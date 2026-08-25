@@ -136,13 +136,13 @@ export function CaseCard({ c }: { c: CaseCardData }) {
         {c.liveUrl && (
           <span className="case-live">
             Live at{" "}
-            <a href={c.liveUrl} target="_blank" rel="noopener">
+            <a href={c.liveUrl} target="_blank" rel="noopener" data-case-link={c.slug} data-link-kind="live">
               {c.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
             </a>
           </span>
         )}
         {c.detailHref && (
-          <Link className="link-arrow" href={c.detailHref}>
+          <Link className="link-arrow" href={c.detailHref} data-case-link={c.slug} data-link-kind="detail">
             Read the full case study {ARROW}
           </Link>
         )}

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import { AnalyticsScripts } from "@/components/analytics-scripts";
+import { ClickTracker } from "@/components/click-tracker";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -50,11 +52,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <AnalyticsScripts />
       </head>
       <body className="min-h-full flex flex-col">
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <ClickTracker />
         {children}
       </body>
     </html>

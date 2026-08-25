@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { CASES, DISCIPLINES, type Discipline } from "./cases-data";
 import { CaseCard } from "./case-card";
+import { trackPortfolioFilter } from "@/lib/analytics/events";
 
 type Filter = "all" | Discipline;
 
@@ -20,14 +21,19 @@ export function PortfolioGrid() {
 
   const visible = filter === "all" ? CASES : CASES.filter((c) => c.tags.includes(filter));
 
+  function selectFilter(f: Filter) {
+    setFilter(f);
+    trackPortfolioFilter(f);
+  }
+
   return (
     <>
       <div className="filters reveal" role="group" aria-label="Filter case studies by discipline">
-        <button className="chip" type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>
+        <button className="chip" type="button" aria-pressed={filter === "all"} onClick={() => selectFilter("all")}>
           All <span className="cn">{counts.all}</span>
         </button>
         {DISCIPLINES.map((d) => (
-          <button key={d} className="chip" type="button" aria-pressed={filter === d} onClick={() => setFilter(d)}>
+          <button key={d} className="chip" type="button" aria-pressed={filter === d} onClick={() => selectFilter(d)}>
             {d === "Web Build" ? "Web build" : d} <span className="cn">{counts[d]}</span>
           </button>
         ))}

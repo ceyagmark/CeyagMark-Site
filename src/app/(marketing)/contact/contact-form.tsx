@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { trackContactSubmitted } from "@/lib/analytics/events";
 
 export const TIER_COPY: Record<string, [string, string]> = {
   high: [
@@ -72,6 +73,7 @@ export function ContactForm() {
         setSubmitting(false);
         return;
       }
+      trackContactSubmitted({ hasCompany: company.trim().length > 0 });
       setSuccess(true);
     } catch {
       setSubmitError("Could not reach the server. Check your connection and try again.");

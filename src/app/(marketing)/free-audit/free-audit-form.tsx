@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { STEPS, type Field, type Option } from "./steps-data";
+import { trackFoundingAuditApplication } from "@/lib/analytics/events";
 
 type Answer = { text?: string; values?: string[] };
 
@@ -120,6 +121,17 @@ export function FreeAuditForm() {
         setSubmitting(false);
         return;
       }
+      trackFoundingAuditApplication({
+        qualified,
+        dqReason,
+        name: r.name,
+        email: r.email,
+        phone: r.whatsapp,
+        store: r.store,
+        country: r.country,
+        budget: r.budget,
+        roas: r.roas,
+      });
       setEnded(qualified ? "success" : { dqReason: dqReason ?? "" });
     } catch {
       setSubmitError("Could not reach the server. Check your connection and try again.");

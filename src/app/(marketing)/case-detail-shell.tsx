@@ -12,6 +12,7 @@ const FWD_ARROW = (
 );
 
 export function CaseDetailShell({
+  slug,
   breadcrumbLabel,
   eyebrow,
   h1,
@@ -20,6 +21,7 @@ export function CaseDetailShell({
   ctaText,
   children,
 }: {
+  slug: string;
   breadcrumbLabel: string;
   eyebrow: string;
   h1: string;
@@ -59,7 +61,7 @@ export function CaseDetailShell({
               <Link className="link-arrow" href="/portfolio">
                 {BACK_ARROW} All case studies
               </Link>
-              <Link className="link-arrow" href="/growth-audit">
+              <Link className="link-arrow" href="/growth-audit" data-case-cta={slug}>
                 {ctaText} {FWD_ARROW}
               </Link>
             </div>

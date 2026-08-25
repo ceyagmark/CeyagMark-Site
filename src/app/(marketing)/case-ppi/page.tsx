@@ -39,6 +39,7 @@ export default function CasePpiPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ARTICLE_JSON_LD) }} />
       <CaseDetailShell
+        slug="case-ppi"
         breadcrumbLabel="Perth Pre-Purchase Inspection"
         eyebrow="Case study · Web build, CRO, SEO, dashboard"
         h1="17 percent of everyone who opened the booking page went on to book."

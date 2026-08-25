@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { formatLkr, formatUsdCents } from "@/lib/money";
+import { trackBookingCompleted } from "@/lib/analytics/events";
 
 type SessionType = {
   id: string;
@@ -127,6 +128,12 @@ export function BookingFlow() {
       }
       setConfirmation(data.booking);
       setStep("success");
+      trackBookingCompleted({
+        confirmationCode: data.booking.confirmationCode,
+        sessionTypeName: data.booking.sessionTypeName,
+        sessionTypeSlug: selected.slug,
+        valueUsdCents: selected.priceUsdCents,
+      });
     } catch {
       setSubmitError("Could not reach the server. Check your connection and try again.");
       setSubmitting(false);

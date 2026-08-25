@@ -14,6 +14,7 @@ import {
   fillTokens,
   type Contact,
 } from "./quiz-data";
+import { trackGrowthAuditCompleted } from "@/lib/analytics/events";
 
 type Step = { kind: "contact" } | { kind: "profile"; idx: number } | { kind: "bp"; idx: number } | { kind: "strategic"; idx: number } | { kind: "open" } | { kind: "loading" } | { kind: "result" };
 
@@ -85,6 +86,15 @@ export function QuizFlow() {
     setStepIndex(STEPS.length); // past the last real step -> "loading" render below
     setSubmitting(true);
     setSubmitError(null);
+    trackGrowthAuditCompleted({
+      tier: r.tier,
+      score: r.pct,
+      grade: r.grade,
+      industry: industry.id,
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+    });
     try {
       const res = await fetch("/api/quiz/submit", {
         method: "POST",

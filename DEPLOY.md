@@ -67,6 +67,10 @@ via `vercel env add <NAME>`:
 | `RESEND_API_KEY` | leave unset for now | see below |
 | `HUB_INTAKE_URL` | leave unset | AgencyOS Hub has no live intake endpoint yet |
 | `SEED_OWNER_EMAIL` | `growth@ceyagmark.com` (already the real, published address) | fallback only |
+| `NEXT_PUBLIC_GTM_ID` | `GTM-T7ZVSV73` | the real container already live on ceyagmark.com — keep it |
+| `NEXT_PUBLIC_GA4_ID` | leave unset until a real GA4 property exists | |
+| `NEXT_PUBLIC_META_PIXEL_ID` | leave unset until a real Pixel exists | |
+| `NEXT_PUBLIC_CLARITY_ID` | leave unset until a real Clarity project exists | |
 
 Do **not** set `NOTIFY_FROM_EMAIL`/`RESEND_API_KEY` until Shashika has a real Resend
 account and API key — until then every booking/lead notification logs to
@@ -93,6 +97,17 @@ the project, so a bare `vercel` is safe). This gives a `*.vercel.app` preview UR
   content pointed at `ceyagmark.com` URLs, not the `*.vercel.app` preview domain
   (this app's `metadataBase` is hardcoded to the production domain on purpose, so
   URLs stay correct once this does go live on the real domain).
+- **GTM container `GTM-T7ZVSV73`** — open Chrome DevTools → Network on the preview
+  and confirm `gtm.js` loads. The code side is done (Slice 5). What is NOT done,
+  and cannot be done from code: the container itself has no tags configured
+  inside it (the original audit's finding #1 — "GTM loads, fires zero tags").
+  That's a job in tagmanager.google.com, not a code change — Shashika (or
+  whoever has access to that GTM account) needs to add and publish a GA4
+  Configuration tag, a Meta Pixel tag, and whatever else, each triggered off
+  the real `dataLayer` events this app now pushes (`whatsapp_click`,
+  `founding_audit_application`, `growth_audit_completed`, `booking_completed`,
+  `contact_submitted`, `portfolio_filter`, `case_opened`, `case_cta_click` — full
+  list and payload shapes in `BUILD-NOTES.md`'s Slice 5 section).
 
 ## What's still not done, deploy or no deploy
 

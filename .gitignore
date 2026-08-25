@@ -30,8 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — .env.example is the real, maintained reference for every var
+# this app reads (see DEPLOY.md); it belongs in git. Everything else here
+# holds real secrets or a real analytics ID and stays local-only.
 .env*
+!.env.example
 
 # vercel
 .vercel

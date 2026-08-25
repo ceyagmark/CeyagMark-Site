@@ -39,6 +39,7 @@ export default function CaseSportswearPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ARTICLE_JSON_LD) }} />
       <CaseDetailShell
+        slug="case-sportswear"
         breadcrumbLabel="Sportswear brand"
         eyebrow="Case study · Marketing, CRO"
         h1="Return on ad spend from 2 to 9 in 2.5 months, and the order value did most of the work."

@@ -480,14 +480,182 @@ an explicit "not verified this pass" list).
 
 ---
 
-## Slices 4–5 — not started
+## Slice 5 — Analytics, consent mode, security headers · 2026-08-25
 
-Motion layer (`motion/react`, scroll reveals, shine-sweep buttons, liquid-glass
-borders, magnetic buttons, one cursor-spotlight hero — applied over the now-verified
-structure, never before it) and analytics/legal/hardening (GTM, Meta Pixel, GA4,
-Clarity, consent mode, CSP, security headers) remain fully unbuilt. The booking
-engine (Slice 1, the kickoff's own named highest-risk module) and the full marketing
-surface (Slice 3, every SEO-critical page) are both built and verified; motion and
-analytics are lower-risk, additive layers over an already-correct foundation, and
-stopping here — rather than partially through either — keeps every shipped slice at
-a clean, gated stopping point.
+**Gate: PASSED.** Production build clean (36/36 static pages held — the CSP
+approach chosen specifically did not regress this), vitest 14/14, db-check 8/8,
+eslint 0 errors. Live-verified: GTM loads with the real container ID in the
+correct order relative to consent defaults, all six security headers present on
+the actual HTTP response (not just in the config file), five of eight new/ported
+dataLayer events fired live from real clicks, zero CSP-violation console errors
+across the whole session.
+
+### What shipped
+
+- **`GTM-T7ZVSV73` wired in, for real.** This is not a placeholder — it's the
+  exact container ID already live on ceyagmark.com today (confirmed by grepping
+  the live static site's own HTML, `Projects/CeyagMark/CeyagMark/*.html`), the
+  one the original ad-readiness audit found loading but firing zero tags. That
+  finding was never a code bug — the container itself has nothing configured
+  inside it, which is a job in tagmanager.google.com, not something this
+  session could fix from a repo. What this slice actually fixes: the app now
+  pushes real, rich events for every meaningful interaction, so whenever
+  Shashika (or whoever has GTM access) adds tags, they have real triggers to
+  bind to instead of nothing.
+- **Real dataLayer events, ported from the live site's own vanilla JS, not
+  invented.** Grepped `assets/js/{main,portfolio,free-audit,quiz}.js` on the
+  live static site and found it already pushes `whatsapp_click`,
+  `portfolio_filter`, `case_opened`, `case_cta_click`, `founding_audit_
+  application`, and `growth_audit_completed` — same event names, same field
+  names, ported verbatim into `src/lib/analytics/events.ts` and wired into
+  their Next.js equivalents (`click-tracker.tsx` for the delegated
+  wa.me/case-link clicks, direct calls in `free-audit-form.tsx`/`quiz-
+  flow.tsx`). Two new events, **not** ported because nothing to port existed:
+  `booking_completed` and `contact_submitted` — booking didn't exist as a
+  real conversion on the static site, and contact silently discarded every
+  submission, so there was no real event to carry over for either. Named as
+  new additions here, not disguised as a port.
+- **GA4, Meta Pixel, Microsoft Clarity — env-gated, no invented IDs.** The
+  live site has zero of these installed (confirmed by grep: no `fbq(`, no
+  `gtag(`, no Clarity snippet anywhere in the static site's JS). Rather than
+  fabricate placeholder IDs, each of `NEXT_PUBLIC_GA4_ID`/`NEXT_PUBLIC_META_
+  PIXEL_ID`/`NEXT_PUBLIC_CLARITY_ID` is read from env and the corresponding
+  script in `analytics-scripts.tsx` simply never renders if its ID is unset —
+  same pattern as this build's own notification/lead-sink ports. They ship
+  ready; they don't ship pretending to already be configured.
+- **Google Consent Mode v2, default-DENIED, no auto-grant.** The default
+  `gtag('consent', 'default', {...})` call sets every signal
+  (`ad_storage`/`ad_user_data`/`ad_personalization`/`analytics_storage`) to
+  `denied` and runs via `beforeInteractive`, confirmed live to execute before
+  GTM's own script. **Deliberately not auto-granted to "satisfied":** this
+  app ships no cookie-consent banner, so there is no real user choice to
+  reflect. Auto-granting consent nobody gave would be a fabricated compliance
+  signal — arguably worse than shipping no Consent Mode at all. See open
+  items below.
+- **Security headers and a CSP, real and verified on the wire.**
+  `next.config.ts`'s `headers()` now sets CSP, `X-Frame-Options`,
+  `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and
+  `Strict-Transport-Security` on every route. Confirmed via `curl -sD -`
+  against the running server, not just read from the config source.
+
+### Decisions taken (two-way doors, logged not escalated)
+
+1. **CSP uses `'unsafe-inline'` plus an explicit vendor allowlist, not
+   nonce-based strict CSP.** Next.js's own docs present nonce-based CSP as the
+   stricter option, but it requires every page touched by it to render
+   dynamically on every request — that would undo Slice 3's verified
+   36/36-static-page build, which is the entire point of ADR-001's route-class
+   decisions. GTM/GA4/Meta Pixel/Clarity all inject their own inline
+   bootstrap scripts at runtime regardless of which approach is chosen, so
+   `'unsafe-inline'` was going to be needed either way for those vendors' own
+   scripts. This is the same tradeoff Next.js's docs present as their default
+   "without nonces" path, not a shortcut invented for this build.
+2. **Consent Mode ships default-denied with no banner, not default-granted.**
+   Covered above. The honest, correct state for a site with no real consent
+   UI — flagged as an open item, not silently resolved either way.
+3. **`case_cta_click`/`case_opened` use one delegated `document`-level click
+   listener (`click-tracker.tsx`) instead of an `onClick` handler on every
+   individual link.** Mirrors the live static site's own architecture
+   (`portfolio.js` did exactly this with `querySelectorAll` + a shared
+   `push()` helper) and avoids converting several Server Components
+   (`case-card.tsx`, `case-detail-shell.tsx`) into Client Components just to
+   attach a tracking call — the components stayed server-rendered, only
+   gaining a `data-case-link`/`data-case-cta` attribute each.
+4. **`CaseDetailShell` gained a required `slug` prop**, threaded through from
+   all four case-detail pages, so its CTA link could carry a real
+   `data-case-cta` value. Small, explicit, typed — matches this codebase's
+   existing preference over inferring the slug from the URL at runtime
+   (which would have required converting the shell to a Client Component).
+
+### V2 five-lens review (Slice 5 diff)
+
+**1. Correctness.** `booking_completed`'s field names were checked directly
+against `/api/bookings/route.ts`'s actual JSON response shape (not assumed)
+before wiring — `confirmationCode`/`sessionTypeName` exist there,
+`priceUsdCents`/`slug` come from the already-in-scope `SessionType` state, and
+the TypeScript compiler (strict mode, `noUncheckedIndexedAccess`) would have
+failed the build on any mismatch. It didn't. Traced: a user who has JavaScript
+analytics blocked (ad-blocker, browser setting) never sees the tracking calls
+throw, because `push()` no-ops silently outside a `window` context and every
+call site fires its own real business logic (the actual `POST` request, the
+actual UI state change) independent of whether the dataLayer push itself
+succeeds — tracking failure can never block a real conversion.
+
+**2. Security.** The new CSP was checked for what it does NOT block: same-
+origin scripts/styles, the app's own `next/font`-self-hosted fonts (no
+external font host needed, so no `font-src` exception was added beyond
+`'self' data:`), and every vendor script domain actually used. Checked for
+what it DOES block: arbitrary third-party script/connect/frame origins
+outside the four named vendors. `frame-ancestors 'self'` plus `X-Frame-
+Options: SAMEORIGIN` both set (belt-and-suspenders for older browsers that
+don't read the CSP directive). No secrets or IDs that need to stay private
+were added — GTM/GA4/Pixel/Clarity IDs are all meant to be public (they're
+already visible in every page's HTML source once loaded), unlike
+`ADMIN_SESSION_SECRET`/`SUPABASE_SERVICE_ROLE_KEY`, which stay server-only
+and were not touched this slice.
+
+**3. Data integrity.** No database schema changes this slice — analytics
+events are fire-and-forget client-side pushes, not persisted anywhere in
+this app's own data model (GTM/GA4/etc. own that storage, outside this
+codebase's control by design). Nothing here can corrupt or duplicate a real
+booking/lead row; the tracking calls are placed strictly after the real
+write already succeeded (`res.ok` checked first in every case).
+
+**4. UX failure.** No new user-facing UI in this slice — no consent banner,
+no visible change to any page. The one thing checked live: that adding six
+security headers and a CSP doesn't break anything already working (no CSP-
+violation console errors observed across the whole verification pass, on any
+page visited).
+
+**5. Performance.** All four analytics scripts load `afterInteractive` (Next
+.js's default, deliberately not `beforeInteractive` except for the tiny
+inline consent-default script, which is a few bytes and has to run early by
+Google's own requirement) — none of them block the initial render or count
+against the F4 LCP/CLS budget. Zero new dependencies added (hand-rolled with
+`next/script` rather than pulling in `@next/third-parties`, per fable-coding's
+dependency-skepticism rule — four two-line script snippets don't justify a
+new package).
+
+### Evidence
+
+Saved to `evidence/`: `slice5-vitest.txt` (14/14), `slice5-db-check.txt` (8/8),
+`slice5-build.txt` (clean production build, 36/36 static pages — unchanged from
+Slice 3, confirming the CSP choice didn't regress static rendering),
+`slice5-browser-flow.md` (GTM load order proof, security headers fetched
+directly off the wire, five of eight dataLayer events fired live with actual
+payloads shown, and an explicit account of the three events verified by code
+review + type-check rather than a fresh live click-through).
+
+### Not verified, named plainly
+
+- `founding_audit_application` and `growth_audit_completed` were not re-driven
+  live this slice (their success paths were already fully click-driven and
+  proven in Slice 3's evidence; only the new tracking call itself is unproven
+  by a live click, and it's covered by a strict TypeScript build instead).
+- `booking_completed` was not re-driven live this slice, same reasoning —
+  Slice 1 already fully verified the booking flow live.
+- No real GA4/Meta Pixel/Clarity account exists anywhere, so none of the
+  three has ever actually received an event — only their env-gated loading
+  code is verified (absent → does not render, confirmed by reading the
+  rendered `<head>`).
+- No cookie-consent banner exists. Consent Mode defaults to denied, which is
+  correct given that, but it means Google's ad platforms will operate in
+  reduced/modeled measurement mode indefinitely until a real banner is built
+  — this matters before any real EU-facing ad spend, less so for Sri-Lanka-
+  first targeting.
+- CSP was checked for "does it block GTM" (it doesn't) but not stress-tested
+  against every possible future GTM tag template (e.g., a custom HTML tag
+  that loads from some other domain would need that domain added to the
+  allowlist — this is expected, ongoing maintenance for any CSP alongside
+  GTM, not a defect).
+
+---
+
+## Slice 4 — Motion — not started
+
+`motion/react` (scroll reveals, shine-sweep buttons, liquid-glass borders,
+magnetic buttons, one cursor-spotlight hero — applied over the now-verified
+structure, never before it) remains fully unbuilt. Every other slice (booking,
+lead capture, marketing/SEO, analytics/security) is built and gated; motion is
+the one purely additive, purely cosmetic layer left, and it depends on nothing
+else in the stack — safe to build independently whenever it's picked up next.

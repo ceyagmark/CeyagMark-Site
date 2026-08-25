@@ -29,6 +29,7 @@ export default function CaseMotorbikePartsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <CaseDetailShell
+        slug="case-motorbike-parts"
         breadcrumbLabel="Motorbike parts store"
         eyebrow="Case study · Marketing, SEO, CRO"
         h1="It scored 38 out of 100, and the biggest single win was a phone number."

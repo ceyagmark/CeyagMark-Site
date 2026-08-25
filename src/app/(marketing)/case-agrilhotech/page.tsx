@@ -39,6 +39,7 @@ export default function CaseAgrilhotechPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ARTICLE_JSON_LD) }} />
       <CaseDetailShell
+        slug="case-agrilhotech"
         breadcrumbLabel="AgrilHoTech"
         eyebrow="Case study · Web build, marketing, SEO, CRO"
         h1="We audited our own store for AI search and published the score."

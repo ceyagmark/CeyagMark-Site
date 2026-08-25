@@ -1,0 +1,12 @@
+
+[1m[46m RUN [49m[22m [36mv3.2.7 [39m[90mC:/Claude Cowork/Projects/CeyagMark/nextjs[39m
+
+ [32m✓[39m tests/tokens.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m tests/money.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+ [32m✓[39m tests/validation.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m14 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 22:35:25
+[2m   Duration [22m 792ms[2m (transform 175ms, setup 0ms, collect 294ms, tests 66ms, environment 1ms, prepare 777ms)[22m
+
