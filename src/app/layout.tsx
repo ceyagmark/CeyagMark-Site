@@ -18,10 +18,11 @@ const SITE_URL = "https://ceyagmark.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Web Development & Performance Marketing Agency in Sri Lanka | CeyagMark",
-    template: "%s | CeyagMark",
-  },
+  // No template: every ported page already carries its own full, exact title
+  // from the live site (which brand-suffixes inconsistently — e.g.
+  // "... | CeyagMark Growth Audit" vs "... | CeyagMark") — appending a
+  // template here would double the suffix on some pages.
+  title: "Web Development & Performance Marketing Agency in Sri Lanka | CeyagMark",
   description:
     "CeyagMark builds your website and runs the marketing on it, so the conversions are ours to prove. Web development, paid ads, SEO and CRO for Sri Lankan and international brands. Engagements from LKR 14,999.",
   openGraph: {

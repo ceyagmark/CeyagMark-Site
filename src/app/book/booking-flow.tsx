@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { formatLkr, formatUsdCents } from "@/lib/money";
 
 type SessionType = {
@@ -31,6 +32,8 @@ function toIsoInstant(date: string, time: string): string {
 }
 
 export function BookingFlow() {
+  const searchParams = useSearchParams();
+  const preselectSlug = searchParams.get("session");
   const [step, setStep] = useState<Step>("session");
   const [sessionTypes, setSessionTypes] = useState<SessionType[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -59,8 +62,15 @@ export function BookingFlow() {
       .then((res) => res.json())
       .then((data) => {
         if (cancelled) return;
-        if (data.error) setLoadError(data.error.message);
-        else setSessionTypes(data.sessionTypes);
+        if (data.error) {
+          setLoadError(data.error.message);
+          return;
+        }
+        setSessionTypes(data.sessionTypes);
+        if (preselectSlug) {
+          const match = (data.sessionTypes as SessionType[]).find((s) => s.slug === preselectSlug);
+          if (match) chooseSession(match);
+        }
       })
       .catch(() => {
         if (!cancelled) setLoadError("Could not load sessions. Check your connection and reload.");
@@ -68,6 +78,9 @@ export function BookingFlow() {
     return () => {
       cancelled = true;
     };
+    // preselectSlug is read once from the initial URL; re-running this on
+    // every searchParams change would refetch mid-flow for no reason.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function chooseSession(sessionType: SessionType) {

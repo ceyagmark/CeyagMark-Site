@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BookingFlow } from "./booking-flow";
 
 // Transactional flow, not a ranked page — noindex, same call PPI made for
@@ -16,7 +17,10 @@ export default function BookPage() {
         Pick a consulting session, or a free discovery call if you are exploring the Leak
         Report, the Fix Sprint or Build &amp; Run.
       </p>
-      <BookingFlow />
+      {/* useSearchParams (for ?session=slug preselection) requires a Suspense boundary. */}
+      <Suspense fallback={<p aria-busy="true" className="text-[var(--text-mute)]">Loading…</p>}>
+        <BookingFlow />
+      </Suspense>
     </main>
   );
 }

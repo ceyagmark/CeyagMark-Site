@@ -1,19 +1,23 @@
 @import "tailwindcss";
+@import "./site.css";
 
 /*
   Design tokens ported verbatim from the live site's design system
   (Projects/CeyagMark/CeyagMark/assets/css/styles.css) per fable-web F1 —
   checked before writing a single new hex value. Dark is the default theme;
-  [data-theme="light"] overrides. Do not add a hex/rgb literal outside this block.
+  [data-theme="light"] overrides. Do not add a hex/rgb literal outside this
+  block or site.css (which is the rest of the ported stylesheet).
 */
 :root,
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #04070f;
   --bg-2: #070d1c;
-  --surface: rgba(255, 255, 255, 0.04);
+  --surface: rgba(255, 255, 255, 0.042);
+  --surface-2: rgba(255, 255, 255, 0.068);
   --surface-solid: #0c1730;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  --border: rgba(255, 255, 255, 0.085);
+  --border-strong: rgba(255, 255, 255, 0.18);
 
   --text: #eef3fc;
   --text-soft: #b3c0db;
@@ -26,20 +30,31 @@
   --on-brand: #ffffff;
 
   --platinum: #d8e2f2;
-  --platinum-dim: #8391ac;
+  --platinum-dim: rgba(216, 226, 242, 0.55);
 
   --good: #46d39a;
   --warn: #e0b15a;
   --bad: #e8786b;
 
-  --shadow-soft: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --glow-1: rgba(46, 134, 255, 0.26);
+  --glow-2: rgba(90, 160, 255, 0.14);
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 30px 70px -20px rgba(0, 0, 0, 0.7),
+    0 8px 24px -12px rgba(8, 20, 52, 0.6);
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 18px 44px -18px rgba(0, 0, 0, 0.6);
+  --card-hi: rgba(255, 255, 255, 0.08);
+  --light-catch: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 22%);
+  --hairline: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04) 30%, rgba(255, 255, 255, 0.02));
+
+  --grain-opacity: 0.035;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 [data-theme="light"] {
+  color-scheme: light;
   --bg: #f4f7fc;
   --bg-2: #ebf0f9;
   --surface: #ffffff;
+  --surface-2: #ffffff;
   --surface-solid: #ffffff;
   --border: #e2e8f3;
   --border-strong: #cfd9ea;
@@ -55,13 +70,21 @@
   --on-brand: #ffffff;
 
   --platinum: #5a6b8c;
-  --platinum-dim: #7c8aa6;
+  --platinum-dim: rgba(90, 107, 140, 0.5);
 
   --good: #128a5e;
   --warn: #b5803a;
   --bad: #c0432f;
 
-  --shadow-soft: 0 20px 60px -20px rgba(10, 20, 46, 0.12);
+  --glow-1: rgba(46, 134, 255, 0.14);
+  --glow-2: rgba(46, 134, 255, 0.07);
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 28px 60px -22px rgba(16, 32, 72, 0.22);
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 16px 38px -20px rgba(16, 32, 72, 0.16);
+  --card-hi: rgba(16, 32, 72, 0.05);
+  --light-catch: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 30%);
+  --hairline: linear-gradient(180deg, rgba(16, 32, 72, 0.1), rgba(16, 32, 72, 0.02));
+
+  --grain-opacity: 0;
 }
 
 @theme inline {
@@ -79,66 +102,6 @@
   --color-bad: var(--bad);
   --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  color-scheme: dark;
-}
-
-[data-theme="light"] {
-  color-scheme: light;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  color: var(--text);
-  text-wrap: balance;
-}
-
-p {
-  color: var(--text-soft);
-  text-wrap: pretty;
-}
-
-a {
-  color: inherit;
-}
-
-:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-.skip-link {
-  position: absolute;
-  left: -999px;
-  top: 8px;
-  background: var(--brand);
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
-  z-index: 1001;
-}
-
-.skip-link:focus {
-  left: 8px;
 }
 
 /* Motion floor (kickoff "hard floors"): resting opacity is 1, animation only
