@@ -91,6 +91,7 @@ export function ContactForm() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
+                  maxLength={200}
                   className="w-full"
                   style={{ width: "100%", minHeight: 44, borderRadius: 10, border: "1px solid var(--border)", background: "transparent", padding: "0 14px", color: "var(--text)" }}
                 />
@@ -108,6 +109,7 @@ export function ContactForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
+                  maxLength={320}
                   style={{ width: "100%", minHeight: 44, borderRadius: 10, border: "1px solid var(--border)", background: "transparent", padding: "0 14px", color: "var(--text)" }}
                 />
                 {emailError && (
@@ -122,6 +124,7 @@ export function ContactForm() {
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   autoComplete="organization"
+                  maxLength={200}
                   style={{ width: "100%", minHeight: 44, borderRadius: 10, border: "1px solid var(--border)", background: "transparent", padding: "0 14px", color: "var(--text)" }}
                 />
               </label>

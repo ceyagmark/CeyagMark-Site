@@ -692,3 +692,15 @@ strong { color: var(--text); font-weight: 600; }
 .q-unknown-banner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 24px; padding: 16px 20px; border: 1px solid var(--border-strong); border-radius: 14px; background: rgba(224,177,90,.10); }
 .q-unknown-banner > div { font-size: .9rem; color: var(--text-soft); }
 .q-unknown-banner .btn { flex: none; padding: 10px 18px; font-size: .86rem; }
+
+/* ============================================================
+   /built-by page, ported from built-by.html's scoped <style>
+   (only the classes this port actually uses).
+   ============================================================ */
+.bb-areas { display: grid; gap: 18px; margin-top: 34px; text-align: left; }
+@media (min-width: 800px) { .bb-areas { grid-template-columns: repeat(3, 1fr); } }
+.bb-area { padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+.bb-area .n { font-family: var(--font-space-grotesk), sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .1em; color: var(--brand-glow); }
+.bb-area h3 { margin: 12px 0 8px; font-size: 1.06rem; }
+.bb-area p { font-size: .9rem; color: var(--text-mute); max-width: none; }
+.bb-fud { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; margin-top: 16px; font-size: .84rem; color: var(--text-mute); }

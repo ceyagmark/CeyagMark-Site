@@ -247,7 +247,7 @@ export function QuizFlow() {
 
         <div className={`q-field${nameError ? " invalid" : ""}`}>
           <label htmlFor="f-name">Your name</label>
-          <input id="f-name" type="text" autoComplete="name" value={contact.name} onChange={(e) => setContact((c) => ({ ...c, name: e.target.value }))} />
+          <input id="f-name" type="text" autoComplete="name" maxLength={200} value={contact.name} onChange={(e) => setContact((c) => ({ ...c, name: e.target.value }))} />
           <span className="err">Please enter your name.</span>
         </div>
         <div className={`q-field${emailError ? " invalid" : ""}`}>
@@ -257,6 +257,7 @@ export function QuizFlow() {
             type="email"
             inputMode="email"
             autoComplete="email"
+            maxLength={320}
             value={contact.email}
             onChange={(e) => setContact((c) => ({ ...c, email: e.target.value }))}
             onKeyDown={(e) => {
@@ -269,7 +270,7 @@ export function QuizFlow() {
           <label htmlFor="f-phone">
             Phone <span className="opt">(optional, for faster follow-up)</span>
           </label>
-          <input id="f-phone" type="tel" inputMode="tel" autoComplete="tel" value={contact.phone} onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))} />
+          <input id="f-phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={40} value={contact.phone} onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))} />
         </div>
         <div className="q-privacy">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flex: "none", marginTop: 1, color: "var(--brand-glow)" }}>
@@ -290,11 +291,12 @@ export function QuizFlow() {
   }
 
   if (step.kind === "profile" || step.kind === "bp" || step.kind === "strategic") {
-    const q = step.kind === "profile" ? PROFILE[step.idx]! : step.kind === "bp" ? BEST_PRACTICE[step.idx]! : STRATEGIC[step.idx]!;
+    const idx = step.idx;
+    const q = step.kind === "profile" ? PROFILE[idx]! : step.kind === "bp" ? BEST_PRACTICE[idx]! : STRATEGIC[idx]!;
     const bucket = step.kind;
     const canSkip = bucket === "bp";
-    const currentValue = bucket === "profile" ? profile[(q as (typeof PROFILE)[number]).id] : bucket === "bp" ? bp[step.idx] : big[(q as (typeof STRATEGIC)[number]).id];
-    const isUnknown = bucket === "bp" && !!unknown[step.idx];
+    const currentValue = bucket === "profile" ? profile[(q as (typeof PROFILE)[number]).id] : bucket === "bp" ? bp[idx] : big[(q as (typeof STRATEGIC)[number]).id];
+    const isUnknown = bucket === "bp" && !!unknown[idx];
     const help = "help" in q && q.help ? <p className="q-help">{fillTokens(q.help, industry)}</p> : null;
 
     function choose(optionIndex: number) {
@@ -302,13 +304,13 @@ export function QuizFlow() {
       else if (bucket === "bp") {
         setBp((arr) => {
           const next = [...arr];
-          next[step.idx] = optionIndex;
+          next[idx] = optionIndex;
           return next;
         });
         setUnknown((u) => {
-          if (!(step.idx in u)) return u;
+          if (!(idx in u)) return u;
           const next = { ...u };
-          delete next[step.idx];
+          delete next[idx];
           return next;
         });
       } else setBig((b) => ({ ...b, [(q as (typeof STRATEGIC)[number]).id]: optionIndex }));
@@ -316,11 +318,11 @@ export function QuizFlow() {
     }
 
     function skip() {
-      setUnknown((u) => ({ ...u, [step.idx]: true }));
-      if (bp[step.idx] === undefined)
+      setUnknown((u) => ({ ...u, [idx]: true }));
+      if (bp[idx] === undefined)
         setBp((arr) => {
           const next = [...arr];
-          next[step.idx] = 0;
+          next[idx] = 0;
           return next;
         });
       goNext();

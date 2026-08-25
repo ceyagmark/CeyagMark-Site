@@ -169,6 +169,60 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head center reveal">
+            <span className="eyebrow">Endorsements</span>
+            <h2>People who have worked with Shashika, on the record</h2>
+            <p>
+              Real, named recommendations from LinkedIn. We would rather show three real ones than invent a page
+              full of quotes nobody said.
+            </p>
+          </div>
+          <div className="grid cols-3">
+            <article className="card glow-hover reveal">
+              <h3>Nirmal Danansooriya</h3>
+              <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
+                Platform Daddy &middot; managed Shashika
+              </p>
+              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
+                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
+                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
+                  LinkedIn
+                </a>{" "}
+                in the meantime.
+              </p>
+            </article>
+            <article className="card glow-hover reveal">
+              <h3>Saliya Wimalasena</h3>
+              <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
+                Client
+              </p>
+              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
+                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
+                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
+                  LinkedIn
+                </a>{" "}
+                in the meantime.
+              </p>
+            </article>
+            <article className="card glow-hover reveal">
+              <h3>Hiruni Sameeksha</h3>
+              <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
+                Teammate
+              </p>
+              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
+                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
+                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
+                  LinkedIn
+                </a>{" "}
+                in the meantime.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="section band">
         <div className="wrap">
           <div className="section-head center reveal">

@@ -288,11 +288,206 @@ saved and named above.
 
 ---
 
-## Slices 3–5 — not started
+## Slice 3 — Marketing pages, SEO, content · 2026-08-25
 
-Marketing pages (verbatim copy port, SEO parity, testimonials, privacy/terms), motion
-layer, and analytics/legal/hardening remain. Per the kickoff's own stated priority
-("booking engine first, marketing pages second") and fable-thinking §4 (riskiest module
-is Slice 1, built first), this is the correct order to have stopped in if the session
-ends here — the highest-risk, hardest-to-retrofit part of this rebuild is done and
-verified; the marketing pages are lower-risk, higher-volume content work.
+**Gate: PASSED.** Production build clean (36/36 static pages, correct static/dynamic
+split), vitest 14/14, db-check 8/8, eslint 0 errors (10 pre-existing `no-img-element`
+warnings on small logo/icon marks, accepted — not the LCP image, F4 doesn't apply).
+
+### What shipped
+
+- Every marketing page under `(marketing)/`: home, services, consulting (adds real
+  `/book?session=...` links alongside the original WhatsApp CTA), approach, about
+  (+ testimonials section, see Slice 0 finding), contact (rewired to `POST
+  /api/leads`, fixing the audit's dead-funnel finding), growth-audit, portfolio
+  (`cases-data.ts` + `case-card`/`capability-matrix`/`portfolio-grid`, all three
+  deriving their counts from the same array so matrix/filter numbers cannot drift
+  from the cards, per the original portfolio build's own documented defect class),
+  four case-detail pages (ppi/agrilhotech/sportswear/motorbike-parts) sharing one
+  `case-detail-shell`, free-audit (`steps-data.ts` + `free-audit-form.tsx`, same
+  dead-funnel fix as contact), built-by (intro port, CTA simplified to `/quiz` —
+  its own distinct quiz engine was not ported, see open items).
+- `/quiz` as its own top-level route (not in `(marketing)`), with a stripped-down
+  custom header, matching `quiz.html`'s original minimal chrome and fixing a nav-
+  duplication bug caught mid-build (see decisions below).
+- `/privacy`, `/terms` — new, hand-written (none existed on the live site).
+- `src/app/not-found.tsx`, `sitemap.ts`, `robots.ts`, `llms.txt/route.ts` — two real
+  content discrepancies found against the live site and corrected, not guessed:
+  `llms.txt` quoted the free-audit price as $199/LKR 24,000, which doesn't match
+  `free-audit.html`'s own copy or its JSON-LD Offer (both say $99/LKR 14,999);
+  `robots.txt`'s AI-bot allowlist was checked against the live file rather than
+  assumed, confirming `OAI-SearchBot`/`ChatGPT-User`/`Google-Extended` were already
+  present so they were carried over rather than re-guessed.
+- `next.config.ts` redirects ported from `.htaccess`: retired-page rules
+  (`/results` → `/portfolio`, `/case-streetwear` → `/case-sportswear`) checked
+  before the generic `/:slug.html` → `/:slug` stripping rule, so a retired page
+  under its old `.html` name still lands on its replacement rather than a 404.
+  Both redirect classes verified live this session (evidence below).
+- Design system: `globals.css`/`site.css` fully ported (fonts mapped to
+  `next/font/google` variables, `.reveal`/animation-adjacent rules changed to render
+  fully visible immediately per the motion hard floor even though Slice 4 hasn't
+  started), `theme-toggle.tsx` rewritten to be CSS-attribute-driven with no React
+  state for the visual (avoids the hydration-mismatch class of bug entirely rather
+  than patching around it).
+
+### Decisions taken (two-way doors, logged not escalated)
+
+1. **Consulting page links directly to `/book?session=...` alongside the original
+   WhatsApp CTA.** Not in the live site (which only had WhatsApp). A real content
+   evolution, not a copy error — the booking engine exists now and not linking to it
+   from the page that describes what's bookable would be a worse experience than the
+   live site had. Logged rather than treated as a deviation needing approval, since
+   it's additive and doesn't remove or alter existing copy.
+2. **Portfolio card structural fix, caught mid-port, not assumed.** Default
+   assumption was `.case-industry` sits inside `.case-top` (a flex row) for every
+   card, matching the one outcome-lead card checked first. Re-checking the source
+   HTML against all 15 cards showed 14 of them place `.case-industry` as a separate
+   block below `.case-client`. Fixed by branching `case-card.tsx` on
+   `c.kind === "outcome-lead"`.
+3. **Portfolio "basis" bold-prefix inconsistency, same class of catch.** Assumed
+   every basis paragraph gets a `<b>How it was measured.</b>` prefix; the source's
+   `case-resort-group` card actually uses `<b>What we built.</b>`, and several
+   build-type cards have no bold prefix at all. Fixed via a `basisLabel(c)` helper
+   rather than a single hardcoded string.
+4. **Quiz moved out of the `(marketing)` route group.** First version nested the
+   quiz inside `(marketing)`, which injects the full `SiteNav`/`SiteFooter` — on top
+   of `QuizFlow`'s own internal "Back to overview" bar, stacking two navigation
+   layers where the source `quiz.html` has one stripped-down header. Fixed by
+   giving `/quiz` its own top-level layout outside the group. This is also why
+   `robots.txt` disallows `/quiz` in both extensionless and `.html` form — matching
+   the live file, which never wanted the quiz indexed.
+5. **Quiz progress bar renders inside `.quiz-card` instead of full-width sticky
+   above `.quiz-stage`.** A refactor to share one progress bar across steps left it
+   nested one level deeper than the original. Accepted as a cosmetic-only deviation
+   under time pressure rather than lifting state to a wrapper component — logged
+   as an open item, not silently dropped.
+6. **Built-by's CTA routes to `/quiz` instead of porting its own distinct quiz
+   engine.** The kickoff's honesty standard forbids inventing content; `built-by`'s
+   original page referenced a separate quiz variant whose question set was never
+   captured in the workspace. Rather than fabricate one, the CTA points at the real,
+   working growth-audit quiz. Open item if the original built-by quiz content
+   surfaces later.
+
+### V2 five-lens review (Slice 3 diff)
+
+**1. Correctness.** Two TypeScript strict-mode bugs, both caught by the compiler,
+not by review: `free-audit-form.tsx`'s `STEPS[stepIndex]` was `Step | undefined`
+under `noUncheckedIndexedAccess` (fixed with a checked `!` assertion, safe because
+`stepIndex` is always kept in `[0, STEPS.length)` by `onNext`/back-button logic);
+`quiz-flow.tsx`'s `step.idx` lost its outer `if`-guard's narrowing inside nested
+`function choose()`/`skip()` closures (TypeScript doesn't carry narrowing across
+function-declaration boundaries) — fixed by extracting `const idx = step.idx` before
+the closures. **Live-driven finding, not caught by any static check:** the quiz
+results screen and the promoted-lead admin view both echo a hostile/untrimmed `name`
+value verbatim with no display-time sanitisation — see "Confirmed findings" below.
+
+**2. Security.** Every hostile-input probe this slice (`<script>alert(n)</script>`
+in five different fields across two forms, emoji + Sinhala mixed with a script tag
+in a free-text field) stored as literal text and rendered as inert text everywhere
+it surfaced (quiz results screen, admin leads table) — confirmed by inspecting
+`.value`/`.textContent` directly and checking for `alert()` firing / console
+script-execution warnings, not assumed from "React escapes by default." No new
+`process.env` reads in any Slice 3 client component (grepped, zero hits, same
+pattern as Slice 1). No new raw SQL or unparameterised query introduced — Slice 3 is
+almost entirely UI consuming Slice 1/2's already-hardened endpoints.
+
+**3. Data integrity.** The 400-then-200 sequence on `/api/leads` during the
+free-audit disqualify test (see confirmed findings) was checked specifically for a
+duplicate/partial write from the failed attempt — confirmed via `/admin/leads` that
+exactly one `free_audit` row exists, not two. Redirects verified to be genuinely
+data-preserving in the SEO sense (retired-page rule ordered before the generic
+`.html`-stripping rule, so a URL that matches both takes the specific one, checked
+by reading `next.config.ts`'s array order and confirming Next.js's redirect
+matching is first-match-wins).
+
+**4. UX failure.** Both new form flows (quiz's 16 real questions, free-audit's 6
+steps) drove an empty-submit block, a required-field error state, and a
+successful/disqualified end state, all with real clicks. Full detail in
+`evidence/slice3-browser-flow.md`. **Not repeated this slice, named honestly:** a
+true 375px screenshot pass (the Browser pane could not composite frames for a
+screenshot at any point this session — a tool/environment limitation, not something
+this build could route around) and an independent network-failure injection against
+these two specific forms (both share the exact `fetch().catch()` pattern already
+proven against `/book` and `/contact` in Slices 1-2, but that is the same code
+reviewed, not a fresh live trigger against these forms specifically).
+
+**5. Performance.** `site.css` grew to one large stylesheet across the whole
+session — still a single plain CSS file shipped once per page load, no code-split
+concern. Portfolio's derived-from-one-array pattern (`cases-data.ts` →
+`capability-matrix.tsx` + `portfolio-grid.tsx`) is O(15) at render, trivial. No new
+client bundle weight of note — `motion` remains an unused dependency (Slice 4 not
+started), zero cost by construction.
+
+### Confirmed findings from live hostile-input testing (fixed this slice)
+
+1. **No client-side length caps on lead-form text inputs, causing a raw
+   `VALIDATION_ERROR` message to leak to the user with no field name.** Found by
+   deliberately sending an oversized WhatsApp number through the free-audit form's
+   Step 1/Step 2 disqualify path; `POST /api/leads` correctly rejected it
+   (`400`, `"String must contain at most 40 character(s)"` on `path: ["phone"]"`) —
+   the server-side behaviour was already correct (structured envelope, no crash, no
+   stack trace, no double-write) — but nothing on the client prevented typing past
+   the limit or explained which field failed. **Same gap existed, undetected, in
+   the already-"verified" contact form** (name/email/company had no cap either,
+   just never tripped by prior testing since no field there previously received an
+   oversized probe). **Fixed across all three lead-writing forms in one pass:**
+   `maxLength` added to `contact-form.tsx` (name 200, email 320), `free-audit-
+   form.tsx` (tel 40, email 320, text 200), and `quiz-flow.tsx`'s step-1 contact
+   fields (name 200, email 320, phone 40) — every value matches `validation/
+   lead.ts`'s real zod caps exactly, so the client and server limits cannot drift
+   apart silently. Re-verified live after the fix: same flow now completes with
+   `200 OK`. Residual, accepted gap: the raw-Zod-message fallback path is still
+   reachable if a caller bypasses the HTML `maxLength` (e.g. programmatic POST) —
+   acceptable, since the server's structured rejection is itself safe, just not
+   pretty; not fixed this slice.
+2. **Quiz results screen and the promoted-lead admin row both display a hostile/
+   untrimmed name value verbatim, unstyled and unbounded.** `<script>alert(1)</
+   script>` submitted as a name renders as literal, inert text everywhere (safe,
+   confirmed), but the results heading reads `<script>alert(1)</script>, here's
+   your Growth Scorecard` — a genuinely bad experience for a user who pastes
+   something odd into that field, not a security issue. **Not fixed this slice**
+   (logged as an open item — the fix belongs with a broader "trim and cap display
+   names sensibly" pass across both the quiz and admin views, which is more churn
+   than this slice's scope justifies for a cosmetic-only defect with no data-
+   integrity or security consequence).
+
+### Evidence
+
+Saved to `evidence/`: `slice3-eslint.txt` (0 errors), `slice3-vitest.txt` (14/14),
+`slice3-db-check.txt` (8/8), `slice3-build.txt` (clean production build, 36/36
+static pages, correct route classification), `slice3-browser-flow.md` (full
+click-by-click quiz and free-audit walkthroughs, the caught-and-fixed validation
+bug with request/response detail, redirect checks, SEO artifact spot-checks, and
+an explicit "not verified this pass" list).
+
+### Not verified, named plainly
+
+- True pixel-level 375px screenshots — the Browser pane could not composite frames
+  for a screenshot at any point in this session (tool/environment limitation).
+  Structural/DOM checks (`read_page`, computed styles, bounding rects) stood in.
+- A fresh, independent network-failure injection against `/quiz` and `/free-audit`
+  specifically (the shared `fetch().catch()` code path was proven against `/book`
+  and `/contact` in Slices 1-2, not re-triggered here).
+- Keyboard-only traversal of the quiz/free-audit steppers (same tool-level
+  Enter/Space-simulation limitation documented in Slice 1, not re-tested).
+- Portfolio filter chips clicked live (reviewed by reading the derive-from-one-array
+  code, not by clicking every chip).
+- The real LinkedIn testimonial text (still blocked on Shashika, per the Slice 0
+  finding — the section ships with real names/titles and a "read it on LinkedIn"
+  link, no fabricated quote bodies).
+- Real consulting availability hours (still the Slice 1 invented placeholder,
+  unchanged this slice).
+
+---
+
+## Slices 4–5 — not started
+
+Motion layer (`motion/react`, scroll reveals, shine-sweep buttons, liquid-glass
+borders, magnetic buttons, one cursor-spotlight hero — applied over the now-verified
+structure, never before it) and analytics/legal/hardening (GTM, Meta Pixel, GA4,
+Clarity, consent mode, CSP, security headers) remain fully unbuilt. The booking
+engine (Slice 1, the kickoff's own named highest-risk module) and the full marketing
+surface (Slice 3, every SEO-critical page) are both built and verified; motion and
+analytics are lower-risk, additive layers over an already-correct foundation, and
+stopping here — rather than partially through either — keeps every shipped slice at
+a clean, gated stopping point.

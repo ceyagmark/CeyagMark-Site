@@ -35,7 +35,7 @@ export function FreeAuditForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const step = STEPS[stepIndex];
+  const step = STEPS[stepIndex]!;
 
   function setAnswer(fieldId: string, answer: Answer) {
     setAnswers((prev) => ({ ...prev, [fieldId]: answer }));
@@ -259,6 +259,7 @@ export function FreeAuditForm() {
               id={`fi-${f.id}`}
               type={f.type}
               placeholder={f.placeholder}
+              maxLength={f.type === "tel" ? 40 : f.type === "email" ? 320 : 200}
               value={answers[f.id]?.text ?? ""}
               onChange={(e) => setAnswer(f.id, { text: e.target.value })}
               autoComplete={f.id === "name" ? "name" : f.type === "tel" ? "tel" : f.type === "email" ? "email" : "off"}
