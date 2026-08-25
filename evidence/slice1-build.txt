@@ -1,0 +1,40 @@
+▲ Next.js 16.3.2 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 53ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.0s
+  Running TypeScript ...
+  Finished TypeScript in 7.9s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/17) ...
+  Generating static pages using 3 workers (4/17) 
+  Generating static pages using 3 workers (8/17) 
+  Generating static pages using 3 workers (12/17) 
+✓ Generating static pages using 3 workers (17/17) in 1193ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin/bookings
+├ ○ /admin/leads
+├ ○ /admin/login
+├ ƒ /api/admin/bookings
+├ ƒ /api/admin/leads
+├ ƒ /api/admin/login
+├ ƒ /api/admin/logout
+├ ƒ /api/availability
+├ ƒ /api/bookings
+├ ƒ /api/bookings/[token]
+├ ƒ /api/bookings/[token]/cancel
+├ ƒ /api/leads
+├ ƒ /api/quiz/submit
+├ ƒ /api/session-types
+├ ○ /book
+└ ƒ /booking/[token]
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

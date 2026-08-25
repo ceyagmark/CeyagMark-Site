@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+  Design tokens ported verbatim from the live site's design system
+  (Projects/CeyagMark/CeyagMark/assets/css/styles.css) per fable-web F1 —
+  checked before writing a single new hex value. Dark is the default theme;
+  [data-theme="light"] overrides. Do not add a hex/rgb literal outside this block.
+*/
+:root,
+[data-theme="dark"] {
+  --bg: #04070f;
+  --bg-2: #070d1c;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-solid: #0c1730;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --text: #eef3fc;
+  --text-soft: #b3c0db;
+  --text-mute: #74829f;
+
+  --brand: #2e86ff;
+  --brand-2: #1a56c4;
+  --brand-deep: #103a8e;
+  --brand-glow: #6aa6ff;
+  --on-brand: #ffffff;
+
+  --platinum: #d8e2f2;
+  --platinum-dim: #8391ac;
+
+  --good: #46d39a;
+  --warn: #e0b15a;
+  --bad: #e8786b;
+
+  --shadow-soft: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="light"] {
+  --bg: #f4f7fc;
+  --bg-2: #ebf0f9;
+  --surface: #ffffff;
+  --surface-solid: #ffffff;
+  --border: #e2e8f3;
+  --border-strong: #cfd9ea;
+
+  --text: #0a142e;
+  --text-soft: #44516c;
+  --text-mute: #69768e;
+
+  --brand: #1a56c4;
+  --brand-2: #2e86ff;
+  --brand-deep: #0d3a8e;
+  --brand-glow: #1a56c4;
+  --on-brand: #ffffff;
+
+  --platinum: #5a6b8c;
+  --platinum-dim: #7c8aa6;
+
+  --good: #128a5e;
+  --warn: #b5803a;
+  --bad: #c0432f;
+
+  --shadow-soft: 0 20px 60px -20px rgba(10, 20, 46, 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
+  --color-text-mute: var(--text-mute);
+  --color-brand: var(--brand);
+  --color-brand-glow: var(--brand-glow);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+p {
+  color: var(--text-soft);
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  z-index: 1001;
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+/* Motion floor (kickoff "hard floors"): resting opacity is 1, animation only
+   ever hides-then-reveals via this attribute; if JS/Motion never runs, or
+   prefers-reduced-motion is set, content stays visible by default. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

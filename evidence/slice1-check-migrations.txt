@@ -1,0 +1,2 @@
+3 migration file(s) checked.
+Sequence is contiguous with no gaps or duplicates.
