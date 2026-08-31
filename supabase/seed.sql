@@ -1,9 +1,8 @@
 -- Seed data. Contact details are the real, already-published business contact
 -- from the live site (index.html JSON-LD: telephone +94703727895, email
--- growth@ceyagmark.com) — not invented. Business hours and slot spacing ARE
--- invented placeholders (Shashika has not specified real consulting
--- availability anywhere in the workspace) and are flagged in BUILD-NOTES.md
--- as an open item, same honest call PPI made for Janitha's travel zones.
+-- growth@ceyagmark.com) — not invented. Business hours are now real too
+-- (7pm-10pm, confirmed by Shashika 2026-08-25); slot spacing (30 min) remains
+-- an unconfirmed placeholder.
 
 insert into site_settings (id, min_lead_time_minutes, max_advance_days, owner_alert_email, owner_whatsapp_e164)
 values (1, 120, 30, 'growth@ceyagmark.com', '+94703727895');
@@ -18,15 +17,17 @@ insert into session_types (slug, kind, name, duration_minutes, price_lkr, price_
   ('discovery-fix-sprint', 'discovery', 'Free Discovery Call: The Fix Sprint', 20, 0, 0, 10, true),
   ('discovery-build-and-run', 'discovery', 'Free Discovery Call: Build & Run', 20, 0, 0, 10, true);
 
--- Availability: Mon-Fri 09:00-18:00 Asia/Colombo, 30-minute start spacing.
--- INVENTED PLACEHOLDER — no real hours specified anywhere in the workspace.
--- See BUILD-NOTES.md Slice 1, open items.
+-- Availability: Mon-Fri 19:00-22:00 Asia/Colombo, 30-minute start spacing.
+-- Real hours, confirmed by Shashika 2026-08-25 (previously an invented
+-- placeholder — see BUILD-NOTES.md Slice 1/6). Days-of-week were not
+-- explicitly restated when he confirmed the time window; Mon-Fri is carried
+-- over from the placeholder, not independently confirmed — flag if wrong.
 insert into availability_rules (day_of_week, start_time, end_time, slot_interval_minutes) values
-  (1, '09:00', '18:00', 30),
-  (2, '09:00', '18:00', 30),
-  (3, '09:00', '18:00', 30),
-  (4, '09:00', '18:00', 30),
-  (5, '09:00', '18:00', 30);
+  (1, '19:00', '22:00', 30),
+  (2, '19:00', '22:00', 30),
+  (3, '19:00', '22:00', 30),
+  (4, '19:00', '22:00', 30),
+  (5, '19:00', '22:00', 30);
 
 -- Growth-audit quiz shell — Hub Phase E shape (QuizDefinition/QuizQuestion),
 -- ported from the existing quiz.html question set. Full question port is a

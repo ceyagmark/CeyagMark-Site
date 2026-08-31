@@ -651,6 +651,44 @@ review + type-check rather than a fresh live click-through).
 
 ---
 
+## Real content received from Shashika · 2026-08-25
+
+Two of the open items above are now closed with real, Shashika-confirmed data,
+not assumptions:
+
+- **Consulting hours corrected**: Mon-Fri 19:00-22:00 Asia/Colombo (was the
+  09:00-18:00 placeholder). `supabase/seed.sql`'s `availability_rules` updated
+  and comments corrected to say so plainly. Days-of-week were not explicitly
+  restated when he gave the time window — Mon-Fri is carried over from the
+  placeholder, not independently reconfirmed. If that's wrong, it's a one-line
+  fix in the same file.
+- **All three LinkedIn recommendations, pasted in full and used verbatim.**
+  `about/page.tsx`'s testimonials section now shows the real quote bodies from
+  Nirmal Danansooriya, Saliya Wimalasena and Hiruni Sameeksha — copied exactly
+  as given, including Nirmal's own em dash inside his sentence (a direct quote
+  from a named third party is exempt from this workspace's own no-em-dash
+  writing rule, which governs prose this build writes, not words someone else
+  said). The only edits made to the pasted text: stripping LinkedIn's own UI
+  chrome around each quote (the "1st", "All LinkedIn members", "On", and a
+  trailing "… more" read-more artifact on Nirmal's), none of which was part of
+  the actual recommendation. Card subtitles were shortened from each person's
+  full LinkedIn headline (several keyword-stuffed clauses long) down to
+  title + relationship, matching the card design's existing density — this
+  is a formatting choice about how much of the headline to show, not a
+  change to the recommendation text itself, which is untouched.
+- **New git remote added**: `https://github.com/ShashikaTharinda/CeyagMark-New.git`,
+  a fresh empty repo (not `CeyagMark-2`, which is the old static site's).
+  Pushed at Shashika's explicit request; he hosts the Vercel project himself
+  from here. Supabase project already created on his side — migrations and
+  the corrected seed file still need to be run there by him (`DEPLOY.md` has
+  the exact steps; this session has no Supabase credentials to do it directly).
+- **Cookie-consent banner: decided against, for now.** Confirmed by Shashika
+  directly — Consent Mode's default-denied state (Slice 5) stays as the
+  running state, no banner gets built. Closes that Phase 4 open item from the
+  handoff runbook; worth revisiting only if EU-facing ad spend becomes real.
+
+---
+
 ## Slice 4 — Motion — not started
 
 `motion/react` (scroll reveals, shine-sweep buttons, liquid-glass borders,

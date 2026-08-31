@@ -183,40 +183,57 @@ export default function AboutPage() {
             <article className="card glow-hover reveal">
               <h3>Nirmal Danansooriya</h3>
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
-                Platform Daddy &middot; managed Shashika
+                CEO, Platform Daddy &middot; managed Shashika directly
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
-                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
-                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
-                  LinkedIn
-                </a>{" "}
-                in the meantime.
+              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+                &ldquo;I had the pleasure of working with Shashika at Platform Daddy, where he served as a Senior
+                Digital Marketing Specialist on my team. He has a real strength in performance marketing —
+                consistently building data-driven campaigns that delivered strong ROI, with a sharp instinct for
+                optimizing spend across channels to get the most out of every budget. He played a key role in
+                marketing Sri Lanka&apos;s biggest agri-food and tech event, and led massive campaigns for
+                large-scale corporate brands, handling that scale with a level of precision and confidence that
+                stood out. He&apos;s efficient and gets things done quickly without compromising on quality, and he
+                brought sharp strategic thinking to everything he owned, always trusted to take a project end to end
+                without needing to be micromanaged. Beyond his skills, he&apos;s a genuinely kind person and a great
+                collaborator, someone who lifted the people around him and made the team better simply by being
+                part of it. Any organization would be fortunate to have Shashika on their marketing team,
+                particularly for performance-driven growth roles at scale. I recommend him without
+                hesitation.&rdquo;
               </p>
             </article>
             <article className="card glow-hover reveal">
               <h3>Saliya Wimalasena</h3>
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
-                Client
+                Digital Marketer &middot; client
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
-                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
-                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
-                  LinkedIn
-                </a>{" "}
-                in the meantime.
+              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+                &ldquo;I have had the pleasure of working with Shashika Tharinda on a variety of digital marketing
+                projects, including Meta Ads, Google Ads, e-commerce and conversion tracking. Throughout our
+                collaboration, I have been consistently impressed by his expertise, professionalism and results
+                driven approach. Shashika is one of the most talented performance marketing professionals I have
+                worked with. His knowledge of paid media, conversion optimization, analytics and AI-powered
+                marketing strategies is exceptional. What truly sets him apart is his ability to turn data into
+                measurable business growth and consistently deliver outstanding results. Beyond his technical
+                expertise, Shashika is an excellent mentor who is always willing to share his knowledge. I have
+                learned a great deal from him throughout my digital marketing and e commerce journey and I continue
+                to work with him and benefit from his guidance. I highly recommend Shashika to any business or
+                organization looking for an expert in advanced Meta Ads, Google Ads, performance marketing, AI
+                workflows or e-commerce growth. He is a dedicated professional who consistently exceeds
+                expectations and delivers real business impact.&rdquo;
               </p>
             </article>
             <article className="card glow-hover reveal">
               <h3>Hiruni Sameeksha</h3>
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
-                Teammate
+                Digital Marketing Specialist &middot; teammate
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem", fontStyle: "italic" }}>
-                Full recommendation text pending — Shashika to paste it from LinkedIn. Read it directly on{" "}
-                <a href="https://www.linkedin.com/company/ceyagmark" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
-                  LinkedIn
-                </a>{" "}
-                in the meantime.
+              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+                &ldquo;I had the pleasure of working with Shashika, and he is a dedicated and reliable digital
+                marketing professional. He is always willing to learn, takes ownership of his work, and
+                consistently delivers high-quality results. His creativity, attention to detail, and collaborative
+                approach make him a great team member. I truly enjoyed working alongside him and would confidently
+                recommend him to any team looking for a passionate digital marketer. Wishing him continued success
+                in his career.&rdquo;
               </p>
             </article>
           </div>
