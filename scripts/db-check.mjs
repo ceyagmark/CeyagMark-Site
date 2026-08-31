@@ -35,12 +35,17 @@ async function main() {
   const { rows: types } = await db.query("select * from session_types where slug = 'consulting-30'");
   const sessionTypeId = types[0].id;
 
-  // Pick a start time comfortably inside the seeded Mon-Fri 09:00-18:00
-  // window, far enough ahead to clear min_lead_time_minutes regardless of
-  // when this check runs, and on a real weekday.
+  // Pick a start time comfortably inside the seeded Mon-Fri 19:00-22:00
+  // window (Shashika's real consulting hours, corrected 2026-08-25 — this
+  // was 09:00-18:00 with a 10:00 test slot until then; changing the seeded
+  // hours without updating this hardcoded slot broke every test past the
+  // first, since 10:00 no longer falls inside availability_rules at all).
+  // Starting at the window's open (19:00) leaves the most headroom for the
+  // +35/+40/+100min offsets below to stay inside 22:00 regardless of
+  // session length or buffer.
   const future = new Date();
   future.setDate(future.getDate() + ((1 + 7 - future.getDay()) % 7 || 7)); // next Monday
-  future.setHours(10, 0, 0, 0);
+  future.setHours(19, 0, 0, 0);
   const startsAt = future.toISOString();
 
   // 1. A real booking succeeds.

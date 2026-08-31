@@ -191,7 +191,7 @@ export function FreeAuditForm() {
         <h3>Application received.</h3>
         <p>We will review your answers and contact you on WhatsApp within 24 hours. Only 3 founding slots are available, so we will confirm your spot shortly.</p>
         <div className="actions">
-          <a className="btn btn-primary btn-lg btn-arrow" href={`https://wa.me/94703727895?text=${encodeURIComponent(msg)}`} target="_blank" rel="noopener">
+          <a className="btn btn-primary btn-lg btn-arrow" data-magnetic="0.25" href={`https://wa.me/94703727895?text=${encodeURIComponent(msg)}`} target="_blank" rel="noopener">
             Confirm on WhatsApp {ARROW}
           </a>
           <Link className="btn btn-ghost" href="/">

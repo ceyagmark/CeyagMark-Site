@@ -319,16 +319,43 @@ strong { color: var(--text); font-weight: 600; }
 .page-hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.2rem); max-width: 16ch; }
 .page-hero .lede { margin-top: 22px; max-width: 56ch; }
 
-/* ---------- Reveal — present as a CSS hook only; Slice 4 (motion layer) wires
-   the observer that adds/removes `.in`. Until then every `.reveal` element
-   must render fully visible, per the kickoff's "no animation may be the only
-   thing that reveals content" floor — so opacity/transform are NOT set to a
-   hidden state here (that would violate the floor before Slice 4 exists to
-   satisfy it). This differs from the live site's own rule on purpose. */
-.reveal { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+/* ---------- Reveal (Slice 4) — ported verbatim from the live site's own
+   main.js/styles.css. `.reveal` starts hidden+offset only when JS AND a fine
+   pointer AND normal motion preferences are all confirmed working (the
+   observer never even starts otherwise — see motion-runtime.tsx); every
+   escape hatch below prevents "content only a working animation ever
+   revealed":
+     - `scripting: none`: no JS at all -> fully visible, !important.
+     - `prefers-reduced-motion: reduce`: fully visible, no transition.
+     - a `setTimeout` safety net in motion-runtime.tsx forces every
+       `.reveal` to `.in` at 1500ms and again 200ms after `load`, so a
+       missed intersection (element already on-screen, or the observer
+       failing for any reason) can hide content for at most ~1.5s, never
+       forever. rAF is never used for this — only setTimeout — because rAF
+       can silently never fire in a background tab. */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .07s; }
+.reveal[data-delay="2"] { transition-delay: .14s; }
+.reveal[data-delay="3"] { transition-delay: .21s; }
+.reveal[data-delay="4"] { transition-delay: .28s; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+@media (scripting: none) { .reveal { opacity: 1 !important; transform: none !important; } }
 
 .tilt { transform-style: preserve-3d; transition: transform .3s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+
+/* ---------- Custom cursor (Slice 4) — only ever turned on by motion-runtime.tsx
+   for a fine pointer with no reduced-motion preference; touch/coarse-pointer
+   and reduced-motion visitors never get `body.cursor-on`, so the native
+   cursor is untouched for them. */
+.cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); opacity: 0; }
+.cursor-dot { width: 6px; height: 6px; background: var(--brand-glow); box-shadow: 0 0 8px rgba(46,134,255,.8); }
+.cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--brand); transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease, opacity .25s ease; }
+body.cursor-on { cursor: none; }
+body.cursor-on a, body.cursor-on button, body.cursor-on summary, body.cursor-on .q-option, body.cursor-on label { cursor: none; }
+body.cursor-on input, body.cursor-on textarea, body.cursor-on [data-native-cursor] { cursor: auto; }
+body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
+.cursor-ring.is-hot { width: 60px; height: 60px; background: rgba(46,134,255,.12); border-color: var(--brand-glow); }
 
 /* ---------- Theme toggle (bottom-left) ---------- */
 .theme-toggle {

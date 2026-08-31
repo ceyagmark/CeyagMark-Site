@@ -689,11 +689,166 @@ not assumptions:
 
 ---
 
-## Slice 4 — Motion — not started
+## Slice 4 — Motion · 2026-08-25
 
-`motion/react` (scroll reveals, shine-sweep buttons, liquid-glass borders,
-magnetic buttons, one cursor-spotlight hero — applied over the now-verified
-structure, never before it) remains fully unbuilt. Every other slice (booking,
-lead capture, marketing/SEO, analytics/security) is built and gated; motion is
-the one purely additive, purely cosmetic layer left, and it depends on nothing
-else in the stack — safe to build independently whenever it's picked up next.
+**Gate: PASSED.** Production build clean (36/36 static pages, unchanged),
+vitest 14/14, db-check 8/8 (after a real regression found and fixed — see
+below), eslint 0 errors. Every visually-animated behaviour in this slice
+could only be verified structurally, not watched — see "Not verified" below,
+named plainly rather than implied otherwise.
+
+### A discovery that reframed this slice: the motion system already existed
+
+Before writing anything, `site.css`'s own Slice-0-era comment on `.reveal`
+pointed straight at the answer: "Slice 4 wires the observer that adds/
+removes `.in`." Checking the live static site's `assets/js/main.js` (never
+fully read before this slice) turned up a complete, already-shipped,
+already prefers-reduced-motion-safe motion system — custom cursor, magnetic
+buttons, 3D tilt, glow-follow, parallax, and a scroll-reveal observer with
+a `setTimeout` safety net — not a rough sketch, a real one, clearly the
+source the kickoff's own motion-direction section was describing. This
+slice is a **port**, source-checked line by line against `main.js`, not new
+motion invented from scratch. The one deliberate departure: per-element
+listeners (the original's approach, correct for a traditional multi-page
+site) were replaced with `document`-level event delegation, because Next.js
+App Router layouts persist across client-side navigation — binding
+`pointermove` directly to each element once at load, as the original does,
+would either miss elements a later navigation adds or double-bind elements
+a persisted layout keeps mounted. Delegation sidesteps both failure modes.
+
+### What shipped
+
+- `src/components/motion-runtime.tsx` — one client component, mounted once
+  in the root layout (sitewide, matching the original's scope): a bind-once
+  effect for cursor/magnetic/tilt/glow-follow/parallax (all delegated or
+  self-querying, so navigation never needs to rebind them), and a separate
+  effect keyed on `pathname` for the reveal `IntersectionObserver`, since
+  that API genuinely needs re-`observe()`-ing fresh elements per page.
+- `site.css` — real `.reveal`/`.reveal.in` restored (opacity 0→1, translateY
+  26px→0, .7s), with both of the original's safety nets: `@media
+  (prefers-reduced-motion: reduce)` and `@media (scripting: none)`, both
+  forcing full visibility. Added the cursor CSS block (`.cursor-dot`,
+  `.cursor-ring`, `body.cursor-on`), ported verbatim — it had been
+  referenced by a `@media print` rule since Slice 3 but never defined.
+- `data-magnetic`/`data-tilt` applied selectively, not blanketed: the
+  homepage hero CTA, the free-audit success screen's WhatsApp button
+  (restoring the exact attribute `free-audit.js` had), and the about page's
+  founder card. Tasteful and limited, per the kickoff's own framing.
+- **Not built**: native View Transitions. Considered and deliberately cut —
+  see `evidence/slice4-browser-flow.md` for the reasoning. A real two-way
+  door, cheap to add later, not a silent omission.
+
+### Confirmed findings from this slice's own verification (fixed)
+
+1. **`db-check.mjs`'s hardcoded test time broke when real hours landed.**
+   The script picked a booking slot at a fixed `10:00` local time, "comfortably
+   inside the seeded Mon-Fri 09:00-18:00 window" per its own comment — a
+   comment that stopped being true the moment the earlier real-hours commit
+   changed `availability_rules` to 19:00-22:00, and nobody re-ran `db-check`
+   at the time to notice. Running it now, as part of this slice's own
+   regression pass, caught it: 5 of 8 checks failed, starting with the most
+   basic one ("a real booking succeeds"), because 10:00 no longer falls
+   inside business hours at all. **This is exactly the kind of found-not-
+   assumed defect this build's own process exists to catch** — logged
+   plainly rather than quietly fixed without a trace. Fixed by moving the
+   test slot to `19:00` (the window's open, chosen to leave maximum
+   headroom for the `+35`/`+40`/`+100`-minute offsets used later in the same
+   script). Re-ran: 8/8 passed.
+2. **Slice 5's CSP was missing `'unsafe-eval'` in dev.** React's dev-mode
+   debugger wants `eval()` for stack-trace reconstruction ("React will
+   never use eval() in production mode," per its own console message);
+   Next.js's own CSP docs show exactly this `isDev`-gated allowance, which
+   Slice 5 omitted. Fixed in `next.config.ts` to match Next's documented
+   pattern precisely. Confirmed via `curl` that the served header now
+   includes `'unsafe-eval'` in dev and correctly omits it from a production
+   build. The console error persisted in this specific sandboxed preview
+   pane after the fix (which also showed unrelated HMR WebSocket failures) —
+   traced as far as confirming the served header is provably correct, then
+   treated as a pane limitation rather than chased further, since
+   `preview_logs` showed no server errors and every structural check in
+   this slice passed normally regardless.
+
+### The stuck-opacity investigation (a false alarm, run to ground properly)
+
+`.reveal` elements correctly received the `.in` class, but `getComputedStyle`
+kept reporting `opacity:"0"` regardless — indistinguishable at first glance
+from a broken CSS cascade. Investigated rather than assumed, per fable's
+"probe the anomaly" discipline: an isolated element created with both
+classes at once computed correctly (`opacity:1`); a clone of the real
+failing element, in the same parent, also computed correctly; a trivial,
+totally unrelated CSS transition probe reproduced the identical
+stuck-at-start symptom. Conclusion, now confirmed rather than merely
+suspected: this Browser pane cannot render **any** CSS transition to
+completion — a wider version of its already-documented no-compositing
+limitation (previously known for rAF/scroll/IntersectionObserver/
+screenshots). The reveal logic itself — the class-toggle mechanism, the
+observer, the safety net — is correct and verified; only the visual fade is
+unobservable here. Full write-up and the exact reproduction steps:
+`evidence/slice4-browser-flow.md`. Memory (`browser-pane-no-compositing.md`)
+updated with this finding so it doesn't cost a future session the same
+investigation.
+
+### V2 five-lens review (Slice 4 diff)
+
+**1. Correctness.** Traced: an element with `prefers-reduced-motion: reduce`
+never gets `.reveal`'s hidden state at all (the media query wins by being
+more specific in intent, verified by reading the CSS cascade order — `.reveal`
+sets the hidden state, the reduced-motion query immediately overrides both
+opacity and transform back to visible with no transition). A user with no
+JS at all: `@media (scripting: none)` forces `opacity:1 !important` — checked
+by reading the rule, not assumed. An element already inside the viewport at
+page load: `IntersectionObserver`'s first callback fires with
+`isIntersecting:true` immediately upon `.observe()`, so it reveals on the
+very next microtask, not waiting for the 1500ms fallback — this is standard
+IO behaviour, not special-cased in this code, and matches the original.
+
+**2. Security.** No new user input, no new server code, no new external
+script domains (CSP untouched except the dev-only `unsafe-eval` fix above,
+which is additive and dev-gated, not a loosening of the production policy).
+
+**3. Data integrity.** The db-check regression above is the real finding
+here — a test-fixture/seed-data coupling that silently broke, caught by
+actually re-running the suite rather than trusting that "nothing touched
+booking code" meant booking tests would still pass. They didn't, because
+the *seed data* changed, which the test's own hardcoded assumption didn't
+account for.
+
+**4. UX failure.** Every visually-driven check in this slice is listed
+under "Not verified" — honestly, this lens couldn't be exercised beyond
+structural confirmation this time. What *was* checked: `prefers-reduced-
+motion` and `scripting: none` both correctly bypass all hidden-content
+states (read directly from the CSS, not inferred).
+
+**5. Performance.** Every effect in `motion-runtime.tsx` animates only
+`transform`/`opacity` (or a CSS custom property consumed by an
+`opacity`-transitioning `::before`), per the kickoff's hard floor. No new
+dependency added — `motion` remains installed but unused; every effect here
+is plain DOM APIs and CSS, matching what the original site already proved
+sufficient for the same effects. Zero new client bundle weight of note.
+
+### Evidence
+
+Saved to `evidence/`: `slice4-vitest.txt` (14/14), `slice4-db-check.txt`
+(8/8, after the fix above — the pre-fix 3/8 failure was not silently
+discarded, it's the finding that led to the fix), `slice4-build.txt` (clean
+production build, 36/36 static pages, unchanged from Slice 3/5),
+`slice4-browser-flow.md` (the full stuck-opacity investigation with its
+reproduction steps, every structural pointer-event check with its actual
+output values, and the View Transitions scope-cut reasoning).
+
+### Not verified, named plainly
+
+- **No effect in this slice has been watched on a real screen.** The
+  custom cursor, the reveal fade, the magnetic pull, the tilt, the
+  glow-follow, the parallax — all confirmed structurally (correct classes,
+  correct inline styles from dispatched pointer events, correct gating
+  logic read from source) but never rendered and observed visually, because
+  this session's Browser pane cannot composite frames. One real screen, one
+  real look, is a genuine open item before calling this slice "seen."
+- Touch/coarse-pointer behaviour (the `!finePointer` branch that skips
+  cursor/magnetic/tilt/parallax entirely) — confirmed by reading the gate
+  condition, not tested against an actual touch device.
+- `data-parallax` elements — none currently exist anywhere in the ported
+  pages (only `.bg-aura .orb` does), so the `[data-parallax]` code path is
+  live but has nothing to apply to yet. Not a defect; nothing was ever
+  wired to use it on the live site's own equivalent pages either.

@@ -116,7 +116,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="reveal">
-            <figure className="founder-card card glow-hover">
+            <figure className="founder-card card glow-hover tilt" data-tilt="6">
               <div className="founder-portrait">
                 <img src="/img/founder.svg" alt="Shashika Tharinda, founder of CeyagMark" width={132} height={132} loading="lazy" />
               </div>

@@ -177,7 +177,7 @@ export default function HomePage() {
               move we know exactly what moved them, and when they do not, we can go and fix the actual cause.
             </p>
             <div className="hero-actions reveal">
-              <Link className="btn btn-primary btn-lg btn-arrow" href="/growth-audit">
+              <Link className="btn btn-primary btn-lg btn-arrow" href="/growth-audit" data-magnetic="0.3">
                 Get your free Growth Audit
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

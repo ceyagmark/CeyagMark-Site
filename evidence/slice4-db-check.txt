@@ -1,0 +1,10 @@
+  ok   a real booking succeeds
+  ok   an identical slot is rejected as SLOT_UNAVAILABLE
+  ok   a slot inside the post-session buffer is rejected
+  ok   a slot right after the buffer clears succeeds
+  ok   a booking inside min_lead_time_minutes is rejected
+  ok   cancel_booking succeeds
+  ok   a cancelled slot can be rebooked
+  ok   exactly one of two simultaneous calls for the same slot wins
+
+8 passed, 0 failed

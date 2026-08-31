@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { AnalyticsScripts } from "@/components/analytics-scripts";
 import { ClickTracker } from "@/components/click-tracker";
+import { MotionRuntime } from "@/components/motion-runtime";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <ClickTracker />
+        <MotionRuntime />
         {children}
       </body>
     </html>

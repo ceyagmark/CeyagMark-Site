@@ -8,9 +8,13 @@ import type { NextConfig } from "next";
 // so 'unsafe-inline' plus an explicit vendor allowlist is the same tradeoff
 // Next.js's docs present as the default "without nonces" path — logged here,
 // not hidden, per BUILD-NOTES Slice 5.
+// React's dev-mode debugger wants eval() to reconstruct stack traces
+// ("React will never use eval() in production mode" — its own console
+// message). Next's CSP docs recommend the same isDev-gated allowance.
+const isDev = process.env.NODE_ENV === "development";
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.clarity.ms https://*.clarity.ms",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.clarity.ms https://*.clarity.ms`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self' data:",
