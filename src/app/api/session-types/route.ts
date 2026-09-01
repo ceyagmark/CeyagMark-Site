@@ -7,7 +7,8 @@ export async function GET() {
     const dataSource = await getDataSource();
     const sessionTypes = await dataSource.getActiveSessionTypes();
     return NextResponse.json({ sessionTypes });
-  } catch {
+  } catch (err) {
+    console.error("GET /api/session-types:", err);
     return apiError("INTERNAL_ERROR", "Could not load session types.");
   }
 }

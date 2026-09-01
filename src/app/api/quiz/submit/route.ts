@@ -45,7 +45,8 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ submission });
-  } catch {
+  } catch (err) {
+    console.error("POST /api/quiz/submit:", err);
     return apiError("INTERNAL_ERROR", "Could not save your quiz answers.");
   }
 }

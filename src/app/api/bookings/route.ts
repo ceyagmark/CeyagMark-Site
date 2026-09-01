@@ -50,7 +50,8 @@ export async function POST(request: Request) {
         sessionTypeName: result.sessionTypeName,
       },
     });
-  } catch {
+  } catch (err) {
+    console.error("POST /api/bookings:", err);
     return apiError("INTERNAL_ERROR", "Could not create the booking.");
   }
 }

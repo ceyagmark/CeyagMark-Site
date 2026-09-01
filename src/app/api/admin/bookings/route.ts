@@ -9,7 +9,8 @@ export async function GET() {
     const dataSource = await getDataSource();
     const bookings = await dataSource.adminListBookings();
     return NextResponse.json({ bookings });
-  } catch {
+  } catch (err) {
+    console.error("GET /api/admin/bookings:", err);
     return apiError("INTERNAL_ERROR", "Could not load bookings.");
   }
 }

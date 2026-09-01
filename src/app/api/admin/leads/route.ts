@@ -9,7 +9,8 @@ export async function GET() {
     const dataSource = await getDataSource();
     const leads = await dataSource.adminListLeads();
     return NextResponse.json({ leads });
-  } catch {
+  } catch (err) {
+    console.error("GET /api/admin/leads:", err);
     return apiError("INTERNAL_ERROR", "Could not load leads.");
   }
 }

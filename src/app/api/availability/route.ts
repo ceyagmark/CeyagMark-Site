@@ -19,7 +19,8 @@ export async function GET(request: Request) {
     const dataSource = await getDataSource();
     const slots = await dataSource.getAvailability(parsed.data.sessionTypeId, parsed.data.from, parsed.data.to);
     return NextResponse.json({ slots });
-  } catch {
+  } catch (err) {
+    console.error("GET /api/availability:", err);
     return apiError("INTERNAL_ERROR", "Could not load availability.");
   }
 }

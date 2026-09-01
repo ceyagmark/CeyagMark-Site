@@ -9,7 +9,8 @@ export async function POST(_request: Request, { params }: { params: Promise<{ to
     const result = await dataSource.cancelBooking(token);
     if (!result.ok) return apiError("NOT_FOUND", "Booking not found.");
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error("POST /api/bookings/[token]/cancel:", err);
     return apiError("INTERNAL_ERROR", "Could not cancel the booking.");
   }
 }

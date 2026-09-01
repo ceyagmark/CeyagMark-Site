@@ -43,7 +43,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ lead: { id: lead.id } });
-  } catch {
+  } catch (err) {
+    console.error("POST /api/leads:", err);
     return apiError("INTERNAL_ERROR", "Could not save your submission.");
   }
 }

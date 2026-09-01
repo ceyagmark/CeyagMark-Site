@@ -10,7 +10,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ tok
     const booking = await dataSource.getBookingByToken(token);
     if (!booking) return apiError("NOT_FOUND", "Booking not found.");
     return NextResponse.json({ booking });
-  } catch {
+  } catch (err) {
+    console.error("GET /api/bookings/[token]:", err);
     return apiError("INTERNAL_ERROR", "Could not load the booking.");
   }
 }
