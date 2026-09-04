@@ -9,8 +9,6 @@ export async function GET() {
     return NextResponse.json({ sessionTypes });
   } catch (err) {
     console.error("GET /api/session-types:", err);
-    // TEMPORARY, again — the SUPABASE_URL fix didn't clear it, need to see
-    // what's actually failing now. Reverts in the very next commit.
-    return apiError("INTERNAL_ERROR", err instanceof Error ? err.message : String(err));
+    return apiError("INTERNAL_ERROR", "Could not load session types.");
   }
 }
