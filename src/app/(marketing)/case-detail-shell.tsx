@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SceneTerrain } from "@/components/scene-terrain";
 
 const BACK_ARROW = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: "rotate(180deg)" }}>
@@ -32,7 +33,8 @@ export function CaseDetailShell({
 }) {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero has-scene">
+        <SceneTerrain />
         <div className="wrap">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link> &nbsp;&rsaquo;&nbsp; <Link href="/portfolio">Portfolio</Link> &nbsp;&rsaquo;&nbsp; {breadcrumbLabel}

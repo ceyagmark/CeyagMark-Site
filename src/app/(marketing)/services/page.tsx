@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SceneSignal } from "@/components/scene-signal";
 
 export const metadata: Metadata = {
   title: "Web Design & Digital Marketing Services and Pricing, Sri Lanka | CeyagMark",
@@ -89,7 +90,8 @@ export default function ServicesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICES_JSON_LD) }} />
 
-      <section className="page-hero">
+      <section className="page-hero has-scene">
+        <SceneSignal />
         <div className="wrap">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link> &nbsp;&rsaquo;&nbsp; Services

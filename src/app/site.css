@@ -830,3 +830,32 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
    them, which would strand the dash mid-path as a stray bright segment. Hide
    the pulse outright and keep the static line. */
 @media (prefers-reduced-motion: reduce) { .hr-pulse { animation: none; stroke-opacity: 0; } }
+
+/* ---------- Ambient canvas scenes (terrain, signal) ---------- */
+/* Same contract as .hero-ribbon: absolutely positioned behind the section's
+   own content, never interactive, never affecting layout. The parent section
+   needs position:relative and its .wrap lifted, which the rules below do. */
+.scene-layer { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.scene-layer canvas { display: block; width: 100%; height: 100%; }
+.page-hero.has-scene, .case-hero.has-scene { position: relative; }
+.page-hero.has-scene > .wrap, .case-hero.has-scene > .wrap { position: relative; z-index: 1; }
+
+/* Fades the scene out under the copy (left) and at the very bottom edge, so it
+   reads as depth on the open right-hand side rather than as a picture behind
+   the text. A mask, not a colour gradient: masks fade alpha, so this needs no
+   per-theme variant, whereas a gradient to `transparent` interpolates through
+   transparent black and would haze the light theme grey. */
+.scene-layer {
+  opacity: .9;
+  -webkit-mask-image: linear-gradient(90deg, transparent 4%, #000 56%), linear-gradient(180deg, #000 76%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 4%, #000 56%), linear-gradient(180deg, #000 76%, transparent 100%);
+  mask-composite: intersect;
+}
+[data-theme="light"] .scene-layer { opacity: .5; }
+
+/* Below the two-column breakpoint the section is text-dense and the scene sits
+   directly under the copy, so it comes down hard rather than being hidden —
+   unlike the hero ribbon, a full-width scene still composes at any width. */
+@media (max-width: 999px) { .scene-layer { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .scene-layer { opacity: .5; } }
