@@ -201,7 +201,7 @@ export default function HomePage() {
           </div>
 
           <div className="reveal">
-            <div className="glass metric-panel glow-hover">
+            <div className="glass metric-panel glow-hover tilt" data-tilt="6">
               <div className="mp-head">
                 <span>Real client outcomes</span>
               </div>
@@ -309,8 +309,8 @@ export default function HomePage() {
                 CeyagMark to fix the economics, not the slide.
               </p>
             </div>
-            <div className="reveal">
-              <div className="glass leak-panel glow-hover">
+            <div className="reveal" data-delay="1">
+              <div className="glass leak-panel glow-hover tilt" data-tilt="5">
                 <div className="leak-head">The squeeze on your unit economics</div>
                 <div className="leak-meter">
                   <div className="leak-row">
@@ -361,7 +361,7 @@ export default function HomePage() {
                 rarely the platform. It is the unit economics underneath.
               </p>
             </article>
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal" data-delay="1">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M12 3v18M7 8h7a3 3 0 010 6H7m0 0h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -373,7 +373,7 @@ export default function HomePage() {
                 much you can ever afford to spend.
               </p>
             </article>
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal" data-delay="2">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M4 19V5m16 14V9M9 19v-7m6 7v-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -400,7 +400,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid cols-4">
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal tilt" data-tilt="5">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0zM12 7v5l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -410,7 +410,7 @@ export default function HomePage() {
               <p>Profitable demand from paid search, paid social and marketplaces, built to scale without breaking your return.</p>
               <div className="meta">Paid acquisition</div>
             </article>
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal tilt" data-delay="1" data-tilt="5">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M4 4h16v12H4zM8 20h8M12 16v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -420,7 +420,7 @@ export default function HomePage() {
               <p>Turn the traffic you already pay for into more customers, with pages, offers and checkout tested every week.</p>
               <div className="meta">CRO and funnels</div>
             </article>
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal tilt" data-delay="2" data-tilt="5">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M20 6l-9 9-4-4M4 14v6h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -430,7 +430,7 @@ export default function HomePage() {
               <p>Email, SMS and lifecycle automation that turns one purchase into many, so you can outbid everyone on the way in.</p>
               <div className="meta">Retention and LTV</div>
             </article>
-            <article className="card glow-hover reveal">
+            <article className="card glow-hover reveal tilt" data-delay="3" data-tilt="5">
               <div className="ico" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                   <path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4M3 17l9 4 9-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -542,7 +542,7 @@ export default function HomePage() {
             </ul>
           </div>
           <div className="reveal">
-            <div className="glass metric-panel glow-hover">
+            <div className="glass metric-panel glow-hover tilt" data-tilt="6">
               <div className="mp-head">
                 <span>What you are actually paying for</span>
               </div>
@@ -660,7 +660,7 @@ export default function HomePage() {
               shows you the highest value fix first. No pitch until you have seen the diagnosis.
             </p>
             <div className="hero-actions" style={{ marginTop: 32 }}>
-              <Link className="btn btn-primary btn-lg btn-arrow" href="/growth-audit">
+              <Link className="btn btn-primary btn-lg btn-arrow" href="/growth-audit" data-magnetic="0.3">
                 Get your free Growth Audit{" "}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

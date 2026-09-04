@@ -61,7 +61,7 @@ export function SiteNav() {
             <Link className="muted-link" href="/contact" onClick={() => setOpen(false)}>
               Contact
             </Link>
-            <Link className="btn btn-primary" href="/growth-audit" onClick={() => setOpen(false)}>
+            <Link className="btn btn-primary" href="/growth-audit" data-magnetic="0.25" onClick={() => setOpen(false)}>
               Free Growth Audit
             </Link>
           </div>

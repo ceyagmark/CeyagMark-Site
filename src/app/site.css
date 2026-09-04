@@ -70,7 +70,7 @@ h2 { font-size: clamp(2.1rem, 4.2vw, 3.35rem); letter-spacing: -.03em; }
 h3 { font-size: 1.4rem; line-height: 1.15; }
 p { color: var(--text-soft); max-width: 64ch; text-wrap: pretty; }
 strong { color: var(--text); font-weight: 600; }
-.display-grad { background: linear-gradient(104deg, var(--text) 8%, var(--brand-glow) 52%, var(--brand) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.display-grad { background: linear-gradient(104deg, var(--text) 4%, var(--brand-glow) 46%, var(--good) 96%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 11px;
@@ -225,6 +225,7 @@ strong { color: var(--text); font-weight: 600; }
 .hero-trust .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
 
 .metric-panel { position: relative; padding: 34px; border-radius: 24px; overflow: hidden; }
+.metric-panel::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--brand-glow), var(--good)); opacity: .8; z-index: 2; }
 .metric-panel::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--light-catch); z-index: 1; }
 .metric-panel > * { position: relative; z-index: 2; }
 .metric-panel .mp-head { display: flex; align-items: center; justify-content: space-between; }
@@ -242,7 +243,7 @@ strong { color: var(--text); font-weight: 600; }
 .mp-row { display: flex; align-items: baseline; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border); }
 .mp-row:last-child { border-bottom: none; }
 .mp-row .k { color: var(--text-soft); font-size: .92rem; }
-.mp-row .v { font-family: var(--font-space-grotesk), sans-serif; font-size: 1.7rem; font-weight: 600; color: var(--text); letter-spacing: -.02em; }
+.mp-row .v { font-family: var(--font-space-grotesk), sans-serif; font-size: 1.9rem; font-weight: 600; color: var(--text); letter-spacing: -.025em; }
 .mp-row .v.up { color: var(--good); } .mp-row .v.down { color: var(--good); }
 .mp-row .v small { font-family: var(--font-inter); font-size: .72rem; color: var(--text-mute); font-weight: 500; margin-left: 6px; }
 
