@@ -175,7 +175,7 @@ strong { color: var(--text); font-weight: 600; }
 
 /* ---------- Nav ---------- */
 .nav { position: sticky; top: 0; z-index: 100; transition: background .4s ease, border-color .4s ease, height .3s ease; border-bottom: 1px solid transparent; }
-.nav.scrolled { background: color-mix(in srgb, var(--bg) 68%, transparent); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom-color: var(--border); box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 10px 30px -16px rgba(0,0,0,.6); }
+.nav.scrolled { background: color-mix(in srgb, var(--bg) 93%, transparent); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom-color: var(--border); box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 10px 30px -16px rgba(0,0,0,.6); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
 .brand { display: inline-flex; align-items: center; gap: 11px; font-family: var(--font-space-grotesk), sans-serif; font-size: 1.42rem; font-weight: 700; letter-spacing: -.03em; color: var(--text); }
 .brand b { color: var(--brand); font-weight: 700; }
@@ -896,3 +896,53 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
    ground is not a subtler version of the idea, it is the wrong idea. Hiding it
    also collapses the canvas to 1px, which the scene detects and skips. */
 [data-theme="light"] .star-field { display: none; }
+
+
+/* ---------- Engagement ladder (services) ---------- */
+/* These four cards are a sequence, not a set: diagnose, then fix, then run.
+   They previously read as four equal boxes with the price landing at a
+   different height in each, because the price followed body text of varying
+   length instead of being pinned to the card's bottom edge. */
+.ladder-grid > .card { display: flex; flex-direction: column; }
+.ladder-grid > .card > p:first-of-type { flex-grow: 1; }
+
+.ladder-step {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text-mute); margin-bottom: 16px;
+}
+.ladder-step b {
+  display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  font-family: var(--font-space-grotesk), sans-serif; font-size: .78rem; letter-spacing: 0;
+  color: var(--brand-glow); background: rgba(46, 134, 255, .13);
+  border: 1px solid var(--border-strong);
+  transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+.ladder-grid > .card:hover .ladder-step b {
+  background: rgba(46, 134, 255, .26); color: var(--text); border-color: var(--brand);
+}
+/* The last card is not a rung: consulting is available at any point, so its
+   marker is deliberately not a number and not on the connector. */
+.ladder-step[data-step="any"] b { color: var(--good); background: rgba(70, 211, 154, .12); font-size: .9rem; }
+
+/* Connector between the three numbered rungs, desktop only, drawn behind the
+   cards so it reads as one run rather than three separate borders. */
+@media (min-width: 1000px) {
+  .ladder-grid { position: relative; }
+  .ladder-grid::before {
+    content: ""; position: absolute; left: 12%; right: 38%; top: 43px; height: 1px; z-index: 0;
+    background: linear-gradient(90deg, transparent, var(--border-strong) 12%, var(--border-strong) 88%, transparent);
+  }
+  .ladder-grid > .card { position: relative; z-index: 1; }
+}
+
+/* Price and proof blocks reserve a consistent height so the price LINES align
+   across the row, not just the card bottoms. Two things varied: the proof runs
+   to two or three lines, and the USD figure wraps onto its own line in some
+   cards but not others (measured: proof 45/67/45/67px, price 29/58/58/29px).
+   Only applied where the four cards actually sit in a row; stacked, there is
+   nothing to align to. min-height is a floor, so longer copy still fits. */
+@media (min-width: 920px) {
+  .ladder-grid > .card > p:nth-of-type(2) { min-height: 3.7rem; }
+  .ladder-grid > .card > p:nth-of-type(3) { min-height: 4.3rem; }
+}

@@ -33,7 +33,7 @@ const SERVICES_JSON_LD = {
       name: "The Leak Report",
       serviceType: "Website and Funnel Audit",
       description:
-        "A scored audit of a site and funnel against a fixed rubric, delivered as a score out of 100, category subscores, an annotated screenshot trail and a three-fix shortlist.",
+        "A scored audit of a site and funnel against the same checklist every time, delivered as a score out of 100, a score for each area, marked-up screenshots and the three fixes that would lift it fastest.",
       provider: { "@id": "https://ceyagmark.com/#organization" },
       offers: { "@type": "Offer", price: "14999", priceCurrency: "LKR" },
     },
@@ -42,7 +42,7 @@ const SERVICES_JSON_LD = {
       position: 2,
       name: "The Fix Sprint",
       serviceType: "Conversion Rate Optimization",
-      description: "Ships the three fixes named in a Leak Report on a fixed scope and timeline, then re-scores the site on the same rubric.",
+      description: "Builds the three fixes named in a Leak Report on a fixed price and fixed dates, then scores the site again on the same checklist.",
       provider: { "@id": "https://ceyagmark.com/#organization" },
       offers: { "@type": "Offer", price: "30000", priceCurrency: "LKR" },
     },
@@ -119,11 +119,9 @@ export default function ServicesPage() {
             <h2>Diagnose, fix, then run it</h2>
             <p>Most clients start at the top and move down as the numbers justify it. You are not obliged to. Each step stands on its own.</p>
           </div>
-          <div className="grid cols-4">
+          <div className="grid cols-4 ladder-grid">
             <article className="card glow-hover reveal" id="leak-report">
-              <div className="meta" style={{ margin: "0 0 14px", border: "none", padding: 0 }}>
-                01 Diagnose
-              </div>
+              <span className="ladder-step"><b>01</b> Diagnose</span>
               <h3>The Leak Report</h3>
               <p>
                 We score your site and funnel out of 100, using the same checklist every time. You get the
@@ -139,9 +137,7 @@ export default function ServicesPage() {
               </p>
             </article>
             <article className="card glow-hover reveal" id="fix-sprint">
-              <div className="meta" style={{ margin: "0 0 14px", border: "none", padding: 0 }}>
-                02 Fix
-              </div>
+              <span className="ladder-step"><b>02</b> Fix</span>
               <h3>The Fix Sprint</h3>
               <p>
                 We build the three fixes your Leak Report named. Fixed price, fixed dates. Then we score the
@@ -154,9 +150,7 @@ export default function ServicesPage() {
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 10 }}>Scoped from your Leak Report, so you know what you are buying before you buy it.</p>
             </article>
             <article className="card glow-hover reveal" id="build-and-run">
-              <div className="meta" style={{ margin: "0 0 14px", border: "none", padding: 0 }}>
-                03 Build &amp; run
-              </div>
+              <span className="ladder-step"><b>03</b> Build &amp; run</span>
               <h3>Build &amp; Run</h3>
               <p>
                 The site and the marketing on it, as one job. We set up the tracking on day one, so your numbers
@@ -172,9 +166,7 @@ export default function ServicesPage() {
               </p>
             </article>
             <article className="card glow-hover reveal" id="consulting-offer">
-              <div className="meta" style={{ margin: "0 0 14px", border: "none", padding: 0 }}>
-                Any time
-              </div>
+              <span className="ladder-step" data-step="any"><b>·</b> Any time</span>
               <h3>Consulting</h3>
               <p>
                 A one to one session, strategy or technical. For brands running marketing in-house, and for
