@@ -776,3 +776,18 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
 .admin-field label { display: block; font-size: .82rem; color: var(--text-soft); margin-bottom: 8px; }
 .admin-input { width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--border-strong); background: var(--bg); color: var(--text); padding: 0 16px; font-size: .95rem; transition: border-color .2s ease; }
 .admin-input:focus { outline: none; border-color: var(--brand); }
+
+/* ---------- Growth orb — the real logo's growth-line mark, floating.
+   Resting opacity 1 always (the motion floor): this is a decoration on
+   top of already-visible content, never a gate on visibility. The follow
+   and spin are added by motion-runtime.tsx only when a fine pointer and
+   normal motion preferences are confirmed; otherwise it just sits still,
+   fully visible, exactly like every other motion effect in this build. */
+.growth-orb-anchor { position: absolute; top: -16px; right: 22px; z-index: 3; pointer-events: none; }
+.growth-orb {
+  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--surface-2); border: 1px solid var(--border-strong);
+  backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 12px 28px -10px rgba(46,134,255,.5);
+}
+@media (max-width: 640px) { .growth-orb-anchor { top: -12px; right: 14px; } .growth-orb { width: 42px; height: 42px; } }

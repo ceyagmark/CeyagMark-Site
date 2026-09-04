@@ -200,7 +200,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="reveal">
+          <div className="reveal" style={{ position: "relative" }}>
+            <div className="growth-orb-anchor" aria-hidden="true">
+              <div className="growth-orb" data-growth-orb>
+                <svg viewBox="0 0 100 100" width="30" height="30">
+                  <defs>
+                    <linearGradient id="orb-grad" x1="20" y1="70" x2="80" y2="25" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="var(--brand-glow)" />
+                      <stop offset="1" stopColor="var(--good)" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M30 64 L45 52 L55 58 L74 33" fill="none" stroke="url(#orb-grad)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M60 30 L78 28 L74 46 Z" fill="url(#orb-grad)" />
+                </svg>
+              </div>
+            </div>
             <div className="glass metric-panel glow-hover tilt" data-tilt="6">
               <div className="mp-head">
                 <span>Real client outcomes</span>

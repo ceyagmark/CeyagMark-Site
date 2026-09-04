@@ -164,6 +164,47 @@ export function MotionRuntime() {
     window.addEventListener("pointermove", requestParallax, { passive: true });
     parallaxFrameFn();
 
+    // ---------- Growth orb ----------
+    // A floating chip carrying the real logo's growth-line mark (not a new
+    // character invented for this) that drifts toward the cursor within its
+    // own container and gently rotates with scroll. Contained, not
+    // full-viewport — it moves within a max radius of its resting position,
+    // same "tasteful and limited" bar as everything else in this file.
+    let ox = 0;
+    let oy = 0;
+    let otx = 0;
+    let oty = 0;
+    let orbFrame = 0;
+    const ORB_RADIUS = 22;
+    function orbLoop() {
+      const wrap = document.querySelector<HTMLElement>("[data-growth-orb]");
+      if (wrap) {
+        ox += (otx - ox) * 0.08;
+        oy += (oty - oy) * 0.08;
+        const sy = window.scrollY;
+        const spin = (sy * 0.05) % 360;
+        wrap.style.transform = `translate3d(${ox}px, ${oy}px, 0) rotate(${spin}deg)`;
+      }
+      orbFrame = requestAnimationFrame(orbLoop);
+    }
+    function onOrbPointerMove(e: PointerEvent) {
+      const wrap = document.querySelector<HTMLElement>("[data-growth-orb]");
+      if (!wrap) return;
+      const parent = wrap.parentElement;
+      if (!parent) return;
+      const r = parent.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+      const pull = Math.min(dist, 260) / 260;
+      otx = (dx / (dist || 1)) * ORB_RADIUS * pull;
+      oty = (dy / (dist || 1)) * ORB_RADIUS * pull;
+    }
+    document.addEventListener("pointermove", onOrbPointerMove, { passive: true });
+    orbLoop();
+
     return () => {
       document.removeEventListener("pointermove", onGlowMove);
       document.removeEventListener("pointermove", onPointerMove);
@@ -178,8 +219,10 @@ export function MotionRuntime() {
       window.removeEventListener("scroll", requestParallax);
       window.removeEventListener("pointermove", onParallaxPointerMove);
       window.removeEventListener("pointermove", requestParallax);
+      document.removeEventListener("pointermove", onOrbPointerMove);
       cancelAnimationFrame(ringFrame);
       cancelAnimationFrame(parallaxFrame);
+      cancelAnimationFrame(orbFrame);
       document.body.classList.remove("cursor-on");
     };
     // Runs once — every listener above is delegated or re-queries the live
