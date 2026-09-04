@@ -9,6 +9,8 @@ export async function GET() {
     return NextResponse.json({ sessionTypes });
   } catch (err) {
     console.error("GET /api/session-types:", err);
-    return apiError("INTERNAL_ERROR", "Could not load session types.");
+    // TEMPORARY — diagnosing the live prod Supabase failure with no working
+    // Vercel log access. Reverts in the very next commit.
+    return apiError("INTERNAL_ERROR", err instanceof Error ? err.message : String(err));
   }
 }
