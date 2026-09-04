@@ -6,15 +6,15 @@ const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
 // Google Consent Mode v2, set before any Google tag can fire (Google's own
-// requirement — the default call must run before gtag.js/GTM loads, hence
+// requirement, the default call must run before gtag.js/GTM loads, hence
 // `beforeInteractive`). Defaults are DENIED across the board: this app ships
 // no cookie-consent banner, so there is no real user choice to reflect yet.
-// Denied-by-default is the honest state, not a workaround — granting consent
+// Denied-by-default is the honest state, not a workaround, granting consent
 // nobody gave would be a fabricated compliance signal, worse than not
 // implementing Consent Mode at all. GTM's own Google tags read this and fall
 // back to modeled/cookieless measurement automatically; Meta Pixel and
 // Microsoft Clarity are not Google products and do not read this signal at
-// all — see BUILD-NOTES.md's Slice 5 section for what that means in practice
+// all, see BUILD-NOTES.md's Slice 5 section for what that means in practice
 // and why a real consent banner is the next open item, not this one.
 const CONSENT_DEFAULT_SCRIPT = `
 window.dataLayer = window.dataLayer || [];

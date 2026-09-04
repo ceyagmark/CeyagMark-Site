@@ -7,7 +7,7 @@
 // "The path argument must be of type string... Received an instance of URL"
 // under Turbopack's Next 16 RSC runtime, while the identical code path worked
 // fine from a Route Handler. Root cause not fully chased (three-hypothesis
-// budget spent finding the workaround, not the Turbopack internal) — the fix
+// budget spent finding the workaround, not the Turbopack internal), the fix
 // is architectural anyway: admin pages should read through the same API the
 // rest of the app already proved works, not a second direct-DB path.
 import { useEffect, useState } from "react";

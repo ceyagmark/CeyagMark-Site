@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 // Ported from the live llms.txt with two corrections found while porting:
 // (1) the live file quoted the free-audit price as "$199 USD / LKR 24,000",
 //     which does not match free-audit.html's own copy or its JSON-LD Offer
-//     (both say $99 / LKR 14,999) — used the verified figure, not the stale
+//     (both say $99 / LKR 14,999), used the verified figure, not the stale
 //     one; (2) the Booking & Operations System line updated since it now
 //     also runs live on this site for consulting sessions, not only PPI.
 const CONTENT = `# CeyagMark

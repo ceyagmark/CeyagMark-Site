@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// Single parsing site for booking input (W2/C7) — every caller imports this,
+// Single parsing site for booking input (W2/C7), every caller imports this,
 // no second ad-hoc check anywhere else in the codebase.
 export const createBookingSchema = z.object({
   sessionTypeId: z.string().uuid(),

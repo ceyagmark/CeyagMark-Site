@@ -5,7 +5,7 @@ import { trackWhatsappClick, trackCaseOpened, trackCaseCtaClick } from "@/lib/an
 
 // One delegated listener on `document`, mirroring the live static site's own
 // pattern (assets/js/main.js's whatsapp_click, assets/js/portfolio.js's
-// case_opened/case_cta_click) — a single listener that survives client-side
+// case_opened/case_cta_click), a single listener that survives client-side
 // navigation, rather than wiring an onClick into every server-rendered link
 // that happens to point at wa.me or a case study.
 export function ClickTracker() {

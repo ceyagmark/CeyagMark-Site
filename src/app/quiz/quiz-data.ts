@@ -1,4 +1,4 @@
-// Ported verbatim from Projects/CeyagMark/CeyagMark/assets/js/quiz.js — question
+// Ported verbatim from Projects/CeyagMark/CeyagMark/assets/js/quiz.js, question
 // text, options, insight copy and the scoring/tier algorithm are unchanged.
 // NOT ported: localStorage save-for-later, the base64 share-link, and the
 // resume gate. Those are real UX conveniences in the original but are

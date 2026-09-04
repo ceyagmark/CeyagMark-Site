@@ -22,8 +22,8 @@ const SITE_URL = "https://ceyagmark.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // No template: every ported page already carries its own full, exact title
-  // from the live site (which brand-suffixes inconsistently — e.g.
-  // "... | CeyagMark Growth Audit" vs "... | CeyagMark") — appending a
+  // from the live site (which brand-suffixes inconsistently, e.g.
+  // "... | CeyagMark Growth Audit" vs "... | CeyagMark"), appending a
   // template here would double the suffix on some pages.
   title: "Web Development & Performance Marketing Agency in Sri Lanka | CeyagMark",
   description:

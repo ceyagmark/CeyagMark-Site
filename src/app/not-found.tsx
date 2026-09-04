@@ -6,7 +6,7 @@ import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { BgAura } from "@/components/bg-aura";
 
 // Next.js's global not-found page. robots noindex,follow is the framework
-// default for this route already (no <meta> needed) — carried over from the
+// default for this route already (no <meta> needed), carried over from the
 // live site's explicit tag for documentation parity only.
 export default function NotFound() {
   return (

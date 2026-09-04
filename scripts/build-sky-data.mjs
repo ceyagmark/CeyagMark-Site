@@ -8,7 +8,7 @@
 // scale this renders.
 //
 // Run: node scripts/build-sky-data.mjs
-// Output: src/lib/sky-data.json  (committed — the build must not need network)
+// Output: src/lib/sky-data.json  (committed, the build must not need network)
 
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -49,7 +49,7 @@ for (const f of stars.features) {
 console.log(`RA range  : ${raMin.toFixed(2)} .. ${raMax.toFixed(2)}`);
 console.log(`Dec range : ${decMin.toFixed(2)} .. ${decMax.toFixed(2)}`);
 if (raMin < -180.01 || raMax > 360.01 || decMin < -90.01 || decMax > 90.01) {
-  throw new Error("Coordinates outside any expected convention — inspect before trusting this data.");
+  throw new Error("Coordinates outside any expected convention, inspect before trusting this data.");
 }
 const raConvention = raMin < -0.01 ? "-180..180" : "0..360";
 console.log(`RA convention detected: ${raConvention}`);

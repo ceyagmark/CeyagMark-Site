@@ -117,7 +117,7 @@ const FAQ_JSON_LD = {
       name: "What does CeyagMark do?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We build websites and run the marketing on them as one engagement. That covers web development, paid advertising, SEO, conversion rate optimization and retention marketing. Because one team owns both the site and the traffic, we can find a problem and fix it without waiting on anyone else.",
+        text: "We build the site and run the marketing on it, as one job. That covers the website, paid ads, search, getting more visitors to buy, and bringing past customers back. One team owns both, so when something goes wrong we can find it and fix it without waiting on anyone.",
       },
     },
     {
@@ -141,7 +141,7 @@ const FAQ_JSON_LD = {
       name: "How do you measure success?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In money. We report on revenue, return on ad spend, customer lifetime value, conversion rate and cost per acquisition, not impressions or reach.",
+        text: "In money. We report what you earned, what you got back for every rupee of ad spend, what a customer is worth over time, how many visitors buy, and what one new customer costs. Not views or reach.",
       },
     },
     {
@@ -649,7 +649,7 @@ export default function HomePage() {
               <summary>
                 How do you measure success? <span className="pm" aria-hidden="true" />
               </summary>
-              <p>In money. We report on revenue, return on ad spend, customer lifetime value, conversion rate and cost per acquisition. Never impressions, likes or reach.</p>
+              <p>In money. We report what you earned, what you got back for every rupee of ad spend, what a customer is worth over time, how many visitors buy, and what one new customer costs. Never likes or views.</p>
             </details>
             <details>
               <summary>

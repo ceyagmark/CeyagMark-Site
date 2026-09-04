@@ -82,7 +82,7 @@ export default function CaseAgrilhotechPage() {
         <h2>What the audit found</h2>
         <p>
           The good half was genuinely good. robots.txt explicitly welcomes GPTBot, PerplexityBot and ClaudeBot while
-          blocking the scrapers that take without returning anything. The llms.txt file was comprehensive. Product
+          blocking the scrapers that take without returning anything. The llms.txt file was thorough. Product
           pages carried real structured pricing and a substantial FAQ block. Discovery scored 82.
         </p>
         <p>

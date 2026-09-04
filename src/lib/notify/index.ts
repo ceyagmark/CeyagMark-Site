@@ -9,7 +9,7 @@ export interface Notifier {
 // The PPI lesson, verbatim: "a stub that returns ok: true makes 'no
 // credentials' and 'working provider' indistinguishable to every caller."
 // This adapter always reports its true outcome, and every outcome is written
-// to notification_log by sendAndLog() below — never inferred, never silent.
+// to notification_log by sendAndLog() below, never inferred, never silent.
 class ConsoleNotifier implements Notifier {
   async send(email: Email, template: string) {
     console.log(`[notify:skipped] ${template} -> ${email.to} : ${email.subject}`);

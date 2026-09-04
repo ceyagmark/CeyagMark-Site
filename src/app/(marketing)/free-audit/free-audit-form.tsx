@@ -26,7 +26,7 @@ function optionLabel(o: Option, currency: "USD" | "LKR"): string {
 // behaviour change: postLead() used to fire-and-forget to a Google Apps
 // Script URL (window.CEYAG_LEAD_ENDPOINT). It now awaits a POST to
 // /api/leads (source: "free_audit") and the success/disqualified screens
-// only render after that write is confirmed — same fix as the contact form.
+// only render after that write is confirmed, same fix as the contact form.
 export function FreeAuditForm() {
   const [currency, setCurrency] = useState<"USD" | "LKR">("USD");
   const [stepIndex, setStepIndex] = useState(0);

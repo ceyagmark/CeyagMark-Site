@@ -16,7 +16,7 @@
 
 const DEG = Math.PI / 180;
 
-/** Nittambuwa, Sri Lanka — where CeyagMark actually is. */
+/** Nittambuwa, Sri Lanka, where CeyagMark actually is. */
 export const OBSERVER = { latitude: 7.14, longitude: 80.1 };
 
 /**
@@ -132,7 +132,7 @@ export function project(h: Horizontal, cam: Camera): Projected | null {
 
 /**
  * The moment a given scroll position represents: dusk to dawn, 18:00 through
- * 06:00 the next morning, on today's date. Today's date is deliberate — it
+ * 06:00 the next morning, on today's date. Today's date is deliberate, it
  * means the sky overhead is the sky actually overhead, and it drifts through
  * the year the way the real one does.
  */

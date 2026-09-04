@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-// Ported from the live static site's own assets/js/main.js — that file's
+// Ported from the live static site's own assets/js/main.js, that file's
 // custom cursor, magnetic buttons, 3D tilt, glow-follow and parallax are
 // real, already-shipped, already prefers-reduced-motion-safe effects, not
 // new ideas invented for this rebuild. The one real difference from a
@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 // each `[data-magnetic]`/`[data-tilt]`/`.glow-hover` element (as the
 // original does, once, at page load) would either miss elements added by a
 // later navigation or double-bind elements a persisted layout keeps
-// mounted. Event delegation on `document` sidesteps both failure modes —
+// mounted. Event delegation on `document` sidesteps both failure modes , 
 // one listener, `e.target.closest(...)`, works the same regardless of
 // whether the underlying elements are fresh or persisted.
 export function MotionRuntime() {
@@ -26,7 +26,7 @@ export function MotionRuntime() {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     // ---------- Glow-follow (.glow-hover cards) ----------
-    // Cheap position tracking for a CSS radial-gradient highlight — not
+    // Cheap position tracking for a CSS radial-gradient highlight, not
     // object movement, so this runs regardless of reduced-motion, matching
     // the original.
     function onGlowMove(e: PointerEvent) {
@@ -168,7 +168,7 @@ export function MotionRuntime() {
     // A floating chip carrying the real logo's growth-line mark (not a new
     // character invented for this) that drifts toward the cursor within its
     // own container and gently rotates with scroll. Contained, not
-    // full-viewport — it moves within a max radius of its resting position,
+    // full-viewport, it moves within a max radius of its resting position,
     // same "tasteful and limited" bar as everything else in this file.
     let ox = 0;
     let oy = 0;
@@ -225,12 +225,12 @@ export function MotionRuntime() {
       cancelAnimationFrame(orbFrame);
       document.body.classList.remove("cursor-on");
     };
-    // Runs once — every listener above is delegated or re-queries the live
+    // Runs once, every listener above is delegated or re-queries the live
     // DOM, so nothing here needs rebinding when the route changes.
   }, []);
 
   // Reveal observer: genuinely needs re-init per navigation, since
-  // IntersectionObserver must be told about each new page's elements —
+  // IntersectionObserver must be told about each new page's elements , 
   // delegation doesn't help an API that works by calling .observe() on
   // specific nodes.
   useEffect(() => {
@@ -283,7 +283,7 @@ export function MotionRuntime() {
 
     // The floor: never let a missed intersection (or an observer that
     // fails for any reason) hide content longer than ~1.5s. setTimeout,
-    // never requestAnimationFrame — rAF can silently never fire in a
+    // never requestAnimationFrame, rAF can silently never fire in a
     // background tab, which would mean content that never reveals itself.
     const safetyTimer = window.setTimeout(revealAll, 1500);
     function onLoad() {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { BookingFlow } from "./booking-flow";
 
-// Transactional flow, not a ranked page — noindex, same call PPI made for
+// Transactional flow, not a ranked page, noindex, same call PPI made for
 // /booking/* (F6 exemption, stated not skipped silently).
 export const metadata: Metadata = {
   title: "Book a session",

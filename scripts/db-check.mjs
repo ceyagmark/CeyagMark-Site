@@ -36,7 +36,7 @@ async function main() {
   const sessionTypeId = types[0].id;
 
   // Pick a start time comfortably inside the seeded Mon-Fri 19:00-22:00
-  // window (Shashika's real consulting hours, corrected 2026-08-25 — this
+  // window (Shashika's real consulting hours, corrected 2026-08-25, this
   // was 09:00-18:00 with a 10:00 test slot until then; changing the seeded
   // hours without updating this hardcoded slot broke every test past the
   // first, since 10:00 no longer falls inside availability_rules at all).
@@ -80,7 +80,7 @@ async function main() {
   );
 
   // 3. A slot inside the buffer window (10 min after a 30-min session ends)
-  // is also rejected — proves the buffer is enforced, not just the raw
+  // is also rejected, proves the buffer is enforced, not just the raw
   // session duration.
   const bufferStart = new Date(new Date(startsAt).getTime() + 35 * 60 * 1000).toISOString();
   const bufferClash = await db.query("select create_booking($1,$2,$3,$4,$5,$6,$7,$8,$9) as r", [
@@ -151,7 +151,7 @@ async function main() {
 
   // 7. Two concurrent calls for the same free slot: exactly one wins.
   // (PGlite is single-connection, so this is serialised, not a true
-  // concurrency proof — same limitation PPI documented. It proves the
+  // concurrency proof, same limitation PPI documented. It proves the
   // constraint's *logic* is correct, not that it survives real concurrent
   // connections, which needs a real Postgres instance.)
   const raceStart = new Date(new Date(clearStart).getTime() + 60 * 60 * 1000).toISOString();

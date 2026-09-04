@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const BASE = "https://ceyagmark.com";
 
 // Every public, indexable page from SLICE-0-CONTRACTS.md's meta table, plus
-// privacy/terms (new). /book, /booking/*, /quiz and /admin/* are excluded —
+// privacy/terms (new). /book, /booking/*, /quiz and /admin/* are excluded , 
 // transactional or noindex per that same table.
 const PATHS = [
   "/",

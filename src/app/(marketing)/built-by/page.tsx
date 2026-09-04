@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 // Ported: the intro/marketing sections from built-by.html, verbatim. NOT
-// ported: built-by.js's own 15-question "Website Plan" quiz engine — a
+// ported: built-by.js's own 15-question "Website Plan" quiz engine: a
 // second full quiz engine, materially different content from growth-audit's
 // quiz (built-by's asks about an existing site the visitor already has, not
 // their acquisition/conversion/retention maturity). Replicating it was out
 // of budget for this session. Its CTA below deliberately routes into the
-// real, working Growth Audit quiz instead of a dead or fabricated one — an
+// real, working Growth Audit quiz instead of a dead or fabricated one, an
 // honest simplification, logged as an open item in BUILD-NOTES rather than
 // left as a silent gap or a 404 (this URL must exist per SEO parity).
 export const metadata: Metadata = {

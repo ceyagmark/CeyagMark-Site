@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-// New page — does not exist on the live site (audit finding: /privacy,
+// New page, does not exist on the live site (audit finding: /privacy,
 // /terms and /privacy-policy all 404). Written per the privacy-policy skill,
 // covering the Pixel, GA4, Clarity and form data this app actually collects.
 export const metadata: Metadata = {

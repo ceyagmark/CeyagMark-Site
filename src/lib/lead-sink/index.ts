@@ -4,7 +4,7 @@ import type { DataSource, Lead } from "@/lib/data/types";
 
 // Same rule as the notification port: a skipped or stubbed send logs
 // explicitly as skipped, never silently as sent (ADR-001 #11). The DB write
-// already happened by the time this runs (createLead/createBooking) — this
+// already happened by the time this runs (createLead/createBooking), this
 // port only handles the two forward sinks: Hub and the local pipeline file.
 
 const PIPELINE_FILE = join(process.cwd(), "data", "hub-pipeline-log.jsonl");
@@ -31,7 +31,7 @@ async function sinkToFile(lead: Lead): Promise<{ status: "sent" | "skipped" | "f
     await mkdir(join(process.cwd(), "data"), { recursive: true });
     const record = {
       // AgencyOS-pipeline-shaped record (Lead model field names), written
-      // inside this repo — never into Agency/, which is frozen until
+      // inside this repo, never into Agency/, which is frozen until
       // 2026-08-29 (Agency/baseline-week.md).
       source: "ceyagmark-nextjs",
       leadSource: lead.source,

@@ -74,7 +74,7 @@ function buildFrame(key: string, cam: Camera, lst: number): Frame {
         const pb = project(toHorizontal(b[0], b[1], OBSERVER.latitude, lst), cam);
         // Both ends must be above the horizon and in front of the camera, or the
         // segment would draw a straight line across a constellation that is
-        // half-risen — visibly wrong to anyone who knows the sky.
+        // half-risen, visibly wrong to anyone who knows the sky.
         if (!pa || !pb) continue;
         segs.push([pa.x, pa.y, pb.x, pb.y]);
         sx += pa.x;

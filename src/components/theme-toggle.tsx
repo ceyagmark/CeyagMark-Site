@@ -24,7 +24,7 @@ export function ThemeToggle() {
     try {
       localStorage.setItem(THEME_KEY, next);
     } catch {
-      // Storage unavailable (private browsing, disabled cookies) — the
+      // Storage unavailable (private browsing, disabled cookies), the
       // toggle still works for this page load, just doesn't persist.
     }
     const meta = document.querySelector('meta[name="theme-color"]');

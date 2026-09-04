@@ -16,7 +16,7 @@ import type {
 } from "./types";
 import { generateConfirmationCode, generateManageToken } from "./tokens";
 
-// PGlite is dev/test only — see ADR-001 #4. Required dynamically so a
+// PGlite is dev/test only, see ADR-001 #4. Required dynamically so a
 // production bundle never needs the package resolvable (it is a
 // devDependency; PPI's BUILD-NOTES flags the same external-module stub issue
 // if this import is reachable from a production build path, which it is not:

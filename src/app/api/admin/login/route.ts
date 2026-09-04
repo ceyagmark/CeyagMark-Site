@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   }
   const password = typeof (body as { password?: unknown })?.password === "string" ? (body as { password: string }).password : "";
   if (!password || !checkPassword(password)) {
-    // Same message whether the password is wrong or unset — never reveals
+    // Same message whether the password is wrong or unset, never reveals
     // which, matching PPI's rule for its dev sign-in.
     return apiError("UNAUTHORIZED", "Incorrect password.");
   }

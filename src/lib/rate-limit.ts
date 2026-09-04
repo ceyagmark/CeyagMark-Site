@@ -1,4 +1,4 @@
-// In-memory, per-IP, per-instance — documented as such rather than dressed up
+// In-memory, per-IP, per-instance, documented as such rather than dressed up
 // as distributed (same honest call PPI made). Resets on deploy/restart.
 const hits = new Map<string, number[]>();
 

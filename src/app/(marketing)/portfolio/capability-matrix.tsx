@@ -1,6 +1,6 @@
 import { CASES, DISCIPLINES } from "./cases-data";
 
-// Rows and the heading count are computed from CASES, not hand-typed — the
+// Rows and the heading count are computed from CASES, not hand-typed. The
 // original build session found its hand-maintained matrix heading drifting
 // from the actual card count after an edit. Deriving both from one source
 // makes that defect class structurally impossible here.

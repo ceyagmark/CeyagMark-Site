@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-// New page — see privacy/page.tsx for the same audit finding this fixes.
+// New page, see privacy/page.tsx for the same audit finding this fixes.
 export const metadata: Metadata = {
   title: "Terms of Service | CeyagMark",
   description: "The terms that apply to using ceyagmark.com, booking a consulting session, or applying for an audit.",

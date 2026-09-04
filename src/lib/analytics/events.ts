@@ -1,10 +1,10 @@
 // Every event here mirrors a real dataLayer.push() call that already exists in
-// the live static site (assets/js/{main,portfolio,free-audit,quiz}.js) — same
+// the live static site (assets/js/{main,portfolio,free-audit,quiz}.js), same
 // event names, same field names, so any GTM tag or variable Shashika already
 // has half-configured for the old site keeps working. `booking_completed` and
 // `contact_submitted` are new: neither funnel existed as a real conversion on
 // the static site (booking didn't exist; contact silently discarded leads),
-// so there was nothing to port for them — they're named to match the existing
+// so there was nothing to port for them, they're named to match the existing
 // convention, not invented data.
 
 declare global {

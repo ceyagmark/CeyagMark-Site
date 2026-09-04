@@ -1,10 +1,10 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
-// No Supabase project exists yet (no credentials — see ADR-001), so this is a
+// No Supabase project exists yet (no credentials, see ADR-001), so this is a
 // dev-only password gate, same shape as PPI's dev sign-in: a signed cookie
 // with a constant-time compare. Reversible two-way-door decision, logged in
-// BUILD-NOTES rather than escalated — the real auth path (Supabase Auth +
+// BUILD-NOTES rather than escalated, the real auth path (Supabase Auth +
 // RLS) is a Slice 2+ open item once a project exists.
 const COOKIE_NAME = "ceyag_admin";
 
@@ -13,7 +13,7 @@ const COOKIE_NAME = "ceyag_admin";
 // build (Next.js dev/Turbopack does not guarantee the route-handler module
 // and the page-server-component module share one instance, so the signing
 // secret differed between the POST that signed the cookie and the GET that
-// verified it — found by driving the real flow, not assumed). Fail loudly
+// verified it, found by driving the real flow, not assumed). Fail loudly
 // instead of failing every login unpredictably.
 function getSecret(): string {
   const secret = process.env.ADMIN_SESSION_SECRET;

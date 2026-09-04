@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 
 // Generated in application code, not in SQL, so no crypto extension
-// (pgcrypto) is required on either database — see 0001_init.sql header.
+// (pgcrypto) is required on either database, see 0001_init.sql header.
 export function generateConfirmationCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I ambiguity
   let code = "";

@@ -1,10 +1,10 @@
 // Unlike PPI, local-source.ts does not hand-list which migration files to
-// apply — it reads every *.sql file in supabase/migrations/ (readdirSync,
+// apply, it reads every *.sql file in supabase/migrations/ (readdirSync,
 // sorted) at startup, so a new migration cannot be forgotten from the dev
 // path by construction. That eliminates the specific drift PPI hit four
 // times. What THIS script checks instead: filenames are sequential with no
 // gaps or duplicate numbers, so supabase-source.ts (applied manually via the
-// Supabase SQL editor or `supabase db push` once a project exists — there is
+// Supabase SQL editor or `supabase db push` once a project exists, there is
 // none yet, see ADR-001) is applying migrations in the same order local dev
 // already proved works.
 

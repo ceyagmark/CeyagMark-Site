@@ -1,7 +1,7 @@
 // Portable source for the portfolio page, ported verbatim from
 // Projects/CeyagMark/CeyagMark/portfolio.html + Projects/CeyagMark/portfolio/cases.json.
 // Matrix rows and filter chip counts are DERIVED from `tags` below rather than
-// hand-maintained twice — the original build session found the matrix heading
+// hand-maintained twice, the original build session found the matrix heading
 // and the filter counts drifting out of sync; generating both from one array
 // makes that class of bug structurally impossible here.
 
@@ -20,7 +20,7 @@ export type CaseCardData = {
   headline: string;
   metrics?: CaseMetric[];
   basis?: string;
-  basisLabel?: string; // e.g. "How it was measured." / "What we built." — omit for no bold prefix
+  basisLabel?: string; // e.g. "How it was measured." / "What we built.", omit for no bold prefix
   connect?: string;
   engagement?: { label: string; href?: string };
   tags: Discipline[];

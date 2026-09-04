@@ -10,7 +10,7 @@ type Filter = "all" | Discipline;
 export function PortfolioGrid() {
   const [filter, setFilter] = useState<Filter>("all");
 
-  // Counts derived from the same data the cards render from — cannot drift
+  // Counts derived from the same data the cards render from, cannot drift
   // from the actual card tags the way two hand-maintained lists could (the
   // original build session's own finding).
   const counts = useMemo(() => {

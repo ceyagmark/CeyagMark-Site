@@ -1,5 +1,5 @@
 // Money is integer minor units everywhere (ADR-001 #5 / W5). These are
-// display-only formatters — never used on a path that computes a total.
+// display-only formatters, never used on a path that computes a total.
 
 export function formatLkr(wholeRupees: number): string {
   return `LKR ${wholeRupees.toLocaleString("en-LK")}`;

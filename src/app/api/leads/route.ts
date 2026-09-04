@@ -8,7 +8,7 @@ import { leadReceivedEmail } from "@/lib/notify/templates";
 import { sinkLead } from "@/lib/lead-sink";
 
 // Every lead writes to the database first; the success state on the caller's
-// side renders only after this responds 200 — fixes the audit finding that
+// side renders only after this responds 200, fixes the audit finding that
 // /contact showed success while the fetch was silently skipped.
 export async function POST(request: Request) {
   if (isRateLimited(`lead:${clientKey(request)}`, 10, 10 * 60 * 1000)) {
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     await sinkLead(dataSource, lead);
 
     // site_settings.owner_alert_email is not exposed through the DataSource
-    // port yet (only create_booking reads it, server-side) — see BUILD-NOTES
+    // port yet (only create_booking reads it, server-side), see BUILD-NOTES
     // open items. Falls back to the same real, published contact seeded there.
     const ownerEmail = process.env.SEED_OWNER_EMAIL ?? "growth@ceyagmark.com";
     await sendAndLog(dataSource, leadReceivedEmail(ownerEmail, lead.name, lead.email, lead.source), "lead_received", {

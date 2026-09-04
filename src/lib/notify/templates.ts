@@ -15,7 +15,7 @@ export function bookingConfirmationEmail(booking: Extract<CreateBookingResult, {
   const manageUrl = `https://ceyagmark.com/booking/${booking.manageToken}`;
   return {
     to: booking.customerEmail,
-    subject: `Booked: ${booking.sessionTypeName} — ${booking.confirmationCode}`,
+    subject: `Booked: ${booking.sessionTypeName}, ${booking.confirmationCode}`,
     text: `Hi ${booking.customerName},\n\nYour ${booking.sessionTypeName} is confirmed for ${when} (Asia/Colombo time).\n\nConfirmation code: ${booking.confirmationCode}\n\nNeed to cancel? ${manageUrl}\n\nSee you then.\nCeyagMark`,
   };
 }
@@ -24,7 +24,7 @@ export function bookingOwnerAlertEmail(booking: Extract<CreateBookingResult, { o
   const when = DATE_FMT.format(new Date(booking.startsAt));
   return {
     to: booking.ownerAlertEmail,
-    subject: `New booking: ${booking.sessionTypeName} — ${when}`,
+    subject: `New booking: ${booking.sessionTypeName}, ${when}`,
     text: `${booking.customerName} (${booking.customerEmail}) booked ${booking.sessionTypeName} for ${when} (Asia/Colombo time). Confirmation code ${booking.confirmationCode}.`,
   };
 }
