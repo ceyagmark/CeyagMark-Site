@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroRibbon } from "@/components/hero-ribbon";
 
 // Meta, JSON-LD and copy ported verbatim from Projects/CeyagMark/CeyagMark/index.html
 // per SLICE-0-CONTRACTS.md's per-page meta table. Nothing here is new copy.
@@ -164,7 +163,6 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
 
       <section className="hero">
-        <HeroRibbon />
         <div className="wrap hero-grid">
           <div>
             <span className="eyebrow reveal">Performance marketing powered by AI</span>
