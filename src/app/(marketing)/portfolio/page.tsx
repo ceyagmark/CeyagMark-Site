@@ -161,7 +161,7 @@ export default function PortfolioPage() {
       <section className="section">
         <div className="wrap">
           <div className="cta-band reveal">
-            <h2>Want to know which half is costing you?</h2>
+            <h2>Find out which half is costing you</h2>
             <p>
               The Growth Audit takes about three minutes and tells you whether your problem is the traffic, the
               site, or the gap between them. No call required to get the answer. If you already know what you need,

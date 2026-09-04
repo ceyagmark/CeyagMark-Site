@@ -141,8 +141,8 @@ export default function AboutPage() {
             <h2 style={{ marginTop: 16 }}>When a project outgrows a website, we do not subcontract it to a stranger.</h2>
             <p className="mt-s">
               Marketing work runs into engineering limits quickly. A client needs a booking system with capacity
-              rules, a native app, or a data pipeline, and most agencies at that point either say no or quietly hand
-              it to a supplier nobody has met.
+              rules, a native app, or a data pipeline. Most agencies either say no, or quietly hand the job to a
+              supplier nobody has met.
             </p>
             <p className="mt-s">
               We work alongside{" "}
