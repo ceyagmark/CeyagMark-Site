@@ -12,6 +12,7 @@
 // rest of the app already proved works, not a second direct-DB path.
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AdminHeader } from "@/components/admin-header";
 
 type Booking = {
   id: string;
@@ -28,6 +29,13 @@ const DATE_FMT = new Intl.DateTimeFormat("en-LK", {
   dateStyle: "medium",
   timeStyle: "short",
 });
+
+const STATUS_TONE: Record<string, string> = {
+  confirmed: "good",
+  completed: "brand",
+  cancelled: "bad",
+  no_show: "warn",
+};
 
 export default function AdminBookingsPage() {
   const router = useRouter();
@@ -49,52 +57,67 @@ export default function AdminBookingsPage() {
   }, [router]);
 
   return (
-    <main id="main" className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="text-2xl mb-6">Bookings</h1>
-      <nav className="mb-6 text-sm">
-        <a className="text-[var(--brand-glow)]" href="/admin/leads">
-          Leads →
-        </a>
-      </nav>
-      {error && (
-        <p role="alert" className="text-[var(--bad)]">
-          {error}
-        </p>
-      )}
-      {!bookings && !error && (
-        <p aria-busy="true" aria-live="polite" className="text-[var(--text-mute)]">
-          Loading…
-        </p>
-      )}
-      {bookings && bookings.length === 0 && <p className="text-[var(--text-soft)]">No bookings yet.</p>}
-      {bookings && bookings.length > 0 && (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="text-left border-b border-[var(--border)]">
-                <th className="py-2 pr-4">When</th>
-                <th className="py-2 pr-4">Session</th>
-                <th className="py-2 pr-4">Customer</th>
-                <th className="py-2 pr-4">Status</th>
-                <th className="py-2 pr-4">Code</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map((b) => (
-                <tr key={b.id} className="border-b border-[var(--border)]">
-                  <td className="py-2 pr-4">{DATE_FMT.format(new Date(b.startsAt))}</td>
-                  <td className="py-2 pr-4">{b.sessionTypeName}</td>
-                  <td className="py-2 pr-4">
-                    {b.customerName} · {b.customerEmail}
-                  </td>
-                  <td className="py-2 pr-4">{b.status}</td>
-                  <td className="py-2 pr-4">{b.confirmationCode}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </main>
+    <div className="admin-shell">
+      <div className="admin-wrap">
+        <AdminHeader />
+        <h1 className="admin-title">Bookings</h1>
+
+        {error && (
+          <div className="admin-card">
+            <p role="alert" className="admin-error">
+              {error}
+            </p>
+          </div>
+        )}
+        {!bookings && !error && (
+          <div className="admin-card">
+            <p aria-busy="true" aria-live="polite" className="admin-loading">
+              Loading…
+            </p>
+          </div>
+        )}
+        {bookings && bookings.length === 0 && (
+          <div className="admin-card">
+            <p className="admin-empty">No bookings yet.</p>
+          </div>
+        )}
+        {bookings && bookings.length > 0 && (
+          <div className="admin-card">
+            <div style={{ overflowX: "auto" }}>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>When</th>
+                    <th>Session</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bookings.map((b) => (
+                    <tr key={b.id}>
+                      <td className="primary">{DATE_FMT.format(new Date(b.startsAt))}</td>
+                      <td>{b.sessionTypeName}</td>
+                      <td>
+                        <span className="primary">{b.customerName}</span>
+                        <br />
+                        {b.customerEmail}
+                      </td>
+                      <td>
+                        <span className="admin-pill" data-tone={STATUS_TONE[b.status] ?? "mute"}>
+                          {b.status.replace("_", " ")}
+                        </span>
+                      </td>
+                      <td className="mono">{b.confirmationCode}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

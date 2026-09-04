@@ -4,6 +4,7 @@
 // API route, not a server component calling getDataSource() directly.
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AdminHeader } from "@/components/admin-header";
 
 type Lead = {
   id: string;
@@ -19,6 +20,24 @@ const DATE_FMT = new Intl.DateTimeFormat("en-LK", {
   dateStyle: "medium",
   timeStyle: "short",
 });
+
+const STAGE_TONE: Record<string, string> = {
+  new: "brand",
+  qualified: "good",
+  call_booked: "good",
+  proposal_sent: "warn",
+  won: "good",
+  lost: "bad",
+  nurture: "mute",
+};
+
+const SOURCE_LABEL: Record<string, string> = {
+  contact: "Contact form",
+  free_audit: "Free audit",
+  growth_audit: "Growth audit",
+  built_by: "Built by",
+  quiz: "Quiz",
+};
 
 export default function AdminLeadsPage() {
   const router = useRouter();
@@ -40,50 +59,63 @@ export default function AdminLeadsPage() {
   }, [router]);
 
   return (
-    <main id="main" className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="text-2xl mb-6">Leads</h1>
-      <nav className="mb-6 text-sm">
-        <a className="text-[var(--brand-glow)]" href="/admin/bookings">
-          ← Bookings
-        </a>
-      </nav>
-      {error && (
-        <p role="alert" className="text-[var(--bad)]">
-          {error}
-        </p>
-      )}
-      {!leads && !error && (
-        <p aria-busy="true" aria-live="polite" className="text-[var(--text-mute)]">
-          Loading…
-        </p>
-      )}
-      {leads && leads.length === 0 && <p className="text-[var(--text-soft)]">No leads yet.</p>}
-      {leads && leads.length > 0 && (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="text-left border-b border-[var(--border)]">
-                <th className="py-2 pr-4">When</th>
-                <th className="py-2 pr-4">Source</th>
-                <th className="py-2 pr-4">Name</th>
-                <th className="py-2 pr-4">Email</th>
-                <th className="py-2 pr-4">Stage</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leads.map((l) => (
-                <tr key={l.id} className="border-b border-[var(--border)]">
-                  <td className="py-2 pr-4">{DATE_FMT.format(new Date(l.createdAt))}</td>
-                  <td className="py-2 pr-4">{l.source}</td>
-                  <td className="py-2 pr-4">{l.name}</td>
-                  <td className="py-2 pr-4">{l.email}</td>
-                  <td className="py-2 pr-4">{l.stage}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </main>
+    <div className="admin-shell">
+      <div className="admin-wrap">
+        <AdminHeader />
+        <h1 className="admin-title">Leads</h1>
+
+        {error && (
+          <div className="admin-card">
+            <p role="alert" className="admin-error">
+              {error}
+            </p>
+          </div>
+        )}
+        {!leads && !error && (
+          <div className="admin-card">
+            <p aria-busy="true" aria-live="polite" className="admin-loading">
+              Loading…
+            </p>
+          </div>
+        )}
+        {leads && leads.length === 0 && (
+          <div className="admin-card">
+            <p className="admin-empty">No leads yet.</p>
+          </div>
+        )}
+        {leads && leads.length > 0 && (
+          <div className="admin-card">
+            <div style={{ overflowX: "auto" }}>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>When</th>
+                    <th>Source</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Stage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map((l) => (
+                    <tr key={l.id}>
+                      <td className="primary">{DATE_FMT.format(new Date(l.createdAt))}</td>
+                      <td>{SOURCE_LABEL[l.source] ?? l.source}</td>
+                      <td className="primary">{l.name}</td>
+                      <td>{l.email}</td>
+                      <td>
+                        <span className="admin-pill" data-tone={STAGE_TONE[l.stage] ?? "mute"}>
+                          {l.stage.replace("_", " ")}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

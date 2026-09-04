@@ -731,3 +731,47 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
 .bb-area h3 { margin: 12px 0 8px; font-size: 1.06rem; }
 .bb-area p { font-size: .9rem; color: var(--text-mute); max-width: none; }
 .bb-fud { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; margin-top: 16px; font-size: .84rem; color: var(--text-mute); }
+
+/* ============================================================
+   Admin panel — was raw unstyled Tailwind utilities (functional,
+   never given a design pass). Reuses this file's own tokens, not a
+   separate palette, so it reads as part of the same product.
+   ============================================================ */
+.admin-shell { min-height: 100vh; background: radial-gradient(1200px 600px at 50% -10%, var(--glow-2), transparent 60%), var(--bg); }
+.admin-wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; flex-wrap: wrap; }
+.admin-brand { font-family: var(--font-space-grotesk), sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+.admin-brand span { color: var(--brand-glow); }
+.admin-nav { display: flex; align-items: center; gap: 6px; }
+.admin-tab { padding: 9px 18px; border-radius: 999px; font-size: .88rem; font-weight: 600; color: var(--text-soft); border: 1px solid transparent; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+.admin-tab:hover { color: var(--text); }
+.admin-tab[data-active="true"] { color: var(--text); background: var(--surface-2); border-color: var(--border-strong); }
+.admin-signout { padding: 9px 16px; border-radius: 999px; font-size: .85rem; font-weight: 600; color: var(--text-mute); border: 1px solid var(--border); background: transparent; transition: color .2s ease, border-color .2s ease; cursor: pointer; }
+.admin-signout:hover { color: var(--bad); border-color: var(--bad); }
+.admin-title { font-family: var(--font-space-grotesk), sans-serif; font-weight: 700; font-size: 1.7rem; margin-bottom: 28px; }
+.admin-card { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); box-shadow: var(--shadow-soft); }
+.admin-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--light-catch); opacity: .9; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: .9rem; position: relative; z-index: 1; }
+.admin-table th { text-align: left; padding: 16px 20px; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-mute); border-bottom: 1px solid var(--border); }
+.admin-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); color: var(--text-soft); vertical-align: top; }
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tbody tr { transition: background .15s ease; }
+.admin-table tbody tr:hover { background: var(--surface-2); }
+.admin-table .primary { color: var(--text); font-weight: 500; }
+.admin-table .mono { font-family: var(--font-mono, ui-monospace, monospace); font-size: .85em; color: var(--brand-glow); }
+.admin-empty, .admin-loading, .admin-error { padding: 60px 20px; text-align: center; color: var(--text-mute); font-size: .95rem; }
+.admin-error { color: var(--bad); }
+.admin-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: .74rem; font-weight: 600; letter-spacing: .02em; text-transform: capitalize; }
+.admin-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.admin-pill[data-tone="good"] { color: var(--good); background: rgba(70,211,154,.12); }
+.admin-pill[data-tone="bad"] { color: var(--bad); background: rgba(232,120,107,.12); }
+.admin-pill[data-tone="warn"] { color: var(--warn); background: rgba(224,177,90,.12); }
+.admin-pill[data-tone="brand"] { color: var(--brand-glow); background: rgba(46,134,255,.12); }
+.admin-pill[data-tone="mute"] { color: var(--text-mute); background: var(--surface-2); }
+.admin-login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.admin-login-card { width: 100%; max-width: 380px; padding: 40px 36px; }
+.admin-login-card h1 { font-family: var(--font-space-grotesk), sans-serif; font-size: 1.5rem; margin-bottom: 6px; }
+.admin-login-card .lede { font-size: .88rem; color: var(--text-mute); margin-bottom: 28px; }
+.admin-field label { display: block; font-size: .82rem; color: var(--text-soft); margin-bottom: 8px; }
+.admin-input { width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--border-strong); background: var(--bg); color: var(--text); padding: 0 16px; font-size: .95rem; transition: border-color .2s ease; }
+.admin-input:focus { outline: none; border-color: var(--brand); }

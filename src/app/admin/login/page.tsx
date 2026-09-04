@@ -29,33 +29,33 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main id="main" className="mx-auto max-w-sm px-6 py-24">
-      <h1 className="text-2xl mb-6">Admin sign in</h1>
-      <form onSubmit={onSubmit}>
-        <label className="block mb-4">
-          <span className="block text-sm mb-1">Password</span>
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full min-h-[44px] rounded-lg border border-[var(--border)] bg-transparent px-3 py-2"
-          />
-        </label>
-        {error && (
-          <p role="alert" className="text-[var(--bad)] mb-4">
-            {error}
-          </p>
-        )}
-        <button
-          type="submit"
-          disabled={submitting}
-          aria-busy={submitting}
-          className="min-h-[44px] rounded-lg px-6 py-2 font-semibold text-[var(--on-brand)] bg-[var(--brand)] disabled:opacity-60"
-        >
-          Sign in
-        </button>
-      </form>
-    </main>
+    <div className="admin-shell admin-login-wrap">
+      <div className="admin-card admin-login-card">
+        <h1>Admin sign in</h1>
+        <p className="lede">Bookings and leads, CeyagMark&apos;s own dashboard.</p>
+        <form onSubmit={onSubmit}>
+          <div className="admin-field" style={{ marginBottom: 20 }}>
+            <label htmlFor="admin-password">Password</label>
+            <input
+              id="admin-password"
+              type="password"
+              required
+              autoFocus
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="admin-input"
+            />
+          </div>
+          {error && (
+            <p role="alert" className="admin-error" style={{ marginBottom: 16, padding: 0, textAlign: "left" }}>
+              {error}
+            </p>
+          )}
+          <button type="submit" disabled={submitting} aria-busy={submitting} className="btn btn-primary" style={{ width: "100%" }}>
+            {submitting ? "Signing in…" : "Sign in"}
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
