@@ -32,6 +32,30 @@ function toIsoInstant(date: string, time: string): string {
   return new Date(`${date}T${time}:00+05:30`).toISOString();
 }
 
+const STEP_ORDER: Step[] = ["session", "time", "details"];
+const STEP_LABEL: Record<string, string> = { session: "Session", time: "Time", details: "Details" };
+
+// Progress across the three input steps. Tells people how much is left before
+// they commit, which is the cheapest drop-off reduction available on a flow
+// that asks for a name and an email.
+function StepBar({ step }: { step: Step }) {
+  const current = STEP_ORDER.indexOf(step);
+  if (current < 0) return null;
+  return (
+    <div className="bk-steps" aria-label={`Step ${current + 1} of 3`}>
+      {STEP_ORDER.map((s, i) => (
+        <div key={s} style={{ display: "contents" }}>
+          {i > 0 && <span className="bk-step-sep" aria-hidden="true" />}
+          <span className="bk-step" data-state={i === current ? "active" : i < current ? "done" : "todo"}>
+            <i aria-hidden="true">{i < current ? "\u2713" : i + 1}</i>
+            {STEP_LABEL[s]}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function BookingFlow() {
   const searchParams = useSearchParams();
   const preselectSlug = searchParams.get("session");
@@ -150,9 +174,9 @@ export function BookingFlow() {
 
   if (loadError) {
     return (
-      <div role="alert" className="rounded-xl border border-[var(--bad)] p-6 text-[var(--text)]">
+      <div role="alert" className="bk-alert">
         <p>{loadError}</p>
-        <button className="btn-ghost mt-4 rounded-lg border px-4 py-2" onClick={() => window.location.reload()}>
+        <button className="btn btn-ghost" style={{ marginTop: 16 }} onClick={() => window.location.reload()}>
           Reload
         </button>
       </div>
@@ -161,7 +185,7 @@ export function BookingFlow() {
 
   if (!sessionTypes) {
     return (
-      <div aria-busy="true" aria-live="polite" className="py-16 text-center text-[var(--text-mute)]">
+      <div aria-busy="true" aria-live="polite" className="bk-loading">
         Loading sessions…
       </div>
     );
@@ -169,9 +193,9 @@ export function BookingFlow() {
 
   if (sessionTypes.length === 0) {
     return (
-      <div className="rounded-xl border border-[var(--border)] p-6 text-[var(--text-soft)]">
+      <div className="bk-empty">
         No sessions are open for booking right now. WhatsApp us at{" "}
-        <a className="text-[var(--brand-glow)]" href="https://wa.me/94703727895">
+        <a className="muted-link" href="https://wa.me/94703727895">
           +94 70 372 7895
         </a>{" "}
         and we will find a time.
@@ -181,64 +205,73 @@ export function BookingFlow() {
 
   if (step === "session") {
     return (
-      <ul className="grid gap-4">
+      <div className="bk-step-panel">
+        <StepBar step="session" />
+        <ul className="bk-list">
         {sessionTypes.map((sessionType) => (
           <li key={sessionType.id}>
             <button
               type="button"
               onClick={() => chooseSession(sessionType)}
-              className="w-full text-left rounded-xl border border-[var(--border)] p-5 min-h-[44px] hover:border-[var(--brand)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
+              className="bk-option"
             >
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-semibold text-[var(--text)]">{sessionType.name}</span>
-                <span className="text-[var(--text-mute)] text-sm">{sessionType.durationMinutes} min</span>
-              </div>
-              <div className="mt-1 text-sm text-[var(--text-soft)]">
-                {sessionType.kind === "discovery"
-                  ? "Free"
-                  : `${formatLkr(sessionType.priceLkr)} / ${formatUsdCents(sessionType.priceUsdCents)}`}
-              </div>
+              <span>
+                <span className="bk-option-name">{sessionType.name}</span>
+                <span className="bk-option-price" data-free={sessionType.kind === "discovery" ? "1" : undefined}>
+                  {sessionType.kind === "discovery"
+                    ? "Free"
+                    : `${formatLkr(sessionType.priceLkr)} / ${formatUsdCents(sessionType.priceUsdCents)}`}
+                </span>
+              </span>
+              <span className="bk-option-side">
+                <span className="bk-option-dur">{sessionType.durationMinutes} min</span>
+                <svg className="bk-option-go" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
             </button>
           </li>
         ))}
-      </ul>
+        </ul>
+      </div>
     );
   }
 
   if (step === "time" && selected) {
     return (
-      <div>
-        <button type="button" className="text-sm text-[var(--brand-glow)] mb-6" onClick={() => setStep("session")}>
-          ← Change session
+      <div className="bk-step-panel">
+        <StepBar step="time" />
+        <button type="button" className="bk-back" onClick={() => setStep("session")}>
+          &larr; Change session
         </button>
-        <h2 className="text-xl mb-4">{selected.name}</h2>
+        <h2 style={{ marginBottom: 20 }}>{selected.name}</h2>
         {slotsError && (
-          <p role="alert" className="text-[var(--bad)] mb-4">
+          <p role="alert" className="bk-alert">
             {slotsError}
           </p>
         )}
         {!slots && !slotsError && (
-          <p aria-busy="true" aria-live="polite" className="text-[var(--text-mute)]">
+          <p aria-busy="true" aria-live="polite" className="bk-note">
             Loading available times…
           </p>
         )}
         {slots && slots.length === 0 && (
-          <p className="text-[var(--text-soft)]">
+          <p className="bk-note">
             No times are open in the next three weeks. WhatsApp us at{" "}
-            <a className="text-[var(--brand-glow)]" href="https://wa.me/94703727895">
+            <a className="muted-link" href="https://wa.me/94703727895">
               +94 70 372 7895
             </a>
             .
           </p>
         )}
         {slots && slots.length > 0 && (
-          <div className="grid gap-4">
+          <div>
             {slots.map((day) => (
-              <div key={day.date}>
-                <div className="text-sm font-semibold text-[var(--text)] mb-2">
+              <div key={day.date} className="bk-day">
+                <div className="bk-day-label">
                   {TIME_FMT.format(new Date(`${day.date}T12:00:00+05:30`))}
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="bk-times">
                   {day.times.map((time) => (
                     <button
                       key={time}
@@ -248,7 +281,7 @@ export function BookingFlow() {
                         setPickedTime(time);
                         setStep("details");
                       }}
-                      className="min-h-[44px] min-w-[44px] px-3 rounded-lg border border-[var(--border)] hover:border-[var(--brand)] text-sm focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
+                      className="bk-time"
                     >
                       {time}
                     </button>
@@ -264,55 +297,56 @@ export function BookingFlow() {
 
   if (step === "details" && selected && pickedDate && pickedTime) {
     return (
-      <form onSubmit={submitBooking} noValidate>
-        <button type="button" className="text-sm text-[var(--brand-glow)] mb-6" onClick={() => setStep("time")}>
-          ← Change time
+      <form onSubmit={submitBooking} noValidate className="bk-step-panel">
+        <StepBar step="details" />
+        <button type="button" className="bk-back" onClick={() => setStep("time")}>
+          &larr; Change time
         </button>
-        <p className="mb-6 text-[var(--text-soft)]">
-          {selected.name} on{" "}
+        <p className="bk-summary">
+          <strong>{selected.name}</strong> on{" "}
           {TIME_FMT.format(new Date(`${pickedDate}T12:00:00+05:30`))} at {pickedTime} (Asia/Colombo)
         </p>
 
-        <label className="block mb-4">
-          <span className="block text-sm mb-1">Name</span>
+        <label className="bk-field">
+          <span>Name</span>
           <input
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full min-h-[44px] rounded-lg border border-[var(--border)] bg-transparent px-3 py-2"
+            className="bk-input"
           />
         </label>
-        <label className="block mb-4">
-          <span className="block text-sm mb-1">Email</span>
+        <label className="bk-field">
+          <span>Email</span>
           <input
             required
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full min-h-[44px] rounded-lg border border-[var(--border)] bg-transparent px-3 py-2"
+            className="bk-input"
           />
         </label>
-        <label className="block mb-4">
-          <span className="block text-sm mb-1">Phone (optional)</span>
+        <label className="bk-field">
+          <span>Phone (optional)</span>
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full min-h-[44px] rounded-lg border border-[var(--border)] bg-transparent px-3 py-2"
+            className="bk-input"
           />
         </label>
-        <label className="block mb-6">
-          <span className="block text-sm mb-1">What should we know before the call? (optional)</span>
+        <label className="bk-field">
+          <span>What should we know before the call? (optional)</span>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             maxLength={2000}
             rows={3}
-            className="w-full rounded-lg border border-[var(--border)] bg-transparent px-3 py-2"
+            className="bk-input"
           />
         </label>
 
         {submitError && (
-          <p role="alert" className="text-[var(--bad)] mb-4">
+          <p role="alert" className="bk-alert">
             {submitError}
           </p>
         )}
@@ -321,7 +355,7 @@ export function BookingFlow() {
           type="submit"
           disabled={submitting}
           aria-busy={submitting}
-          className="min-h-[44px] rounded-lg px-6 py-2 font-semibold text-[var(--on-brand)] bg-[var(--brand)] disabled:opacity-60"
+          className="btn btn-primary btn-lg"
         >
           {submitting ? "Booking…" : "Confirm booking"}
         </button>
@@ -331,18 +365,22 @@ export function BookingFlow() {
 
   if (step === "success" && confirmation) {
     return (
-      <div role="status" aria-live="polite">
-        <h2 className="text-2xl mb-2">Booked.</h2>
-        <p className="text-[var(--text-soft)] mb-6">
+      <div role="status" aria-live="polite" className="bk-step-panel">
+        <div className="bk-success-mark" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12.5l5.5 5.5L20 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <h2 style={{ marginBottom: 12 }}>Booked.</h2>
+        <p className="lede" style={{ marginBottom: 28 }}>
           {confirmation.sessionTypeName} confirmed. Confirmation code{" "}
-          <strong className="text-[var(--text)]">{confirmation.confirmationCode}</strong>. We have emailed the
-          details.
+          <span className="bk-code">{confirmation.confirmationCode}</span>. We have emailed the details.
         </p>
         <a
           href={whatsappHref}
           target="_blank"
           rel="noopener"
-          className="inline-block min-h-[44px] rounded-lg px-6 py-2 font-semibold text-[var(--on-brand)] bg-[var(--brand)]"
+          className="btn btn-primary btn-lg"
         >
           Message us on WhatsApp
         </a>

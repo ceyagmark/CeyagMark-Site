@@ -2,12 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
+/** Cursor position in canvas CSS pixels, eased. `active` is false until the
+ *  pointer has actually been over the page, so scenes can rest until then. */
+export type ScenePointer = { x: number; y: number; active: boolean };
+
 export type SceneDraw = (
   ctx: CanvasRenderingContext2D,
   width: number,
   height: number,
   seconds: number,
   tokens: Record<string, string>,
+  pointer: ScenePointer,
 ) => void;
 
 /**
@@ -63,10 +68,30 @@ export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
+    // Pointer, eased toward the raw position so scenes glide rather than snap.
+    const pointer: ScenePointer = { x: 0, y: 0, active: false };
+    let rawX = 0;
+    let rawY = 0;
+    function onPointerMove(e: PointerEvent) {
+      const rect = canvas!.getBoundingClientRect();
+      rawX = e.clientX - rect.left;
+      rawY = e.clientY - rect.top;
+      if (!pointer.active) {
+        pointer.x = rawX;
+        pointer.y = rawY;
+        pointer.active = true;
+      }
+    }
+    // Bound to the window, not the canvas: the canvas is pointer-events:none and
+    // sits behind the copy, so it would never receive events of its own.
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
     const start = performance.now();
     function render(now: number) {
+      pointer.x += (rawX - pointer.x) * 0.07;
+      pointer.y += (rawY - pointer.y) * 0.07;
       ctx!.clearRect(0, 0, width, height);
-      drawRef.current(ctx!, width, height, (now - start) / 1000, tokens);
+      drawRef.current(ctx!, width, height, (now - start) / 1000, tokens, pointer);
     }
 
     readTokens();
@@ -128,6 +153,7 @@ export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
       ro.disconnect();
       mo.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pointermove", onPointerMove);
     };
   }, [tokenNames]);
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SceneNetwork } from "@/components/scene-network";
 
 export const metadata: Metadata = {
   title: "Free Website & Marketing Audit, Sri Lanka | CeyagMark Growth Audit",
@@ -35,7 +36,8 @@ export default function GrowthAuditPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
 
-      <section className="hero" id="start">
+      <section className="hero has-scene" id="start">
+        <SceneNetwork />
         <div className="wrap hero-grid">
           <div>
             <span className="eyebrow reveal">Free Growth Scorecard, about three minutes</span>

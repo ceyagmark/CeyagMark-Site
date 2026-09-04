@@ -1,18 +1,5 @@
-import { SiteNav } from "@/components/site-nav";
-import { SiteFooter } from "@/components/site-footer";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { WhatsAppFab } from "@/components/whatsapp-fab";
-import { BgAura } from "@/components/bg-aura";
+import { SiteChrome } from "@/components/site-chrome";
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <BgAura />
-      <SiteNav />
-      <main id="main">{children}</main>
-      <SiteFooter />
-      <ThemeToggle />
-      <WhatsAppFab />
-    </>
-  );
+  return <SiteChrome>{children}</SiteChrome>;
 }

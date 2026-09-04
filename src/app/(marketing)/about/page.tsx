@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SceneNetwork } from "@/components/scene-network";
 
 export const metadata: Metadata = {
   title: "About CeyagMark, Web and Marketing Agency in Nittambuwa, Sri Lanka",
@@ -44,7 +45,8 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ABOUT_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
 
-      <section className="page-hero">
+      <section className="page-hero has-scene">
+        <SceneNetwork />
         <div className="wrap">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link> &nbsp;&rsaquo;&nbsp; About

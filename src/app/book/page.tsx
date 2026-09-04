@@ -11,16 +11,19 @@ export const metadata: Metadata = {
 
 export default function BookPage() {
   return (
-    <main id="main" className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="text-3xl md:text-4xl mb-2">Book a session</h1>
-      <p className="text-[var(--text-soft)] mb-10">
-        Pick a consulting session, or a free discovery call if you are exploring the Leak
-        Report, the Fix Sprint or Build &amp; Run.
-      </p>
-      {/* useSearchParams (for ?session=slug preselection) requires a Suspense boundary. */}
-      <Suspense fallback={<p aria-busy="true" className="text-[var(--text-mute)]">Loading…</p>}>
-        <BookingFlow />
-      </Suspense>
-    </main>
+    <section className="page-hero">
+      <div className="wrap bk-wrap">
+        <span className="eyebrow">Consulting</span>
+        <h1>Book a session</h1>
+        <p className="lede">
+          Pick a consulting session, or a free discovery call if you are exploring the Leak
+          Report, the Fix Sprint or Build &amp; Run.
+        </p>
+        {/* useSearchParams (for ?session=slug preselection) requires a Suspense boundary. */}
+        <Suspense fallback={<div aria-busy="true" className="bk-loading">Loading…</div>}>
+          <BookingFlow />
+        </Suspense>
+      </div>
+    </section>
   );
 }

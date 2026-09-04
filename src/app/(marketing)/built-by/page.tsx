@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SceneNetwork } from "@/components/scene-network";
 
 // Ported: the intro/marketing sections from built-by.html, verbatim. NOT
 // ported: built-by.js's own 15-question "Website Plan" quiz engine — a
@@ -36,7 +37,8 @@ export default function BuiltByPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
 
-      <section className="hero" style={{ textAlign: "center", paddingBottom: "clamp(40px,6vw,72px)" }}>
+      <section className="hero has-scene" style={{ textAlign: "center", paddingBottom: "clamp(40px,6vw,72px)" }}>
+        <SceneNetwork />
         <div className="wrap narrow">
           <span className="eyebrow center reveal">Built by CeyagMark</span>
           <h1 className="reveal" style={{ marginTop: 20 }}>
