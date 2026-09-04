@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { ContactHero } from "./contact-hero";
 import { ContactForm } from "./contact-form";
-import { SceneNetwork } from "@/components/scene-network";
 
 export const metadata: Metadata = {
   title: "Contact CeyagMark, Web & Marketing Agency Sri Lanka | WhatsApp or Email",
@@ -30,8 +29,7 @@ export default function ContactPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(CONTACT_JSON_LD) }} />
 
-      <section className="page-hero has-scene">
-        <SceneNetwork />
+      <section className="page-hero">
         <div className="wrap">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link> &nbsp;&rsaquo;&nbsp; Contact

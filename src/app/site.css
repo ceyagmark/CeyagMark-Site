@@ -958,3 +958,14 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
 .bk-step-panel { animation: bk-fade .4s var(--ease) both; }
 @keyframes bk-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .bk-step-panel, .bk-success-mark { animation: none; } }
+
+/* ---------- Night sky (dark theme only) ---------- */
+/* Sits below .bg-aura's orbs (-2) so the blurred glows read as atmosphere in
+   front of the stars. Fixed, so it is the same sky on every page and does not
+   scroll away. */
+.star-field { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; }
+.star-field canvas { display: block; width: 100%; height: 100%; }
+/* Hidden rather than dimmed in the light theme: a star field on a near-white
+   ground is not a subtler version of the idea, it is the wrong idea. Hiding it
+   also collapses the canvas to 1px, which the scene detects and skips. */
+[data-theme="light"] .star-field { display: none; }

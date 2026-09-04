@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { FreeAuditForm } from "./free-audit-form";
-import { SceneNetwork } from "@/components/scene-network";
 
 export const metadata: Metadata = {
   title: "Free E-commerce Performance Audit, 3 Founding Slots | CeyagMark",
@@ -101,8 +100,7 @@ export default function FreeAuditPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
 
-      <section className="hero has-scene" id="top">
-        <SceneNetwork />
+      <section className="hero" id="top">
         <div className="wrap hero-grid">
           <div>
             <span className="pill reveal">

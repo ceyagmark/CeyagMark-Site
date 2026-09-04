@@ -29,7 +29,17 @@ export type SceneDraw = (
  * compositor), and a decorative canvas that renders nothing at all in that
  * case reads as a broken element rather than a still one.
  */
-export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
+/** `animateFromWidth`: below this viewport width the scene paints one static
+ *  frame and never starts a rAF loop. For a fixed, always-on-screen background
+ *  that is the difference between a decorative touch and a battery cost on the
+ *  low-end mobile hardware this site is built for. */
+export type SceneOptions = { animateFromWidth?: number };
+
+export function useCanvasScene(
+  draw: SceneDraw,
+  tokenNames: readonly string[],
+  opts?: SceneOptions,
+) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   // Keep the latest draw without restarting the loop when a parent re-renders.
   // Assigned in an effect, not during render: mutating a ref while rendering is
@@ -46,6 +56,8 @@ export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
     if (!ctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const minWidth = opts?.animateFromWidth ?? 0;
+    const mayAnimate = !reduce && window.innerWidth >= minWidth;
 
     let tokens: Record<string, string> = {};
     function readTokens() {
@@ -105,7 +117,7 @@ export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
       frame = requestAnimationFrame(loop);
     }
     function play() {
-      if (running || reduce) return;
+      if (running || !mayAnimate) return;
       running = true;
       frame = requestAnimationFrame(loop);
     }
@@ -155,7 +167,7 @@ export function useCanvasScene(draw: SceneDraw, tokenNames: readonly string[]) {
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pointermove", onPointerMove);
     };
-  }, [tokenNames]);
+  }, [tokenNames, opts?.animateFromWidth]);
 
   return canvasRef;
 }

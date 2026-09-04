@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PortfolioGrid } from "./portfolio-grid";
 import { CapabilityMatrix } from "./capability-matrix";
-import { SceneNetwork } from "@/components/scene-network";
 
 export const metadata: Metadata = {
   title: "Portfolio: Website and Digital Marketing Case Studies, Sri Lanka | CeyagMark",
@@ -45,8 +44,7 @@ export default function PortfolioPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(COLLECTION_JSON_LD) }} />
 
-      <section className="page-hero has-scene">
-        <SceneNetwork />
+      <section className="page-hero">
         <div className="wrap">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link> &nbsp;&rsaquo;&nbsp; Portfolio
