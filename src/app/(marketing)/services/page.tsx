@@ -126,9 +126,9 @@ export default function ServicesPage() {
               </div>
               <h3>The Leak Report</h3>
               <p>
-                A scored audit of your site and funnel against a fixed rubric: a score out of 100, category
-                subscores, an annotated screenshot trail, and a three-fix shortlist ranked by what moves the score
-                fastest. The same rubric every time, so a re-audit is a comparison rather than a fresh opinion.
+                We score your site and funnel out of 100, using the same checklist every time. You get the
+                score, a score for each area, marked-up screenshots of what we found, and the three fixes that
+                would lift it fastest. Run it again later and you see what moved, not a new opinion.
               </p>
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
                 from LKR 14,999 <span className="dim" style={{ fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: ".85rem" }}>from $99</span>
@@ -144,9 +144,9 @@ export default function ServicesPage() {
               </div>
               <h3>The Fix Sprint</h3>
               <p>
-                We ship the three fixes named in your Leak Report, on a fixed scope and a fixed timeline, then
-                re-score your site on the same rubric so the before and after are measured with the same ruler.
-                Scope is set by the shortlist, so it cannot quietly expand.
+                We build the three fixes your Leak Report named. Fixed price, fixed dates. Then we score the
+                site again on the same checklist, so the before and after are measured the same way. The
+                shortlist sets the work, so it cannot quietly grow.
               </p>
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
                 from LKR 30,000 <span className="dim" style={{ fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: ".85rem" }}>from $199</span>
@@ -159,9 +159,9 @@ export default function ServicesPage() {
               </div>
               <h3>Build &amp; Run</h3>
               <p>
-                The site and the marketing on it, as one engagement, instrumented from day one so the reporting
-                comes out of the system we built rather than a tag that hopes it lines up. This is the one that only
-                works because both halves are ours.
+                The site and the marketing on it, as one job. We set up the tracking on day one, so your numbers
+                come straight from the system we built. Nothing is guessed from a tag bolted on later. This one
+                only works because both halves are ours.
               </p>
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
                 from LKR 39,900 /mo <span className="dim" style={{ fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: ".85rem" }}>from $249 /mo</span>
@@ -177,8 +177,8 @@ export default function ServicesPage() {
               </div>
               <h3>Consulting</h3>
               <p>
-                A one to one strategy or technical session. For brands running marketing in-house, and for marketing
-                professionals who want a sharper second opinion before a difficult client or employer conversation,
+                A one to one session, strategy or technical. For brands running marketing in-house, and for
+                marketers who want a sharper second opinion before a hard conversation with a client or a boss,
                 not after it.
               </p>
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
@@ -221,10 +221,10 @@ export default function ServicesPage() {
         <div className="wrap">
           <div className="section-head reveal">
             <span className="eyebrow">What is inside them</span>
-            <h2>The disciplines these engagements draw on</h2>
+            <h2>What the work is made of</h2>
             <p>
-              These are not separate products with separate invoices. They are what a Fix Sprint or a Build &amp;
-              Run is made of, combined according to where your money is actually leaking.
+              These are not separate products with separate bills. They are the parts a Fix Sprint or a Build &amp;
+              Run is built from, mixed to match where your money is leaking.
             </p>
           </div>
         </div>
@@ -291,8 +291,8 @@ export default function ServicesPage() {
             <span className="pill">Conversion</span>
             <h2 style={{ marginTop: 18 }}>Conversion Rate Optimization</h2>
             <p className="mt-s">
-              The cheapest growth is the traffic you already buy. We test landing pages, offers, pricing and
-              checkout until more visitors become customers, which lifts revenue without lifting spend.
+              The cheapest growth is the traffic you already pay for. We test landing pages, offers, pricing and
+              checkout until more of those visitors buy. Revenue goes up, ad spend does not.
             </p>
             <ul className="feature-list">
               <li>
@@ -403,8 +403,8 @@ export default function ServicesPage() {
             <span className="pill">The engine</span>
             <h2 style={{ marginTop: 18 }}>AI Growth Systems</h2>
             <p>
-              The reason we move faster and cost less. AI agents handle the volume work and your strategist handles
-              judgement. You get the throughput of a department and the accountability of one expert.
+              This is why we move faster and cost less. AI handles the repetitive work. Your strategist handles
+              the judgement calls. You get the output of a whole department, with one person answerable for it.
             </p>
           </div>
           <div className="grid cols-3">
@@ -510,8 +510,8 @@ export default function ServicesPage() {
       <section className="section">
         <div className="wrap">
           <div className="cta-band reveal">
-            <h2>Not sure which lever to pull first?</h2>
-            <p>Let the Growth Audit tell you. About three minutes, a custom scorecard, and the one fix that will move your numbers most.</p>
+            <h2>Start with the fix that matters most</h2>
+            <p>The Growth Audit finds it. About three minutes, your own scorecard, and the single change that would move your numbers most.</p>
             <div className="hero-actions" style={{ marginTop: 32 }}>
               <Link className="btn btn-primary btn-lg btn-arrow" href="/growth-audit">
                 Get your free Growth Audit{" "}

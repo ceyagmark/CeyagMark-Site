@@ -74,22 +74,22 @@ export default function ApproachPage() {
             <div className="step reveal">
               <div className="n tnum">01</div>
               <h3>Diagnose</h3>
-              <p>Before a dollar moves, we audit the full funnel across acquisition, conversion and retention, and pinpoint where revenue leaks. Most businesses bleed in a place they are not looking.</p>
+              <p>Before a dollar moves, we audit the whole funnel: acquisition, conversion and retention. Then we show you where the revenue leaks out. Most businesses lose it somewhere they never thought to look.</p>
             </div>
             <div className="step reveal">
               <div className="n tnum">02</div>
               <h3>Model</h3>
-              <p>We build the unit economics. Target CPA, payback window, and the lifetime value you need to scale profitably. We know what good looks like in dollars before we start.</p>
+              <p>We work out the numbers first. Target CPA, how long until you make the money back, and the lifetime value you need to grow profitably. We know what good looks like in money before we start.</p>
             </div>
             <div className="step reveal">
               <div className="n tnum">03</div>
               <h3>Deploy</h3>
-              <p>AI agents generate, launch and iterate creative, audiences and experiments at a velocity no manual team can match. Every move is supervised by a strategist who owns the result.</p>
+              <p>AI agents build, launch and refine creative, audiences and tests far faster than a manual team can. A strategist watches every move and owns the result.</p>
             </div>
             <div className="step reveal">
               <div className="n tnum">04</div>
               <h3>Compound</h3>
-              <p>Winners scale, losers die fast, and retention recaptures spend. Each cycle pushes CPA down and lifetime value up. Growth stops being a gamble and starts compounding.</p>
+              <p>Winners get more budget. Losers get cut early. Retention wins back spend. Each round pushes CPA down and lifetime value up, so growth stops being a gamble.</p>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function ApproachPage() {
           <div className="grid cols-3">
             <article className="card glow-hover reveal">
               <h3>Money over metrics</h3>
-              <p>If a number does not connect to revenue, profit or lifetime value, it does not go in the report. No vanity dashboards.</p>
+              <p>If a number does not connect to revenue, profit or lifetime value, it stays out of the report. No dashboards built to look busy.</p>
             </article>
             <article className="card glow-hover reveal">
               <h3>Proof over promises</h3>

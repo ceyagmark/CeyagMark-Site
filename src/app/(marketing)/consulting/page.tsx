@@ -121,7 +121,7 @@ export default function ConsultingPage() {
           <div className="section-head reveal">
             <span className="eyebrow">What we cover</span>
             <h2>Strategy, or deep technical. Your call.</h2>
-            <p>Bring any problem across the growth stack. Most sessions focus on one of these.</p>
+            <p>Bring any problem from across your marketing. Most sessions focus on one of these.</p>
           </div>
           <div className="grid cols-3">
             <article className="card glow-hover reveal">

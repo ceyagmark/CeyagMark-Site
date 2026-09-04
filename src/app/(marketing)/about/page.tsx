@@ -245,12 +245,12 @@ export default function AboutPage() {
           <div className="section-head center reveal">
             <span className="eyebrow center">Who we serve</span>
             <h2>Built for businesses with something to scale</h2>
-            <p>We work best with companies that already have revenue and a real offer, and want to grow it predictably and profitably.</p>
+            <p>We work best with companies that already earn money and have a real offer. You want that growth to be steady, and to stay profitable.</p>
           </div>
           <div className="grid cols-4">
             <article className="card glow-hover reveal">
               <h3>Ecommerce</h3>
-              <p>Stores ready to scale paid acquisition without wrecking their return.</p>
+              <p>Stores ready to spend more on ads without wrecking their return.</p>
             </article>
             <article className="card glow-hover reveal">
               <h3>Product sellers</h3>
