@@ -843,8 +843,15 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
    value is lost by dropping it, and mobile avoids the per-frame paint cost. */
 @media (max-width: 999px) { .hero-ribbon { display: none; } }
 
-[data-theme="light"] .hr-base { stroke-opacity: .22; }
-[data-theme="light"] .hr-pulse-core { stroke-opacity: .30; }
+/* Light theme needs LOWER opacities, not higher. A mid-blue stroke against a
+   near-white ground carries far more contrast than the same stroke against
+   near-black, so the dark-theme values read as a pale band cutting through the
+   hero trust list. These were originally set above the dark values, which was
+   backwards. */
+[data-theme="light"] .hr-base { stroke-opacity: .11; }
+[data-theme="light"] .hr-pulse-glow { stroke-opacity: .05; }
+[data-theme="light"] .hr-pulse-mid { stroke-opacity: .07; }
+[data-theme="light"] .hr-pulse-core { stroke-opacity: .16; }
 
 /* The global reduced-motion rule above freezes animations rather than removing
    them, which would strand the dash mid-path as a stray bright segment. Hide
@@ -872,7 +879,7 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
   mask-image: linear-gradient(90deg, transparent 4%, #000 56%), linear-gradient(180deg, #000 76%, transparent 100%);
   mask-composite: intersect;
 }
-[data-theme="light"] .scene-layer { opacity: .5; }
+[data-theme="light"] .scene-layer { opacity: .4; }
 
 /* Below the two-column breakpoint the section is text-dense and the scene sits
    directly under the copy, so it comes down hard rather than being hidden —
