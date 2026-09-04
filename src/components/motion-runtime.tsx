@@ -235,10 +235,14 @@ export function MotionRuntime() {
   // specific nodes.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .reveal-line"));
-    if (reduce || !els.length) return;
+    if (reduce) return;
 
-    const revealAll = () => els.forEach((el) => el.classList.add("in"));
+    const SEL = ".reveal, .reveal-line";
+    // Re-queries rather than closing over a snapshot: content that mounts later
+    // (a Suspense boundary resolving, say) must be reachable by the safety net
+    // too, or it stays at opacity 0 forever.
+    const revealAll = () =>
+      document.querySelectorAll<HTMLElement>(SEL).forEach((el) => el.classList.add("in"));
 
     let io: IntersectionObserver | null = null;
     if ("IntersectionObserver" in window) {
@@ -253,10 +257,29 @@ export function MotionRuntime() {
         },
         { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
       );
-      els.forEach((el) => io?.observe(el));
+      document.querySelectorAll<HTMLElement>(SEL).forEach((el) => io?.observe(el));
     } else {
       revealAll();
     }
+
+    // Elements that arrive after this effect ran would otherwise never be
+    // observed and never reveal. That is not hypothetical: /contact renders its
+    // h1 and lede from a client component inside a Suspense boundary, so both
+    // mounted after the query above and stayed invisible in production.
+    function track(el: Element) {
+      if (io) io.observe(el);
+      else el.classList.add("in");
+    }
+    const added = new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          if (node.matches(SEL)) track(node);
+          node.querySelectorAll<HTMLElement>(SEL).forEach(track);
+        }
+      }
+    });
+    added.observe(document.body, { childList: true, subtree: true });
 
     // The floor: never let a missed intersection (or an observer that
     // fails for any reason) hide content longer than ~1.5s. setTimeout,
@@ -270,6 +293,7 @@ export function MotionRuntime() {
 
     return () => {
       io?.disconnect();
+      added.disconnect();
       window.clearTimeout(safetyTimer);
       window.removeEventListener("load", onLoad);
     };
