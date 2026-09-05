@@ -942,7 +942,22 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
    cards but not others (measured: proof 45/67/45/67px, price 29/58/58/29px).
    Only applied where the four cards actually sit in a row; stacked, there is
    nothing to align to. min-height is a floor, so longer copy still fits. */
-@media (min-width: 920px) {
+@media (min-width: 620px) {
   .ladder-grid > .card > p:nth-of-type(2) { min-height: 3.7rem; }
   .ladder-grid > .card > p:nth-of-type(3) { min-height: 4.3rem; }
+}
+/* Two columns below 920px, so the cards are still side by side and the prices
+   still need to agree. Narrower cards wrap more, so the floors are taller. */
+@media (min-width: 620px) and (max-width: 919px) {
+  .ladder-grid > .card > p:nth-of-type(2) { min-height: 4.6rem; }
+  .ladder-grid > .card > p:nth-of-type(3) { min-height: 5.6rem; }
+}
+
+/* The ladder cards carry a paragraph, a price and a proof line. At two columns
+   on a 390px screen each card is about 170px wide, which wraps the body to
+   four words a line and leaves the prices 44px out of step with nothing sane
+   to align them to. One column below 620px reads better and removes the
+   alignment problem rather than papering over it. */
+@media (max-width: 619px) {
+  .ladder-grid { grid-template-columns: 1fr; }
 }

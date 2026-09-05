@@ -128,7 +128,7 @@ export default function BuiltByPage() {
 
       <section className="section band" style={{ paddingBlock: "clamp(44px,6vw,72px)" }}>
         <div className="wrap narrow center reveal">
-          <h2>Ready to see where yours stands?</h2>
+          <h2>See where yours stands</h2>
           <div className="hero-actions" style={{ justifyContent: "center", marginTop: 26 }}>
             <Link className="btn btn-primary btn-lg btn-arrow" href="/quiz">
               Start the Quiz{" "}

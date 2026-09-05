@@ -262,7 +262,7 @@ export function ContactForm() {
           </p>
         </div>
         <div className="card glow-hover mt-m">
-          <h3>Not ready to talk?</h3>
+          <h3>Not ready to talk yet</h3>
           <p className="mt-s" style={{ fontSize: ".95rem" }}>
             Start with the free Growth Audit. About three minutes, a custom scorecard, zero obligation.
           </p>
