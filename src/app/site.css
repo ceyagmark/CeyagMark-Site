@@ -616,7 +616,11 @@ body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { opacity: 1; }
 .slots b { color:var(--warn); }
 .strike { text-decoration:line-through; color:var(--text-mute); text-decoration-thickness:1px; }
 .del .ico { font-family:var(--font-space-grotesk),sans-serif; font-weight:700; font-size:1.05rem; }
-.agentswrap { display:grid; gap:48px; align-items:center; }
+/* Top-aligned, not centred. The left column is a single large number and one
+   line of caption against four times that height on the right, so centring
+   parked the number in mid-air with a void above it and about 230px of dead
+   space below. Aligned to the top it anchors the heading beside it. */
+.agentswrap { display:grid; gap:48px; align-items:start; }
 @media (min-width:960px){ .agentswrap { grid-template-columns:.85fr 1.15fr; gap:64px; } }
 .bignum { font-family:var(--font-space-grotesk),sans-serif; font-weight:700; font-size:clamp(4.6rem,11vw,8rem); line-height:.9; letter-spacing:-.04em; }
 .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
@@ -969,4 +973,15 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
    alignment problem rather than papering over it. */
 @media (max-width: 619px) {
   .ladder-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Consulting session cards: a price comparison, so the duration, price and
+   booking link have to line up across the row. They did not, because those
+   three sit after a body paragraph that runs three lines in one card and four
+   in the others. Same shape as the engagement ladder. */
+.session-grid > .card { display: flex; flex-direction: column; }
+.session-grid > .card > p:first-of-type { flex-grow: 1; }
+@media (min-width: 920px) {
+  .session-grid > .card > p:nth-of-type(2) { min-height: 2.9rem; }
 }

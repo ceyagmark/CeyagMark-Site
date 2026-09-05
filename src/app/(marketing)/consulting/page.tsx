@@ -159,7 +159,7 @@ export default function ConsultingPage() {
             <h2>Pick the depth you need</h2>
             <p>Every session ends with written next steps, so you are never left with notes you cannot act on.</p>
           </div>
-          <div className="grid cols-3">
+          <div className="grid cols-3 session-grid">
             <article className="card glow-hover reveal">
               <div className="meta" style={{ margin: "0 0 14px", border: "none", padding: 0 }}>
                 Most popular
