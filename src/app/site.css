@@ -84,7 +84,11 @@ strong { color: var(--text); font-weight: 600; }
 /* ---------- Layout ---------- */
 .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
 .narrow { max-width: 760px; margin-inline: auto; }
-.section { padding-block: clamp(72px, 10vw, 150px); position: relative; }
+/* Was clamp(72px, 10vw, 150px), which resolved to 128px a side at desktop and
+   so 256px between every section. On the homepage that put 1,792px, about 29%
+   of the whole page, into inter-section voids: a lot of scrolling past nothing.
+   Still generous, just no longer cavernous. */
+.section { padding-block: clamp(64px, 7vw, 104px); position: relative; }
 .section-head { max-width: 720px; margin-bottom: 60px; }
 .section-head.center { margin-inline: auto; text-align: center; }
 .section-head h2 { margin-top: 18px; }
@@ -243,6 +247,11 @@ strong { color: var(--text); font-weight: 600; }
 .mp-row { display: flex; align-items: baseline; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border); }
 .mp-row:last-child { border-bottom: none; }
 .mp-row .k { color: var(--text-soft); font-size: .92rem; }
+/* The qualifier is a <small> inside the label. Inline by default, so it ran
+   straight on from the label text: "Booking page to confirmed bookingVehicle
+   inspection, first 3 days" read as one string. It is the sourcing note for a
+   real client number, so it needs to be legible as its own line. */
+.mp-row .k small { display: block; margin-top: 4px; font-size: .76rem; line-height: 1.45; color: var(--text-mute); }
 .mp-row .v { font-family: var(--font-space-grotesk), sans-serif; font-size: 1.9rem; font-weight: 600; color: var(--text); letter-spacing: -.025em; }
 .mp-row .v.up { color: var(--good); } .mp-row .v.down { color: var(--good); }
 .mp-row .v small { font-family: var(--font-inter); font-size: .72rem; color: var(--text-mute); font-weight: 500; margin-left: 6px; }
