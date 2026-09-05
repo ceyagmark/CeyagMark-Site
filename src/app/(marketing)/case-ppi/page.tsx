@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: A Booking Funnel That Converts 17 Percent | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "How a vehicle inspection business went from a contact form to a booking engine that converts 17 percent of everyone who opens it, and why fixing the analytics changed the recommendation.",
   alternates: { canonical: "/case-ppi" },
   openGraph: {
+    images: OG_IMAGE,
     type: "article",
     title: "Case Study: A Booking Funnel That Converts 17 Percent",
     description: "17 percent of everyone who opens the booking page books one. Here is what the funnel actually said.",

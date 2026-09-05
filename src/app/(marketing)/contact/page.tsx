@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { ContactHero } from "./contact-hero";
 import { ContactForm } from "./contact-form";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Contact CeyagMark, Web & Marketing Agency Sri Lanka | WhatsApp or Email",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     "Contact CeyagMark, a web development and performance marketing agency in Nittambuwa, Sri Lanka. WhatsApp +94 70 372 7895, email growth@ceyagmark.com, or send a message. We reply within one business day.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    images: OG_IMAGE,
     title: "Contact CeyagMark, Web & Marketing Agency Sri Lanka",
     description: "WhatsApp us, or send a message. You talk to the person who would run your account.",
     url: "/contact",

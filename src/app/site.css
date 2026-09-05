@@ -997,3 +997,50 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px;
 }
 .bk-alt p { color: var(--text-mute); font-size: .93rem; margin: 0; }
+
+/* ================================================================
+   Mobile pass (measured at a real 375x812, not a headless approximation)
+
+   Three defects this fixes, all confirmed by measurement rather than eye:
+     1. .bk-steps wrapped to two rows (measured 56px tall) so "3 Details"
+        orphaned onto its own line under "1 Session  2 Time".
+     2. 16 tap targets under 44x44, almost all footer links at 19px tall.
+     3. The two fixed FABs (theme 48px, WhatsApp 52px) sit over whatever
+        scrolls beneath them, so the last row of content was unreachable.
+   ================================================================ */
+
+@media (max-width: 520px) {
+  /* 1. One row, always. The labels are what overflow, so they shrink first;
+        the numbered circles stay large enough to read. */
+  .bk-steps { gap: 7px; margin: 22px 0 28px; flex-wrap: nowrap; }
+  .bk-step { font-size: .66rem; letter-spacing: .07em; gap: 7px; white-space: nowrap; }
+  .bk-step i { width: 21px; height: 21px; font-size: .68rem; }
+  .bk-step-sep { min-width: 8px; }
+
+  /* The session name wraps to two lines at this width while the duration and
+     arrow stayed vertically centred against it, which read as a misalignment.
+     Top-align both columns so the duration sits beside the first line. */
+  .bk-option { align-items: flex-start; gap: 12px; padding: 18px; }
+  .bk-option-side { padding-top: 3px; }
+
+  /* Time-slot chips are the most-tapped control in the flow. */
+  .bk-time { min-height: 44px; }
+}
+
+@media (max-width: 768px) {
+  /* 2. Footer links were 19px tall on a 37px pitch: two rows of misfires
+        waiting to happen. 44px target with an 8px gap is the house floor.
+        The footer gets taller on mobile; that is the intended trade. */
+  .footer ul { gap: 8px; }
+  /* min-width catches the short labels ("About" measured 43px wide) without
+     stretching the long ones. */
+  .footer ul a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+  /* The wordmark is the most-tapped link on the page: it is how people get home. */
+  .brand { min-height: 44px; }
+  .footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; }
+  .muted-link { display: inline-flex; align-items: center; min-height: 44px; }
+
+  /* 3. Clear the fixed FABs so the last line of the footer is reachable.
+        52px pill + 20px offset + breathing room. */
+  .footer-bottom { padding-bottom: 92px; }
+}

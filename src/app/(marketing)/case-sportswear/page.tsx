@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: ROAS From 2 to 9 on a Sportswear Brand | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Rebuilding paid acquisition for a Sri Lankan sportswear brand. Return on ad spend from 2 to 9 in 2.5 months, and why the average order value did most of the work.",
   alternates: { canonical: "/case-sportswear" },
   openGraph: {
+    images: OG_IMAGE,
     type: "article",
     title: "Case Study: ROAS From 2 to 9 on a Sportswear Brand",
     description: "Why we verified the tracking before touching the campaigns, and why the order value mattered more than the targeting.",

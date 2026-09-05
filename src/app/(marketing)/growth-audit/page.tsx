@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Free Website & Marketing Audit, Sri Lanka | CeyagMark Growth Audit",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Take the free CeyagMark Growth Audit. Get a custom Growth Scorecard that diagnoses your acquisition, conversion and retention, and shows the highest value fix first.",
   alternates: { canonical: "/growth-audit" },
   openGraph: {
+    images: OG_IMAGE,
     title: "Free Growth Audit | CeyagMark",
     description: "About three minutes, a custom Growth Scorecard, and the one fix that moves your numbers most.",
     url: "/growth-audit",

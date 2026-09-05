@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: The Store Scored 38/100 and Needed a Phone Number | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "A conversion audit of a Sri Lankan motorbike parts store. Score 38 out of 100, no navigation menu, no meta descriptions, and the biggest single win was adding a phone number.",
   alternates: { canonical: "/case-motorbike-parts" },
   openGraph: {
+    images: OG_IMAGE,
     type: "article",
     title: "Case Study: 38 out of 100, and the Biggest Win Was a Phone Number",
     description: "What a full conversion audit found on a Sri Lankan e-commerce store, and why the fix order matters.",

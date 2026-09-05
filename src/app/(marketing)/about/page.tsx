@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "About CeyagMark, Web and Marketing Agency in Nittambuwa, Sri Lanka",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "CeyagMark is a web development and performance marketing agency based in Nittambuwa, Sri Lanka, led by Shashika Tharinda. We reject vanity metrics and the bloated agency model.",
   alternates: { canonical: "/about" },
   openGraph: {
+    images: OG_IMAGE,
     title: "About CeyagMark",
     description: "A lean performance marketing agency that sells growth, not marketing.",
     url: "/about",

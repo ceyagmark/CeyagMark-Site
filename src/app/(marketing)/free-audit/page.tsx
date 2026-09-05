@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FreeAuditForm } from "./free-audit-form";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Free E-commerce Performance Audit, 3 Founding Slots | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "A full-stack performance audit that maps every bottleneck in your store across ads, website, creatives and retention. 3 founding slots free, normally $99 / LKR 14,999. Apply in under 3 minutes.",
   alternates: { canonical: "/free-audit" },
   openGraph: {
+    images: OG_IMAGE,
     title: "Free E-commerce Performance Audit, 3 Founding Slots | CeyagMark",
     description: "We map every bottleneck in your store and show you exactly where your ads are losing money. 3 founding slots free, normally $99 / LKR 14,999.",
     url: "/free-audit",

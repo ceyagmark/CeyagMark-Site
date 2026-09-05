@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="CeyagMark">
+  <!--
+    Favicon variant of the brand mark.
+
+    Two deliberate differences from public/img/logo-mark.svg:
+      1. It carries its own dark navy plate. The site mark draws the "C" in
+         #0A1F44, which disappears against a dark browser tab; a plate makes
+         the icon read on light and dark chrome alike.
+      2. The mark is scaled to 76% so the strokes do not touch the rounded
+         corners at 16px, where a favicon actually lives.
+  -->
+  <defs>
+    <linearGradient id="cm-fav" x1="20" y1="70" x2="80" y2="25" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E86FF"/>
+      <stop offset="1" stop-color="#5AA0FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#0A1F44"/>
+  <g transform="translate(50 50) scale(0.76) translate(-50 -50)">
+    <path d="M73 23 A36 36 0 1 0 73 77" fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round"/>
+    <path d="M30 64 L45 52 L55 58 L74 33" fill="none" stroke="url(#cm-fav)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M60 30 L78 28 L74 46 Z" fill="url(#cm-fav)" stroke="url(#cm-fav)" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+</svg>

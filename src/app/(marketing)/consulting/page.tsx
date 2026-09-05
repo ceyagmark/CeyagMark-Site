@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Marketing Consulting Sri Lanka, LKR 3,000 per 30 Minutes | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Book a one to one strategy or technical consulting session with CeyagMark. For in-house marketing teams and marketing professionals who want senior guidance on paid, CRO, retention, tracking, GTM and AI workflows.",
   alternates: { canonical: "/consulting" },
   openGraph: {
+    images: OG_IMAGE,
     title: "Strategy and Technical Consulting | CeyagMark",
     description: "Book a one to one consulting session for in-house teams and marketing professionals.",
     url: "/consulting",

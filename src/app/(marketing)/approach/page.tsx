@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "How We Work: The CeyagMark Method for Web and Marketing | CeyagMark",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "The CeyagMark method. Diagnose, Model, Deploy, Compound. How AI agents and senior strategists combine to grow revenue, LTV and conversion rate while lowering CPA.",
   alternates: { canonical: "/approach" },
   openGraph: {
+    images: OG_IMAGE,
     title: "The CeyagMark Method",
     description: "A lean machine that works like a forty person agency. Diagnose, Model, Deploy, Compound.",
     url: "/approach",

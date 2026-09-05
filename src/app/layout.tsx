@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     siteName: "CeyagMark",
     locale: "en_LK",
     url: SITE_URL,
-    images: [{ url: "/og-cover.png", width: 1200, height: 630 }],
+    // Referenced explicitly rather than left to the opengraph-image.tsx file
+    // convention. That convention binds the card to the page.tsx in the same
+    // segment, and this app has no src/app/page.tsx: the homepage lives in the
+    // (marketing) route group. The file generated a working /opengraph-image
+    // route that no page ever pointed at, which is how the previous
+    // /og-cover.png 404 went unnoticed. Declaring it here covers every route.
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "CeyagMark" }],
   },
   twitter: {
     card: "summary_large_image",

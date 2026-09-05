@@ -1,9 +1,37 @@
 import type { DataSource } from "@/lib/data/types";
 
-export type Email = { to: string; subject: string; text: string };
+export type Attachment = {
+  filename: string;
+  /** Raw UTF-8 content. Encoded for the provider at send time. */
+  content: string;
+  contentType?: string;
+};
+
+export type Email = {
+  to: string;
+  subject: string;
+  /** Always present. Plain text is the deliverability floor and the accessible fallback. */
+  text: string;
+  html?: string;
+  attachments?: Attachment[];
+};
 
 export interface Notifier {
   send(email: Email, template: string): Promise<{ status: "sent" | "skipped" | "failed"; detail?: string }>;
+}
+
+/**
+ * Where booking and lead alerts go.
+ *
+ * This exists because the seeded owner address is on a domain with no MX
+ * records: mail sent there is accepted by nobody. The alert address is
+ * therefore an explicit env var, separate from the public contact address
+ * shown on the site, and the caller's fallback is only reached when it is
+ * unset.
+ */
+export function ownerAlertRecipient(fallback: string): string {
+  const configured = process.env.OWNER_ALERT_EMAIL?.trim();
+  return configured && configured.length > 0 ? configured : fallback;
 }
 
 // The PPI lesson, verbatim: "a stub that returns ok: true makes 'no
@@ -29,6 +57,16 @@ class ResendNotifier implements Notifier {
         to: email.to,
         subject: email.subject,
         text: email.text,
+        ...(email.html ? { html: email.html } : {}),
+        ...(email.attachments && email.attachments.length > 0
+          ? {
+              attachments: email.attachments.map((a) => ({
+                filename: a.filename,
+                content: Buffer.from(a.content, "utf8").toString("base64"),
+                ...(a.contentType ? { contentType: a.contentType } : {}),
+              })),
+            }
+          : {}),
       });
       if (result.error) return { status: "failed" as const, detail: result.error.message };
       return { status: "sent" as const };

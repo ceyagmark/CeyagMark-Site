@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PortfolioGrid } from "./portfolio-grid";
 import { CapabilityMatrix } from "./capability-matrix";
+import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Portfolio: Website and Digital Marketing Case Studies, Sri Lanka | CeyagMark",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
     "Real case studies from a Sri Lankan web and marketing agency. Booking funnels, WooCommerce stores, AI search visibility and paid acquisition, every number stating how it was measured.",
   alternates: { canonical: "/portfolio" },
   openGraph: {
+    images: OG_IMAGE,
     title: "CeyagMark Portfolio",
     description: "We build the thing and we fill it. Case studies with the numbers and the method behind them.",
     url: "/portfolio",
