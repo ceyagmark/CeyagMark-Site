@@ -138,7 +138,7 @@ export default function GrowthAuditPage() {
             </div>
             <div className="card reveal" style={{ marginTop: 18, display: "flex", gap: 16, alignItems: "center" }}>
               <img
-                src="/img/founder.svg"
+                src="/img/founder.webp"
                 alt="Shashika Tharinda, founder of CeyagMark"
                 width={60}
                 height={60}

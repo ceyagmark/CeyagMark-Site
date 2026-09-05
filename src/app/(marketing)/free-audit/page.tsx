@@ -407,7 +407,7 @@ export default function FreeAuditPage() {
           <div className="reveal">
             <div className="card" style={{ display: "flex", gap: 18, alignItems: "center" }}>
               <img
-                src="/img/founder.svg"
+                src="/img/founder.webp"
                 alt="Shashika Tharinda, founder of CeyagMark"
                 width={74}
                 height={74}
