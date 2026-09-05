@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const LINKS = [
   { href: "/services", label: "Services" },
@@ -64,6 +65,12 @@ export function SiteNav() {
             <Link className="btn btn-primary" href="/growth-audit" data-magnetic="0.25" onClick={() => setOpen(false)}>
               Free Growth Audit
             </Link>
+            {/* Only one of these two is ever displayed (see .theme-dock /
+                .nav-theme in site.css), so the hidden one leaves the
+                accessibility tree rather than duplicating the control. */}
+            <div className="nav-theme">
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
       </div>

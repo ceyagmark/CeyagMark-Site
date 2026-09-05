@@ -8,6 +8,7 @@ import {
   facingForPath,
   localSiderealDegrees,
   project,
+  tiltForViewport,
   timeForScroll,
   toHorizontal,
   type Camera,
@@ -157,7 +158,7 @@ export function SceneStars() {
       if (!frameRef.current || frameRef.current.key !== key) {
         const when = timeForScroll(step / TIME_STEPS);
         const lst = localSiderealDegrees(when, OBSERVER.longitude);
-        const cam: Camera = { facing, tilt: TILT, fov: FOV, width: w, height: h };
+        const cam: Camera = { facing, tilt: tiltForViewport(TILT, w, h, FOV), fov: FOV, width: w, height: h };
         frameRef.current = buildFrame(key, cam, lst);
       }
       const frame = frameRef.current;

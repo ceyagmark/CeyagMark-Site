@@ -14,7 +14,9 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <SiteNav />
       <main id="main">{children}</main>
       <SiteFooter />
-      <ThemeToggle />
+      <div className="theme-dock">
+        <ThemeToggle />
+      </div>
       <WhatsAppFab />
     </>
   );

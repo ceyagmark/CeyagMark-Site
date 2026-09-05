@@ -122,7 +122,15 @@ export function project(h: Horizontal, cam: Camera): Projected | null {
   const x = n * right[0]! + e * right[1]! + u * right[2]!;
   const y = n * up[0]! + e * up[1]! + u * up[2]!;
 
-  const focal = cam.width / 2 / Math.tan((cam.fov * DEG) / 2);
+  // The field of view spans the LONGER axis, not the width.
+  //
+  // Deriving focal length from width alone means a portrait phone gets an
+  // enormous vertical field: at 375x812 the vertical half-angle is 70.5deg, so
+  // with the camera tilted 42deg up the bottom of the screen looks 28.5deg
+  // BELOW the horizon. Everything there is correctly culled, and the result is
+  // a sky that stops two thirds of the way down the page. Measured, not
+  // guessed: the horizon landed at y=536 of 812.
+  const focal = Math.max(cam.width, cam.height) / 2 / Math.tan((cam.fov * DEG) / 2);
   return {
     x: cam.width / 2 + (x / z) * focal,
     y: cam.height / 2 - (y / z) * focal,
@@ -136,6 +144,26 @@ export function project(h: Horizontal, cam: Camera): Projected | null {
  * means the sky overhead is the sky actually overhead, and it drifts through
  * the year the way the real one does.
  */
+/**
+ * How far up to aim so the frame is all sky.
+ *
+ * The horizon is a hard edge: `project` culls everything below it, so any part
+ * of the canvas pointing under it renders empty. Rather than pick a tilt per
+ * breakpoint and have it drift, this solves for the one that keeps the bottom
+ * edge a few degrees above the horizon at whatever aspect ratio it is handed.
+ *
+ * A phone held in portrait sees more sky than a monitor does, which is also
+ * what a person actually looking up sees, so aiming higher on a tall screen is
+ * the honest framing rather than a workaround.
+ */
+export function tiltForViewport(baseTilt: number, width: number, height: number, fov: number): number {
+  const focal = Math.max(width, height) / 2 / Math.tan((fov * DEG) / 2);
+  const verticalHalfAngle = Math.atan(height / 2 / focal) / DEG;
+  // 4 degrees of margin: enough that the sparse, dim stars just above the
+  // horizon are not the only thing along the bottom edge.
+  return Math.max(baseTilt, verticalHalfAngle + 4);
+}
+
 export function timeForScroll(progress: number, now = new Date()): Date {
   const p = Math.max(0, Math.min(1, progress));
   const d = new Date(now);
