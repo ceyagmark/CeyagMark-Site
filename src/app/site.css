@@ -990,3 +990,10 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
 @media (min-width: 920px) {
   .session-grid > .card > p:nth-of-type(2) { min-height: 2.9rem; }
 }
+
+/* Booking: the way out when none of the offered slots fit. */
+.bk-alt {
+  margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px;
+}
+.bk-alt p { color: var(--text-mute); font-size: .93rem; margin: 0; }

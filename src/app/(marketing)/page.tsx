@@ -60,7 +60,7 @@ const ORGANIZATION_JSON_LD = {
     email: "growth@ceyagmark.com",
     availableLanguage: ["English", "Sinhala"],
   },
-  sameAs: ["https://www.linkedin.com/company/ceyagmark"],
+  sameAs: ["https://www.facebook.com/ceyagmark/", "https://www.linkedin.com/company/ceyagmark"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "CeyagMark engagements",

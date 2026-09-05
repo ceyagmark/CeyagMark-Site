@@ -64,7 +64,9 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/company/ceyagmark">LinkedIn</a>
+                <a href="https://www.facebook.com/ceyagmark/" target="_blank" rel="noopener">
+                  Facebook
+                </a>
               </li>
             </ul>
           </div>
