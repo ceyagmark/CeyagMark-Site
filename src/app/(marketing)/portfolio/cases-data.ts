@@ -184,15 +184,18 @@ export const CASES: CaseCardData[] = [
   },
   {
     slug: "case-wound-care",
-    kind: "progress",
-    client: "Suwasetha Wound Care",
-    industry: "Specialist wound care and home visits · Sri Lanka",
-    headline: "Clinical care, and a site that has to earn trust before it asks for a call",
-    basis: "A service site for a solo registered nurse doing specialist wound care and home visits.",
+    kind: "build",
+    client: "Suwasetha Wound Care Centre",
+    industry: "Wound care and home nursing · Gampaha district, Sri Lanka",
+    headline: "The person searching is rarely the person being treated.",
+    basisLabel: "What we built.",
+    basis:
+      "A seven page site with two separate journeys, home visits and care at the centre, because a family choosing between those is making two different decisions. Enquiries open a prefilled WhatsApp message instead of an email form. The blog is written in Sinhala.",
     connect:
-      "This one sells on credibility, not on price. The build is deliberately gated behind real clinical content rather than starting from a template, because in health the copy is the product and a generic page actively costs trust.",
+      "Discovery changed the brief. The person searching is usually an adult child, often working abroad, arranging care for a parent who is not the one doing the searching. So the site has to answer a stranger's questions about someone else's condition, in the language the family actually uses between themselves, and end in WhatsApp because that is how the call gets made here. A template health site would have written to the patient and lost the reader.",
     tags: ["Web Build", "SEO"],
-    cardTags: ["Service site", "Local SEO", "Trust design"],
+    cardTags: ["Service site", "Two journeys", "WhatsApp enquiries", "Sinhala content", "Local SEO"],
+    liveUrl: "https://suwasetha.lk",
   },
   {
     slug: "case-event-ticketing",

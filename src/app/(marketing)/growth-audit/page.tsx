@@ -152,7 +152,7 @@ export default function GrowthAuditPage() {
                 </p>
               </div>
             </div>
-            <p className="dim reveal" style={{ fontSize: ".92rem", marginTop: 14, textAlign: "center" }}>
+            <p className="dim reveal" style={{ fontSize: ".92rem", marginTop: 14 }}>
               <strong style={{ color: "var(--brand-glow)" }}>73 percent of growing businesses</strong> lose money to
               at least one hidden funnel leak. Here is where you stand.
             </p>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CountUp } from "@/components/count-up";
 
 // Meta, JSON-LD and copy ported verbatim from Projects/CeyagMark/CeyagMark/index.html
 // per SLICE-0-CONTRACTS.md's per-page meta table. Nothing here is new copy.
@@ -289,19 +290,19 @@ export default function HomePage() {
         <div className="wrap">
           <div className="grid cols-4">
             <div className="stat reveal">
-              <div className="num tnum">15</div>
+              <div className="num tnum"><CountUp to={15} suffix="+" /></div>
               <div className="lbl">Projects across web and marketing</div>
             </div>
             <div className="stat reveal">
-              <div className="num tnum">6</div>
+              <div className="num tnum"><CountUp to={6} /></div>
               <div className="lbl">Disciplines under one roof</div>
             </div>
             <div className="stat reveal">
-              <div className="num tnum">20+</div>
+              <div className="num tnum"><CountUp to={20} suffix="+" /></div>
               <div className="lbl">Brands run agency-side</div>
             </div>
             <div className="stat reveal">
-              <div className="num tnum">5</div>
+              <div className="num tnum"><CountUp to={5} suffix="+" /></div>
               <div className="lbl">Years in performance marketing</div>
             </div>
           </div>
