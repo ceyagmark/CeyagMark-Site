@@ -272,7 +272,7 @@ export function SceneStars() {
       }
     },
     TOKENS,
-    { animateFromWidth: 1000 },
+    { throttleBelowWidth: 1000, throttledFps: 30 },
   );
 
   return (

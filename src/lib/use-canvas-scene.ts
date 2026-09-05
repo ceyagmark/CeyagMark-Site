@@ -29,11 +29,18 @@ export type SceneDraw = (
  * compositor), and a decorative canvas that renders nothing at all in that
  * case reads as a broken element rather than a still one.
  */
-/** `animateFromWidth`: below this viewport width the scene paints one static
- *  frame and never starts a rAF loop. For a fixed, always-on-screen background
- *  that is the difference between a decorative touch and a battery cost on the
- *  low-end mobile hardware this site is built for. */
-export type SceneOptions = { animateFromWidth?: number };
+/**
+ * `throttleBelowWidth` / `throttledFps`: below that viewport width the loop
+ * paints at the reduced rate rather than on every animation frame.
+ *
+ * This replaces an earlier `animateFromWidth` option that stopped the loop
+ * entirely on narrow screens. That saved battery by turning a live scene into
+ * a still image, which on a night sky reads as a bug rather than a choice —
+ * most of this site's visitors are on phones and they were the only ones never
+ * seeing it move. Halving the paint rate keeps the cost honest without taking
+ * the scene away. `prefers-reduced-motion` still stops it outright.
+ */
+export type SceneOptions = { throttleBelowWidth?: number; throttledFps?: number };
 
 export function useCanvasScene(
   draw: SceneDraw,
@@ -56,8 +63,12 @@ export function useCanvasScene(
     if (!ctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const minWidth = opts?.animateFromWidth ?? 0;
-    const mayAnimate = !reduce && window.innerWidth >= minWidth;
+    const mayAnimate = !reduce;
+    const throttleWidth = opts?.throttleBelowWidth ?? 0;
+    const throttledFps = opts?.throttledFps ?? 30;
+    // Recomputed on resize so a phone rotating into landscape picks up the
+    // right budget instead of keeping whatever it booted with.
+    let minFrameMs = 0;
 
     let tokens: Record<string, string> = {};
     function readTokens() {
@@ -78,6 +89,7 @@ export function useCanvasScene(
       canvas!.height = Math.round(height * dpr);
       // Draw in CSS pixels; the transform absorbs the DPR scaling.
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      minFrameMs = window.innerWidth < throttleWidth ? 1000 / throttledFps : 0;
     }
 
     // Pointer, eased toward the raw position so scenes glide rather than snap.
@@ -112,8 +124,14 @@ export function useCanvasScene(
 
     let frame = 0;
     let running = false;
+    // rAF still fires at the display rate; what the cap skips is the paint,
+    // which is where the cost actually is.
+    let lastPaint = Number.NEGATIVE_INFINITY;
     function loop(now: number) {
-      render(now);
+      if (now - lastPaint >= minFrameMs) {
+        render(now);
+        lastPaint = now;
+      }
       frame = requestAnimationFrame(loop);
     }
     function play() {
@@ -167,7 +185,7 @@ export function useCanvasScene(
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pointermove", onPointerMove);
     };
-  }, [tokenNames, opts?.animateFromWidth]);
+  }, [tokenNames, opts?.throttleBelowWidth, opts?.throttledFps]);
 
   return canvasRef;
 }

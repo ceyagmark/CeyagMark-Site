@@ -5,6 +5,7 @@ import { createBookingSchema } from "@/lib/validation/booking";
 import { isRateLimited, clientKey } from "@/lib/rate-limit";
 import { sendAndLog } from "@/lib/notify";
 import { bookingConfirmationEmail, bookingOwnerAlertEmail } from "@/lib/notify/templates";
+import { createCalendarEvent } from "@/lib/calendar/google";
 
 // POST acts; GET never does (PPI trap, see /api/availability).
 export async function POST(request: Request) {
@@ -36,9 +37,22 @@ export async function POST(request: Request) {
     // Failure design (C5): email is fail-open. The booking is already
     // committed by the time we get here, so a send failure is logged and
     // never surfaces as a failed booking.
+    // Same fail-open reasoning covers the calendar: the booking is committed
+    // before any of this runs, so a Google outage must not turn a successful
+    // booking into an error the customer sees.
     await Promise.all([
       sendAndLog(dataSource, bookingConfirmationEmail(result), "booking_confirmation"),
       sendAndLog(dataSource, bookingOwnerAlertEmail(result), "booking_owner_alert"),
+      createCalendarEvent({
+        confirmationCode: result.confirmationCode,
+        sessionTypeName: result.sessionTypeName,
+        startsAt: result.startsAt,
+        endsAt: result.endsAt,
+        customerName: result.customerName,
+        customerEmail: result.customerEmail,
+        notes: parsed.data.notes,
+        manageUrl: `https://ceyagmark.com/booking/${result.manageToken}`,
+      }),
     ]);
 
     return NextResponse.json({
