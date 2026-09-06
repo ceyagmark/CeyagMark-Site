@@ -96,8 +96,7 @@ export default function CaseSportswearPage() {
           6,841, up 177 percent. That is not an advertising result. Nothing in a campaign manager raises the value
           of a basket.
         </p>
-        <p>
-          Order value is won on the site: in what is bundled, what is offered alongside, how the product pages
+        <p className="note">Order value is won on the site: in what is bundled, what is offered alongside, how the product pages
           present a second item, what the cart does when someone is one item away from free delivery. It is a
           merchandising and conversion problem.
         </p>

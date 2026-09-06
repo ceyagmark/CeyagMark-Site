@@ -19,7 +19,7 @@ export function SiteFooter() {
             </p>
           </div>
           <div>
-            <h4>Agency</h4>
+            <h2>Agency</h2>
             <ul>
               <li>
                 <Link href="/services">Services</Link>
@@ -39,7 +39,7 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h4>Start</h4>
+            <h2>Start</h2>
             <ul>
               <li>
                 <Link href="/growth-audit">Free Growth Audit</Link>
@@ -53,7 +53,7 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h4>Reach us</h4>
+            <h2>Reach us</h2>
             <ul>
               <li>
                 <a href="mailto:growth@ceyagmark.com">growth@ceyagmark.com</a>

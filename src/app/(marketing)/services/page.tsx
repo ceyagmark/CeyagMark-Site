@@ -149,7 +149,7 @@ export default function ServicesPage() {
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
                 from LKR 30,000 <span className="dim" style={{ fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: ".85rem" }}>from $199</span>
               </p>
-              <p className="dim" style={{ fontSize: ".85rem", marginTop: 10 }}>Scoped from your Leak Report, so you know what you are buying before you buy it.</p>
+              <p className="dim note" style={{ fontSize: ".85rem", marginTop: 10 }}>Scoped from your Leak Report, so you know what you are buying before you buy it.</p>
             </article>
             <article className="card glow-hover reveal" id="build-and-run">
               <span className="ladder-step"><b>03</b> Build &amp; run</span>
@@ -178,8 +178,7 @@ export default function ServicesPage() {
               <p className="mt-s" style={{ fontFamily: "var(--font-space-grotesk)", fontWeight: 700, fontSize: "1.1rem" }}>
                 LKR 3,000 <span className="dim" style={{ fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: ".85rem" }}>$20 per 30 min</span>
               </p>
-              <p className="dim" style={{ fontSize: ".85rem", marginTop: 10 }}>
-                Paid upfront, money-back if it was not worth it. <Link href="/consulting">Book a session</Link>
+              <p className="dim note" style={{ fontSize: ".85rem", marginTop: 10 }}>Paid upfront, money-back if it was not worth it. <Link href="/consulting">Book a session</Link>
               </p>
             </article>
           </div>

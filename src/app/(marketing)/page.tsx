@@ -579,8 +579,7 @@ export default function HomePage() {
                   </span>
                 </div>
               </div>
-              <p className="dim" style={{ fontSize: ".8rem", marginTop: 18 }}>
-                No account managers, no junior hand-offs, no overhead priced into your retainer. Every engagement is{" "}
+              <p className="dim note" style={{ fontSize: ".8rem", marginTop: 18 }}>No account managers, no junior hand-offs, no overhead priced into your retainer. Every engagement is{" "}
                 <Link href="/services#engagements" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
                   scoped and priced in public
                 </Link>

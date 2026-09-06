@@ -181,12 +181,10 @@ export default function FreeAuditPage() {
                   </span>
                 </div>
               </div>
-              <p className="dim" style={{ fontSize: ".84rem", marginTop: 18 }}>
-                Example map. Yours is built from your own numbers.
+              <p className="dim note" style={{ fontSize: ".84rem", marginTop: 18 }}>Example map. Yours is built from your own numbers.
               </p>
             </div>
-            <p className="dim reveal" style={{ fontSize: ".92rem", marginTop: 16, textAlign: "center" }}>
-              This is not a Meta ads review. It is a complete diagnosis of every system bleeding revenue in your
+            <p className="dim reveal note" style={{ fontSize: ".92rem", marginTop: 16, textAlign: "center" }}>This is not a Meta ads review. It is a complete diagnosis of every system bleeding revenue in your
               store.
             </p>
           </div>

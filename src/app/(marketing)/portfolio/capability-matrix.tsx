@@ -22,7 +22,10 @@ export function CapabilityMatrix() {
           instead of three suppliers who each own a piece of the answer.
         </p>
       </div>
-      <div className="matrix-scroll reveal">
+      {/* The frame does not scroll; the fade is pinned to it so it stays at the
+          viewport edge instead of sliding away with the table. */}
+      <div className="matrix-frame">
+        <div className="matrix-scroll reveal">
         <table className="matrix">
           <caption>Every project on this page and the disciplines it required.</caption>
           <thead>
@@ -52,6 +55,7 @@ export function CapabilityMatrix() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </>
   );

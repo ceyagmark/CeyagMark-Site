@@ -57,8 +57,7 @@ export default function ContactPage() {
               Send a message instead
             </a>
           </div>
-          <p className="dim reveal" style={{ fontSize: ".9rem", marginTop: 20 }}>
-            Based in Nittambuwa, Sri Lanka. We work with Sri Lankan businesses and with clients in Australia, New
+          <p className="dim reveal note" style={{ fontSize: ".9rem", marginTop: 20 }}>Based in Nittambuwa, Sri Lanka. We work with Sri Lankan businesses and with clients in Australia, New
             Zealand and the UK.
           </p>
         </div>

@@ -176,8 +176,7 @@ export function ContactForm() {
                   <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              <p className="dim center" style={{ marginTop: 16, fontSize: ".85rem" }}>
-                We reply within one business day. No spam, ever.
+              <p className="dim center note" style={{ marginTop: 16, fontSize: ".85rem" }}>We reply within one business day. No spam, ever.
               </p>
             </form>
           ) : (

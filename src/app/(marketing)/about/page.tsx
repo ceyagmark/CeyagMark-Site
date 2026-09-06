@@ -187,7 +187,7 @@ export default function AboutPage() {
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
                 CEO, Platform Daddy &middot; managed Shashika directly
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+              <p className="mt-s note" style={{ fontSize: ".9rem" }}>
                 &ldquo;I had the pleasure of working with Shashika at Platform Daddy, where he served as a Senior
                 Digital Marketing Specialist on my team. He has a real strength in performance marketing —
                 consistently building data-driven campaigns that delivered strong ROI, with a sharp instinct for
@@ -208,7 +208,7 @@ export default function AboutPage() {
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
                 Digital Marketer &middot; client
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+              <p className="mt-s note" style={{ fontSize: ".9rem" }}>
                 &ldquo;I have had the pleasure of working with Shashika Tharinda on a variety of digital marketing
                 projects, including Meta Ads, Google Ads, e-commerce and conversion tracking. Throughout our
                 collaboration, I have been consistently impressed by his expertise, professionalism and results
@@ -229,7 +229,7 @@ export default function AboutPage() {
               <p className="dim" style={{ fontSize: ".85rem", marginTop: 4 }}>
                 Digital Marketing Specialist &middot; teammate
               </p>
-              <p className="mt-s" style={{ fontSize: ".9rem" }}>
+              <p className="mt-s note" style={{ fontSize: ".9rem" }}>
                 &ldquo;I had the pleasure of working with Shashika, and he is a dedicated and reliable digital
                 marketing professional. He is always willing to learn, takes ownership of his work, and
                 consistently delivers high-quality results. His creativity, attention to detail, and collaborative

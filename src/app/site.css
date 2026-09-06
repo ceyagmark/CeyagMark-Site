@@ -340,7 +340,10 @@ strong { color: var(--text); font-weight: 600; }
 .footer { border-top: 1px solid var(--border); padding-top: 76px; position: relative; }
 .footer-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
 @media (min-width: 760px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; } }
-.footer h4 { font-family: var(--font-inter); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 18px; font-weight: 600; }
+/* h2, not h4: these are top-level page sections, and starting the footer at
+   h4 made every page jump h1 or h2 straight to h4 — a skipped level on all 18
+   routes. The size is set here, so the visual weight is unchanged. */
+.footer h2 { font-family: var(--font-inter); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 18px; font-weight: 600; }
 .footer ul { display: grid; gap: 12px; font-size: .95rem; }
 .footer a { color: var(--text-soft); transition: color .2s; }
 .footer a:hover { color: var(--brand-glow); }
@@ -1126,4 +1129,41 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
   /* "Home" is four letters and measured 38px wide even once the height was
      fixed, so the floor has to cover both axes. */
   .breadcrumb a { min-width: 44px; }
+}
+
+/* ---------- Scroll cue on the capability table ----------
+   The table is 828px inside a 327px scroller on a phone. It scrolls correctly
+   and the first column is sticky, but nothing told anyone there was more to
+   the right, so the columns past the fold were effectively invisible.
+
+   The fade is pinned to a non-scrolling frame rather than to the scroller
+   itself, because a pseudo-element inside an overflow container scrolls with
+   the content and would slide out of view exactly when it is needed. */
+.matrix-frame { position: relative; }
+
+@media (max-width: 900px) {
+  .matrix-frame::after {
+    content: "";
+    position: absolute;
+    top: 1px; right: 1px; bottom: 1px;
+    width: 56px;
+    border-radius: 0 17px 17px 0;
+    background: linear-gradient(to left, var(--bg) 8%, transparent);
+    pointer-events: none;
+  }
+}
+
+/* ---------- Body-text floor on phones ----------
+   Thirteen sentence-level passages rendered between 12.5px and 14.7px on
+   mobile, including all three LinkedIn recommendations on /about — the most
+   credibility-carrying text on the site — and the reply-time promise on the
+   contact form.
+
+   These sizes are deliberate on desktop, where they set supporting copy below
+   body text in the hierarchy. On a phone that hierarchy costs more than it
+   buys. The declaration is !important because every one of these carries an
+   inline font-size, which no stylesheet rule can outrank; that is the specific
+   case the keyword exists for, not a shortcut around specificity. */
+@media (max-width: 640px) {
+  .note { font-size: 1rem !important; line-height: 1.6; }
 }

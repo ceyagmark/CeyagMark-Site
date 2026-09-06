@@ -222,8 +222,7 @@ export default function ConsultingPage() {
               </p>
             </article>
           </div>
-          <p className="dim center" style={{ marginTop: 32, fontSize: ".92rem" }}>
-            Session rate is LKR 3,000 / $20 per 30 minutes, billed at that rate for the length booked. Payment is
+          <p className="dim center note" style={{ marginTop: 32, fontSize: ".92rem" }}>Session rate is LKR 3,000 / $20 per 30 minutes, billed at that rate for the length booked. Payment is
             upfront; if the session was not worth it, tell us and we refund it, no argument.
           </p>
           <p className="center" style={{ marginTop: 14, fontSize: ".92rem" }}>
@@ -234,8 +233,7 @@ export default function ConsultingPage() {
             </Link>
             .
           </p>
-          <p className="center dim" style={{ marginTop: 14, fontSize: ".92rem" }}>
-            Looking for done-for-you work instead of advice? The{" "}
+          <p className="center dim note" style={{ marginTop: 14, fontSize: ".92rem" }}>Looking for done-for-you work instead of advice? The{" "}
             <Link href="/services#engagements" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>
               engagement ladder
             </Link>{" "}
