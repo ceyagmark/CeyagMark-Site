@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Case Study: The Store Scored 38/100 and Needed a Phone Number | CeyagMark",
   description:
-    "A conversion audit of a Sri Lankan motorbike parts store. Score 38 out of 100, no navigation menu, no meta descriptions, and the biggest single win was adding a phone number.",
+    "A conversion audit of a Sri Lankan motorbike parts store. Score 38 out of 100, no navigation menu, and the biggest single win was a phone number.",
   alternates: { canonical: "/case-motorbike-parts" },
   openGraph: {
     images: OG_IMAGE,

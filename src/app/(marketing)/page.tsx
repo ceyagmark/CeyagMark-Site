@@ -7,7 +7,7 @@ import { CountUp } from "@/components/count-up";
 export const metadata: Metadata = {
   title: "Web Development & Performance Marketing Agency in Sri Lanka | CeyagMark",
   description:
-    "CeyagMark builds your website and runs the marketing on it, so the conversions are ours to prove. Web development, paid ads, SEO and CRO for Sri Lankan and international brands. Engagements from LKR 14,999.",
+    "We build your website and run the marketing on it. Web development, paid ads, SEO and CRO for Sri Lankan brands. Engagements from LKR 14,999.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Web Development & Performance Marketing Agency in Sri Lanka | CeyagMark",

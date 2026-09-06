@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Marketing Consulting Sri Lanka, LKR 3,000 per 30 Minutes | CeyagMark",
   description:
-    "Book a one to one strategy or technical consulting session with CeyagMark. For in-house marketing teams and marketing professionals who want senior guidance on paid, CRO, retention, tracking, GTM and AI workflows.",
+    "One to one strategy or technical sessions for in-house teams and marketers. Paid, CRO, retention, tracking and GTM. LKR 3,000 per 30 minutes.",
   alternates: { canonical: "/consulting" },
   openGraph: {
     images: OG_IMAGE,

@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Free Website & Marketing Audit, Sri Lanka | CeyagMark Growth Audit",
   description:
-    "Take the free CeyagMark Growth Audit. Get a custom Growth Scorecard that diagnoses your acquisition, conversion and retention, and shows the highest value fix first.",
+    "Take the free Growth Audit. Get a scorecard that diagnoses your acquisition, conversion and retention, and shows the highest value fix first.",
   alternates: { canonical: "/growth-audit" },
   openGraph: {
     images: OG_IMAGE,

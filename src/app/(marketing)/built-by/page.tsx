@@ -14,7 +14,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Get a Website Like That One: Free Website Plan | CeyagMark",
   description:
-    "You clicked through from a site we built. Answer a few questions and get a custom Website Plan: what your site is missing, what to fix first, and what it would cost. Free, about three minutes.",
+    "You clicked through from a site we built. Answer a few questions for a Website Plan: what is missing, what to fix first, and what it would cost.",
   alternates: { canonical: "/built-by" },
   openGraph: {
     images: OG_IMAGE,

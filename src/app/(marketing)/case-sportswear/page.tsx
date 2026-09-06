@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Case Study: ROAS From 2 to 9 on a Sportswear Brand | CeyagMark",
   description:
-    "Rebuilding paid acquisition for a Sri Lankan sportswear brand. Return on ad spend from 2 to 9 in 2.5 months, and why the average order value did most of the work.",
+    "Rebuilding paid acquisition for a Sri Lankan sportswear brand. Return on ad spend went from 2 to 9 in 2.5 months, and order value did most of it.",
   alternates: { canonical: "/case-sportswear" },
   openGraph: {
     images: OG_IMAGE,

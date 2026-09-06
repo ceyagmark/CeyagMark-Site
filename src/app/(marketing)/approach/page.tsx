@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "How We Work: The CeyagMark Method for Web and Marketing | CeyagMark",
   description:
-    "The CeyagMark method. Diagnose, Model, Deploy, Compound. How AI agents and senior strategists combine to grow revenue, LTV and conversion rate while lowering CPA.",
+    "The CeyagMark method: Diagnose, Model, Deploy, Compound. How AI agents and senior strategists grow revenue, LTV and conversion rate while lowering CPA.",
   alternates: { canonical: "/approach" },
   openGraph: {
     images: OG_IMAGE,

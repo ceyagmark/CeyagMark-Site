@@ -8,7 +8,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Contact CeyagMark, Web & Marketing Agency Sri Lanka | WhatsApp or Email",
   description:
-    "Contact CeyagMark, a web development and performance marketing agency in Nittambuwa, Sri Lanka. WhatsApp +94 70 372 7895, email growth@ceyagmark.com, or send a message. We reply within one business day.",
+    "Talk to CeyagMark in Nittambuwa, Sri Lanka. WhatsApp +94 70 372 7895, email growth@ceyagmark.com, or send a message. We reply within one business day.",
   alternates: { canonical: "/contact" },
   openGraph: {
     images: OG_IMAGE,

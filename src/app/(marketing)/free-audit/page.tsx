@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Free E-commerce Performance Audit, 3 Founding Slots | CeyagMark",
   description:
-    "A full-stack performance audit that maps every bottleneck in your store across ads, website, creatives and retention. 3 founding slots free, normally $99 / LKR 14,999. Apply in under 3 minutes.",
+    "A performance audit that maps every bottleneck across your ads, website, creatives and retention. 3 founding slots free, normally LKR 14,999.",
   alternates: { canonical: "/free-audit" },
   openGraph: {
     images: OG_IMAGE,

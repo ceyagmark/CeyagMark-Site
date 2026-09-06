@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "About CeyagMark, Web and Marketing Agency in Nittambuwa, Sri Lanka",
   description:
-    "CeyagMark is a web development and performance marketing agency based in Nittambuwa, Sri Lanka, led by Shashika Tharinda. We reject vanity metrics and the bloated agency model.",
+    "A web development and performance marketing agency in Nittambuwa, Sri Lanka, led by Shashika Tharinda. No vanity metrics, no bloated agency model.",
   alternates: { canonical: "/about" },
   openGraph: {
     images: OG_IMAGE,

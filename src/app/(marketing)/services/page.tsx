@@ -5,7 +5,7 @@ import { OG_IMAGE } from "@/lib/og";
 export const metadata: Metadata = {
   title: "Web Design & Digital Marketing Services and Pricing, Sri Lanka | CeyagMark",
   description:
-    "Website and digital marketing services in Sri Lanka with scope and price stated upfront. Website audits from LKR 14,999, fix sprints from LKR 30,000, and full build plus marketing from LKR 39,900 a month.",
+    "Website and marketing services, scope and price stated upfront. Audits from LKR 14,999, fix sprints from LKR 30,000, build and run from LKR 39,900 a month.",
   alternates: { canonical: "/services" },
   openGraph: {
     images: OG_IMAGE,
