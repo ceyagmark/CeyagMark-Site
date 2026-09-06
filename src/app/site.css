@@ -1081,3 +1081,49 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
   }
   .nav-theme .theme-toggle .t-label { display: inline; }
 }
+
+/* ---------- Metric rows on narrow screens ----------
+   .mp-row is a two-column flex row, which stops working once the value is an
+   expression rather than a single figure. Measured on the homepage at 375px:
+   three of seven rows broke mid-value, rendering "0.7% ->" above "2.8%" and
+   "$28 ->" above "$4". A before-and-after split across two lines stops reading
+   as one number and starts reading as two.
+
+   nowrap keeps the pair together at every width. Below 520px the row stacks so
+   the figure gets the full column instead of whatever the label leaves it —
+   the label is context, the number is the claim, and on a phone the claim
+   deserves its own line. */
+.mp-row .v { white-space: nowrap; }
+
+@media (max-width: 520px) {
+  .mp-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 0;
+  }
+  .mp-row .k { font-size: .95rem; }
+  .mp-row .v { font-size: 2.15rem; line-height: 1.05; }
+}
+
+/* ---------- Card and breadcrumb tap targets ----------
+   Measured on /portfolio at 375px: the breadcrumb "Home" was 38x15, the
+   engagement tags 71x15, and "Read the full case study" — the primary action
+   on every case card — was 201x25. Each is a standalone control, not a link
+   inside a sentence, so the 44px floor applies to all of them.
+
+   The inline URLs in .case-live are deliberately left alone: those sit mid
+   sentence ("Live at suwasetha.lk"), where WCAG exempts them and where forcing
+   44px would push the surrounding line apart. */
+@media (max-width: 768px) {
+  .breadcrumb a,
+  .case-engagement a,
+  .case-foot .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  /* "Home" is four letters and measured 38px wide even once the height was
+     fixed, so the floor has to cover both axes. */
+  .breadcrumb a { min-width: 44px; }
+}

@@ -16,7 +16,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt =
-  "CeyagMark — we build the site and run the marketing on it";
+  "CeyagMark — we don't sell marketing, we sell growth you can bank";
 
 /**
  * Deterministic star field. A seeded generator, not Math.random, so the card
@@ -102,7 +102,23 @@ export default function OpengraphImage() {
               display: "flex",
             }}
           >
-            We build the site and run the marketing on it.
+            {/* The homepage H1, verbatim. A share preview that promises a
+                different line from the page it opens is a conversion leak on
+                every ad click. */}
+            We don&apos;t sell marketing.
+          </div>
+          <div
+            style={{
+              fontSize: 68,
+              fontWeight: 700,
+              lineHeight: 1.08,
+              letterSpacing: "-0.03em",
+              color: "#6aa6ff",
+              maxWidth: 900,
+              display: "flex",
+            }}
+          >
+            We sell growth you can bank.
           </div>
           <div
             style={{
@@ -114,7 +130,7 @@ export default function OpengraphImage() {
               display: "flex",
             }}
           >
-            So the conversions are ours to prove.
+            We build the site and run the marketing on it.
           </div>
         </div>
 
