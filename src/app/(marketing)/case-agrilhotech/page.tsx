@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
-import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: Auditing Our Own Store for AI Search | CeyagMark",
@@ -8,7 +7,6 @@ export const metadata: Metadata = {
     "We ran an AI search visibility audit on our own e-commerce store and published the score. 63 out of 100, and the homepage was introducing itself as Agril.",
   alternates: { canonical: "/case-agrilhotech" },
   openGraph: {
-    images: OG_IMAGE,
     type: "article",
     title: "Case Study: Auditing Our Own Store for AI Search",
     description: "63 out of 100 on our own store, published rather than hidden. Here is what the audit found.",
@@ -31,6 +29,12 @@ const ARTICLE_JSON_LD = {
   "@type": "Article",
   headline: "Auditing our own store for AI search visibility",
   about: "AI search visibility, technical SEO and conversion work on a WooCommerce store",
+  // See case-ppi/page.tsx's comment on this same field: verified against the
+  // real built hash on 2026-09-08, re-check if the image route changes.
+  image: "https://ceyagmark.com/case-agrilhotech/opengraph-image-h4ojgp",
+  datePublished: "2026-08-25",
+  dateModified: "2026-08-25",
+  author: { "@type": "Organization", name: "CeyagMark" },
   publisher: { "@type": "Organization", name: "CeyagMark" },
   mainEntityOfPage: "https://ceyagmark.com/case-agrilhotech",
 };

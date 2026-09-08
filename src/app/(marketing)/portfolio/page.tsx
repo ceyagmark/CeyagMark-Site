@@ -5,7 +5,7 @@ import { CapabilityMatrix } from "./capability-matrix";
 import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
-  title: "Portfolio: Website and Digital Marketing Case Studies, Sri Lanka | CeyagMark",
+  title: "Portfolio: Web & Marketing Case Studies, Sri Lanka | CeyagMark",
   description:
     "Case studies from a Sri Lankan web and marketing agency. Booking funnels, WooCommerce stores and paid acquisition, every number stating how it was measured.",
   alternates: { canonical: "/portfolio" },

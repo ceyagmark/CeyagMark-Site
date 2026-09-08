@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
-import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: ROAS From 2 to 9 on a Sportswear Brand | CeyagMark",
@@ -8,7 +7,6 @@ export const metadata: Metadata = {
     "Rebuilding paid acquisition for a Sri Lankan sportswear brand. Return on ad spend went from 2 to 9 in 2.5 months, and order value did most of it.",
   alternates: { canonical: "/case-sportswear" },
   openGraph: {
-    images: OG_IMAGE,
     type: "article",
     title: "Case Study: ROAS From 2 to 9 on a Sportswear Brand",
     description: "Why we verified the tracking before touching the campaigns, and why the order value mattered more than the targeting.",
@@ -31,6 +29,12 @@ const ARTICLE_JSON_LD = {
   "@type": "Article",
   headline: "Return on ad spend from 2 to 9 on a sportswear brand",
   about: "Paid acquisition and conversion rate optimisation for an apparel brand",
+  // See case-ppi/page.tsx's comment on this same field: verified against the
+  // real built hash on 2026-09-08, re-check if the image route changes.
+  image: "https://ceyagmark.com/case-sportswear/opengraph-image-ul10pl",
+  datePublished: "2026-08-25",
+  dateModified: "2026-08-25",
+  author: { "@type": "Organization", name: "CeyagMark" },
   publisher: { "@type": "Organization", name: "CeyagMark" },
   mainEntityOfPage: "https://ceyagmark.com/case-sportswear",
 };

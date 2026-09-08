@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
-import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
-  title: "Case Study: The Store Scored 38/100 and Needed a Phone Number | CeyagMark",
+  title: "Case Study: Scored 38/100, Needed a Phone Number | CeyagMark",
   description:
     "A conversion audit of a Sri Lankan motorbike parts store. Score 38 out of 100, no navigation menu, and the biggest single win was a phone number.",
   alternates: { canonical: "/case-motorbike-parts" },
   openGraph: {
-    images: OG_IMAGE,
     type: "article",
     title: "Case Study: 38 out of 100, and the Biggest Win Was a Phone Number",
     description: "What a full conversion audit found on a Sri Lankan e-commerce store, and why the fix order matters.",
@@ -26,10 +24,27 @@ const BREADCRUMB_JSON_LD = {
   ],
 };
 
+// Its three sibling case studies all carry this; this one was missing it.
+const ARTICLE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "It scored 38 out of 100, and the biggest single win was a phone number",
+  about: "Conversion rate optimisation for a Sri Lankan motorbike spare parts store",
+  // See case-ppi/page.tsx's comment on this same field: verified against the
+  // real built hash on 2026-09-08, re-check if the image route changes.
+  image: "https://ceyagmark.com/case-motorbike-parts/opengraph-image-r8md7m",
+  datePublished: "2026-08-25",
+  dateModified: "2026-08-25",
+  author: { "@type": "Organization", name: "CeyagMark" },
+  publisher: { "@type": "Organization", name: "CeyagMark" },
+  mainEntityOfPage: "https://ceyagmark.com/case-motorbike-parts",
+};
+
 export default function CaseMotorbikePartsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ARTICLE_JSON_LD) }} />
       <CaseDetailShell
         slug="case-motorbike-parts"
         breadcrumbLabel="Motorbike parts store"

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CaseDetailShell } from "../case-detail-shell";
-import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: "Case Study: A Booking Funnel That Converts 17 Percent | CeyagMark",
@@ -8,7 +7,6 @@ export const metadata: Metadata = {
     "How a vehicle inspection business replaced a contact form with a booking engine that converts 17 percent of everyone who opens it.",
   alternates: { canonical: "/case-ppi" },
   openGraph: {
-    images: OG_IMAGE,
     type: "article",
     title: "Case Study: A Booking Funnel That Converts 17 Percent",
     description: "17 percent of everyone who opens the booking page books one. Here is what the funnel actually said.",
@@ -31,6 +29,16 @@ const ARTICLE_JSON_LD = {
   "@type": "Article",
   headline: "A booking funnel that converts 17 percent of everyone who opens it",
   about: "Web development and conversion optimisation for a vehicle inspection business",
+  // Next content-hashes generated image routes; verified against the actual
+  // built output (`next build`, then grep the static HTML's og:image tag) on
+  // 2026-09-08. Re-check this string if og-card.tsx or this route's
+  // opengraph-image.tsx ever changes, since the hash will move with them.
+  image: "https://ceyagmark.com/case-ppi/opengraph-image-mhmuug",
+  // Matches the date already declared for this route in sitemap.ts, the one
+  // dated source of truth this codebase has for when the page went live.
+  datePublished: "2026-08-25",
+  dateModified: "2026-08-25",
+  author: { "@type": "Organization", name: "CeyagMark" },
   publisher: { "@type": "Organization", name: "CeyagMark" },
   mainEntityOfPage: "https://ceyagmark.com/case-ppi",
 };

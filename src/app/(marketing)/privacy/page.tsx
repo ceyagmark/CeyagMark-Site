@@ -82,9 +82,13 @@ export default function PrivacyPage() {
               case), so we can see which pages and campaigns actually work.
             </p>
             <p className="mt-s">
-              Where your region requires it, these tools load only after you accept analytics cookies via the
-              consent banner. Declining analytics cookies does not block any form, booking, or the quiz, all of
-              which work without them.
+              This site does not currently run a cookie-consent banner. Google Analytics 4 (loaded through Google Tag
+              Manager) is set to Google&apos;s Consent Mode with analytics and ad storage defaulted to denied, so it
+              runs in a reduced, modelled measurement mode unless and until we add a consent flow that can grant it.
+              Meta Pixel and Microsoft Clarity are not Google products and do not read that setting: they load and
+              may set cookies as soon as the page does. If you would rather not be tracked, block these scripts in
+              your browser or an ad blocker, or email us at the address above and we will exclude your visits by
+              hand. None of this affects whether any form, booking, or the quiz works.
             </p>
             <p className="mt-s">
               Booking flow state (your progress through the calendar) is held in the browser&apos;s memory for the

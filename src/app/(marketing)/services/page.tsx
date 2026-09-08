@@ -3,7 +3,7 @@ import Link from "next/link";
 import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
-  title: "Web Design & Digital Marketing Services and Pricing, Sri Lanka | CeyagMark",
+  title: "Web & Marketing Services and Pricing, Sri Lanka | CeyagMark",
   description:
     "Website and marketing services, scope and price stated upfront. Audits from LKR 14,999, fix sprints from LKR 30,000, build and run from LKR 39,900 a month.",
   alternates: { canonical: "/services" },
@@ -513,6 +513,9 @@ export default function ServicesPage() {
                 </svg>
               </Link>
             </div>
+            <p className="dim" style={{ marginTop: 16, fontSize: ".85rem" }}>
+              Already spending on ads? <Link href="/free-audit" style={{ color: "var(--brand-glow)", fontWeight: 600 }}>Apply for a full ad account audit</Link> instead. 3 founding slots free.
+            </p>
           </div>
         </div>
       </section>

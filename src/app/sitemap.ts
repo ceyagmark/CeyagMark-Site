@@ -26,7 +26,10 @@ const PATHS = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PATHS.map((path) => ({
-    url: `${BASE}${path}`,
+    // The homepage's own canonical tag resolves to no trailing slash (Next's
+    // metadataBase resolution of `alternates.canonical: "/"`); this matched
+    // it to that instead of the other way around, so the two stop disagreeing.
+    url: path === "/" ? BASE : `${BASE}${path}`,
     lastModified: new Date("2026-08-25"),
     changeFrequency: path === "/" ? "weekly" : "monthly",
     priority: path === "/" ? 1 : path.startsWith("/case-") ? 0.6 : 0.8,

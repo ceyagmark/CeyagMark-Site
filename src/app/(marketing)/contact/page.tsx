@@ -6,7 +6,7 @@ import { ContactForm } from "./contact-form";
 import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
-  title: "Contact CeyagMark, Web & Marketing Agency Sri Lanka | WhatsApp or Email",
+  title: "Contact CeyagMark, Sri Lanka | WhatsApp or Email",
   description:
     "Talk to CeyagMark in Nittambuwa, Sri Lanka. WhatsApp +94 70 372 7895, email growth@ceyagmark.com, or send a message. We reply within one business day.",
   alternates: { canonical: "/contact" },
@@ -26,10 +26,21 @@ const CONTACT_JSON_LD = {
   about: { "@id": "https://ceyagmark.com/#organization" },
 };
 
+// 14 of the 15 other marketing pages carry this; contact was the one gap.
+const BREADCRUMB_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ceyagmark.com/" },
+    { "@type": "ListItem", position: 2, name: "Contact", item: "https://ceyagmark.com/contact" },
+  ],
+};
+
 export default function ContactPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(CONTACT_JSON_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }} />
 
       <section className="page-hero">
         <div className="wrap">

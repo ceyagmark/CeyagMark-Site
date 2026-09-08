@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
@@ -5,9 +6,15 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { BgAura } from "@/components/bg-aura";
 
-// Next.js's global not-found page. robots noindex,follow is the framework
-// default for this route already (no <meta> needed), carried over from the
-// live site's explicit tag for documentation parity only.
+// Without its own metadata this route silently inherited the root layout's
+// title/description verbatim, so a 404 carried the homepage's own tab title.
+// robots noindex,follow is still the framework default for this route (no
+// <meta> needed for that part).
+export const metadata: Metadata = {
+  title: "Page Not Found | CeyagMark",
+  description: "This page does not exist on ceyagmark.com. Find case studies, services and pricing, or the free Growth Audit from the homepage.",
+};
+
 export default function NotFound() {
   return (
     <>
