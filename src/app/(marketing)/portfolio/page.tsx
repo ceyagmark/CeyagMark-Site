@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PortfolioGrid } from "./portfolio-grid";
 import { CapabilityMatrix } from "./capability-matrix";
+import { CASES } from "./cases-data";
 import { OG_IMAGE } from "@/lib/og";
 
 export const metadata: Metadata = {
@@ -66,7 +67,7 @@ export default function PortfolioPage() {
         <div className="wrap">
           <div className="grid cols-4">
             <div className="stat reveal">
-              <div className="num tnum">15</div>
+              <div className="num tnum">{CASES.length}</div>
               <div className="lbl">Projects across web and marketing</div>
             </div>
             <div className="stat reveal">

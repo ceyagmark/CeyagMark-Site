@@ -61,6 +61,58 @@ export const CASES: CaseCardData[] = [
     funnelNote: "The last step is the current leak. Half of everyone who starts entering their details does not finish, which is where the next work goes.",
   },
   {
+    slug: "case-translation-device",
+    kind: "outcome",
+    client: "US translation-device brand",
+    industry: "Consumer electronics e-commerce · United States",
+    headline: "The receipt page that would have trained the ad campaign on fake orders",
+    metrics: [{ k: "Marketing audit score, July → September", v: "46 → 56" }],
+    basis:
+      "The same five-part marketing audit, covering content, conversion, SEO, competitors and brand, run against the live site in July and again on 10 September 2026. The client's developers shipped the fixes. We wrote the list and re-checked each item on the live site rather than taking it on their word.",
+    connect:
+      "Before any budget went into Google's Performance Max, the tracking check found that the order confirmation page believed whatever was typed into its address bar. A made-up order for $14,999.50 showed the \"your payment went through\" screen and fired a real purchase event. Performance Max learns from purchase events, so every fake or test visit would have taught it to find more people who never buy. The fix went in on the server, and seven fake orders were rejected on the retest before the campaign plan was written.",
+    tags: ["Marketing", "SEO", "CRO"],
+    cardTags: ["Marketing audit", "Tracking QA", "GA4 & GTM", "Performance Max", "CRO"],
+  },
+  {
+    slug: "case-wound-care",
+    kind: "build",
+    client: "Suwasetha",
+    industry: "Elder care, wound care and home nursing · Veyangoda, Sri Lanka",
+    headline: "The person searching is rarely the person being treated.",
+    metrics: [
+      { k: "Claims on the site traced to a source before launch", v: "574 of 574", neutral: true },
+      { k: "Accessibility violations in the launch scan", v: "0", neutral: true },
+      { k: "Home page load on a phone, against a 2.5s budget", v: "1.4s", neutral: true },
+    ],
+    basisLabel: "What we built.",
+    basis:
+      "A nine page site, relaunched in September 2026 with elder care as the lead service alongside wound care, home visits and care at the centre. Every price, qualification and clinical statement was checked against a source before launch, and the release gate ran an automated accessibility scan and a timed page load. Enquiries open a prefilled WhatsApp message instead of an email form.",
+    connect:
+      "The person searching is usually an adult child, often working abroad, arranging care for a parent who is not the one doing the searching, so the site answers a stranger's questions about someone else's condition. When elder care became the lead service, the site's single set of opening hours contradicted every elder-care package on the same domain, because the evening hours belonged to the nurse's wound-care clinic. It now publishes two labelled sets of hours, in the copy and in the data Google reads. One combined span would have been false, since nobody covers the gap between them.",
+    tags: ["Web Build", "SEO"],
+    cardTags: ["Service site", "Elder care relaunch", "WhatsApp enquiries", "Accessibility", "Local SEO"],
+    liveUrl: "https://suwasetha.lk",
+  },
+  {
+    slug: "case-restaurant",
+    kind: "build",
+    client: "Lotus Edge",
+    industry: "Garden restaurant and lounge · Matale, Sri Lanka",
+    headline: "A menu the owner changes in a spreadsheet, live on every table's QR code within a minute",
+    metrics: [
+      { k: "Menu page load on a phone, median of five live tests", v: "1.4s", neutral: true },
+      { k: "Dishes the owner edits without a developer", v: "85", neutral: true },
+    ],
+    basis:
+      "Load time is the largest-paint figure from five Lighthouse mobile runs against the live menu page, all inside a 2.5 second budget. The 85 dishes in 14 sections are read from the restaurant's own Google Sheet, refreshed every 60 seconds, with a saved copy served if the sheet is ever unreachable.",
+    connect:
+      "The printed leaflets already pointed at lotusedge.lk, and the page they reached still said \"Opening\" with a countdown, sample prices and a demo phone number, so fixing it came before any promotion. Nobody on staff is there to update a website, so the menu reads the sheet the owner already edits: untick a dish and it shows as sold out on every table. Table ordering was held back on purpose until the restaurant picks a till that can accept orders from the web, because two systems holding the same order is how staff end up abandoning one of them.",
+    tags: ["Web Build", "SEO"],
+    cardTags: ["Restaurant site", "QR menu", "Google Sheets as CMS", "Restaurant schema", "Performance"],
+    liveUrl: "https://lotusedge.lk",
+  },
+  {
     slug: "case-agrilhotech",
     kind: "outcome",
     client: "AgrilHoTech",
@@ -132,8 +184,8 @@ export const CASES: CaseCardData[] = [
   {
     slug: "case-resort-group",
     kind: "outcome",
-    client: "Sri Lankan resort group",
-    industry: "Hospitality and resorts · Sri Lanka",
+    client: "Resort group, Maldives",
+    industry: "Hospitality and resorts · Maldives",
     headline: "Before we touched a single campaign, we built the stack that could prove what one did.",
     basis:
       "A full conversion-tracking stack across Meta Pixel, Google Ads and GA4, session recording and heatmaps in Hotjar, Klaviyo email automation, and ongoing conversion rate optimisation. No metric is claimed here beyond the work itself.",
@@ -169,6 +221,20 @@ export const CASES: CaseCardData[] = [
     liveUrl: "https://kennydissanayake.com/",
   },
   {
+    slug: "case-security",
+    kind: "progress",
+    client: "Vigor Security",
+    industry: "Private security services · Moratuwa, Sri Lanka",
+    headline: "A security firm with no track record yet, so every trust signal has to be checkable",
+    basisLabel: "What we built.",
+    basis:
+      "A six page site covering six service lines, careers and contact, on a brand system sampled from the logo file rather than eyeballed. A holding page is live at vigorsecurity.lk while the full site is completed.",
+    connect:
+      "A new security company has no clients to name, no testimonials and no photographs of its guards, and this industry's templates fill that gap with invented numbers. The first detail we asked the client for was their Ministry of Defence registration, because it is the one credential a buyer can check. The same rule runs through the design: the brand gold measures 1.76 to 1 against white, unreadable as text, so it only appears on navy, where it clears 8 to 1.",
+    tags: ["Web Build", "SEO"],
+    cardTags: ["Brand system", "Six service lines", "Trust design", "Careers page", "Local SEO"],
+  },
+  {
     slug: "case-construction",
     kind: "progress",
     client: "Ransewana Constructions",
@@ -181,21 +247,6 @@ export const CASES: CaseCardData[] = [
     engagement: { label: "Build & Run (in progress)" },
     tags: ["Web Build", "SEO", "Marketing", "CRM"],
     cardTags: ["Static build", "Local SEO", "Lead capture", "CRM", "Marketing"],
-  },
-  {
-    slug: "case-wound-care",
-    kind: "build",
-    client: "Suwasetha Wound Care Centre",
-    industry: "Wound care and home nursing · Gampaha district, Sri Lanka",
-    headline: "The person searching is rarely the person being treated.",
-    basisLabel: "What we built.",
-    basis:
-      "A seven page site with two separate journeys, home visits and care at the centre, because a family choosing between those is making two different decisions. Enquiries open a prefilled WhatsApp message instead of an email form. The blog is written in Sinhala.",
-    connect:
-      "Discovery changed the brief. The person searching is usually an adult child, often working abroad, arranging care for a parent who is not the one doing the searching. So the site has to answer a stranger's questions about someone else's condition, in the language the family actually uses between themselves, and end in WhatsApp because that is how the call gets made here. A template health site would have written to the patient and lost the reader.",
-    tags: ["Web Build", "SEO"],
-    cardTags: ["Service site", "Two journeys", "WhatsApp enquiries", "Sinhala content", "Local SEO"],
-    liveUrl: "https://suwasetha.lk",
   },
   {
     slug: "case-event-ticketing",
