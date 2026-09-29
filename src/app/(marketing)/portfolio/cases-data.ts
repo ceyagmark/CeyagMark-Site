@@ -173,26 +173,33 @@ export const CASES: CaseCardData[] = [
     client: "Sri Lankan fashion label",
     industry: "Clothing · Sri Lanka",
     headline: "A body-shape fit simulator, built because ads cannot answer a sizing question",
+    basisLabel: "What we built.",
     basis:
-      "A custom HTML5 Canvas tool that renders an anatomical body silhouette from the shopper's own measurements, so they can see how a piece will sit before they order it.",
+      "A custom HTML5 Canvas tool that renders an anatomical body silhouette from the shopper's own measurements, so they can see how a piece will sit before they order it. The label's Meta sales campaign is running now, and its results are not in yet, so none are shown here.",
     connect:
-      "Online fashion here loses orders at the size question, and no amount of ad spend answers it. A marketing agency would have written a better size guide. A development agency would have waited to be asked for the tool. The tool exists because the same team was watching where the drop-off happened and could go and build the fix.",
+      "Online fashion here loses orders at the size question, and no amount of ad spend answers it, so the fit tool exists because the same team was watching where the drop-off happened. The ads audit found the same kind of gap from the other side: in the 31 days before the audit, the store's Pixel recorded about 100,000 page views, one add-to-cart and no purchases. A campaign told to find buyers would have had nothing to learn from, so the site's tracking went first on the launch plan, ahead of any creative.",
     engagement: { label: "Build & Run", href: "/services#build-and-run" },
     tags: ["Web Build", "Marketing", "CRO"],
-    cardTags: ["HTML5 Canvas", "Custom tool", "WooCommerce", "Paid social", "CRO"],
+    cardTags: ["HTML5 Canvas", "Custom tool", "WooCommerce", "Meta sales campaign", "Pixel audit", "CRO"],
   },
   {
     slug: "case-resort-group",
     kind: "outcome",
     client: "Resort group, Maldives",
     industry: "Hospitality and resorts · Maldives",
-    headline: "Before we touched a single campaign, we built the stack that could prove what one did.",
+    headline: "The account reported 2,853 conversions. They were clicks on Book Now, not bookings.",
+    metrics: [
+      { k: "Google Ads spend audited, 12 weeks", v: "$4,669", neutral: true },
+      { k: "Spent on searches that should have been blocked", v: "≈ $520", neutral: true },
+      { k: "Search-term spend already going to generic searches", v: "68%", neutral: true },
+    ],
+    basisLabel: "How it was measured.",
     basis:
-      "A full conversion-tracking stack across Meta Pixel, Google Ads and GA4, session recording and heatmaps in Hotjar, Klaviyo email automation, and ongoing conversion rate optimisation. No metric is claimed here beyond the work itself.",
+      "Read from the account's own exports for 6 July to 28 September 2026, across three campaigns and 21,915 search terms, with every figure marked as either observed in the data or calculated from it. Underneath the ads sits the stack built earlier in the engagement: Meta Pixel, Google Ads and GA4, Hotjar session recordings and Klaviyo email automation.",
     connect:
-      "A resort group's bookings pass through several channels before anyone converts, and without shared, correctly firing tracking across all of them, every report from every channel is a different, competing story. This was infrastructure work done for a marketing reason: nothing downstream, not the ad spend, not the email flows, not the CRO test results, means anything until the measurement underneath it is trustworthy. The team also found copycat domains impersonating the brand during this work, which turned into a separate evidence report and response plan, the kind of thing only caught by a team already watching the brand's search and paid surface every week.",
+      "Bookings finish on a third-party booking engine, so the campaigns launched optimising for the last step the site could see: a click on Book Now. Twelve weeks of data showed that stand-in was measuring browsing, not buying. It counted every click, and brand and generic searches converted at the same 30 percent, which real booking data never does. A real booking event from the booking engine is the fix now being set up. The same audit found one resort's only ad disapproved, which had switched its whole campaign off, and the blocked-search waste above going to competitor resorts, job hunters and a Careers link Google had added on its own. Earlier, the same weekly watch caught copycat domains impersonating the brand.",
     tags: ["Marketing", "CRO"],
-    cardTags: ["Meta Pixel", "Google Ads & GA4", "Hotjar", "Klaviyo automation", "CRO"],
+    cardTags: ["Google Ads audit", "Conversion tracking", "Meta Pixel & GA4", "Hotjar", "Klaviyo automation", "Brand protection"],
   },
   {
     slug: "case-ssms",
