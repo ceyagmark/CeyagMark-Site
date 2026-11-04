@@ -79,4 +79,27 @@ describe("createLeadSchema", () => {
     });
     expect(result.success).toBe(true);
   });
+
+  it("still requires email for non-villa sources", () => {
+    const result = createLeadSchema.safeParse({ source: "contact", name: "Jane", phone: "+94701234567" });
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.error.issues[0]?.path).toEqual(["email"]);
+  });
+
+  it("accepts a villa_check lead with WhatsApp and no email", () => {
+    const result = createLeadSchema.safeParse({ source: "villa_check", name: "Lakmal", phone: "+94771234567", email: "" });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.email).toBeUndefined();
+  });
+
+  it("rejects a villa_check lead with a local-format WhatsApp number", () => {
+    const result = createLeadSchema.safeParse({ source: "villa_check", name: "Lakmal", phone: "0771234567" });
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.error.issues[0]?.message).toBe("Enter your WhatsApp number, e.g. +94701234567.");
+  });
+
+  it("rejects a malformed optional email on villa_check", () => {
+    const result = createLeadSchema.safeParse({ source: "villa_check", name: "Lakmal", phone: "+94771234567", email: "nope" });
+    expect(result.success).toBe(false);
+  });
 });

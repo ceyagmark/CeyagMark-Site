@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // port yet (only create_booking reads it, server-side), see BUILD-NOTES
     // open items. Falls back to the same real, published contact seeded there.
     const ownerEmail = process.env.SEED_OWNER_EMAIL ?? "growth@ceyagmark.com";
-    await sendAndLog(dataSource, leadReceivedEmail(ownerEmail, lead.name, lead.email, lead.source), "lead_received", {
+    await sendAndLog(dataSource, leadReceivedEmail(ownerEmail, lead.name, lead.email, lead.source, lead.phone), "lead_received", {
       leadId: lead.id,
     });
 

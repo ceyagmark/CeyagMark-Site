@@ -53,9 +53,9 @@ export type BookingRecord = {
 };
 
 export type CreateLeadInput = {
-  source: "contact" | "free_audit" | "growth_audit" | "built_by" | "quiz";
+  source: "contact" | "free_audit" | "growth_audit" | "built_by" | "quiz" | "villa_check";
   name: string;
-  email: string;
+  email?: string;
   phone?: string;
   company?: string;
   fields?: Record<string, string>;
@@ -67,7 +67,7 @@ export type Lead = {
   source: CreateLeadInput["source"];
   stage: string;
   name: string;
-  email: string;
+  email: string | null;
   phone: string | null;
   company: string | null;
   fields: Record<string, string>;

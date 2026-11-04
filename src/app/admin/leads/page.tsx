@@ -10,7 +10,8 @@ type Lead = {
   id: string;
   source: string;
   name: string;
-  email: string;
+  email: string | null;
+  phone: string | null;
   stage: string;
   createdAt: string;
 };
@@ -37,6 +38,7 @@ const SOURCE_LABEL: Record<string, string> = {
   growth_audit: "Growth audit",
   built_by: "Built by",
   quiz: "Quiz",
+  villa_check: "Villa check",
 };
 
 export default function AdminLeadsPage() {
@@ -102,7 +104,7 @@ export default function AdminLeadsPage() {
                       <td className="primary">{DATE_FMT.format(new Date(l.createdAt))}</td>
                       <td>{SOURCE_LABEL[l.source] ?? l.source}</td>
                       <td className="primary">{l.name}</td>
-                      <td>{l.email}</td>
+                      <td>{l.email ?? l.phone}</td>
                       <td>
                         <span className="admin-pill" data-tone={STAGE_TONE[l.stage] ?? "mute"}>
                           {l.stage.replace("_", " ")}

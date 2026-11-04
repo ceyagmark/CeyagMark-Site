@@ -260,14 +260,18 @@ export function bookingOwnerAlertEmail(booking: Booking): Email {
 export function leadReceivedEmail(
   ownerEmail: string,
   leadName: string,
-  leadEmail: string,
-  source: string
+  leadEmail: string | null,
+  source: string,
+  leadPhone: string | null = null
 ): Email {
   const to = ownerAlertRecipient(ownerEmail);
+  const contact = leadEmail ?? leadPhone ?? "no contact given";
+  // villa_check leads may have only a WhatsApp number, so reply goes there.
+  const replyHref = leadEmail ? `mailto:${leadEmail}` : `https://wa.me/${(leadPhone ?? "").replace(/\D/g, "")}`;
   return {
     to,
     subject: `New lead (${source}): ${leadName}`,
-    text: `${leadName} (${leadEmail}) submitted the ${source} form on ceyagmark.com.\n\nAll leads: ${SITE_URL}/admin/leads`,
+    text: `${leadName} (${contact}) submitted the ${source} form on ceyagmark.com.\n\nAll leads: ${SITE_URL}/admin/leads`,
     html: shell({
       preheader: `${leadName} submitted the ${source} form.`,
       eyebrow: "New lead",
@@ -275,10 +279,10 @@ export function leadReceivedEmail(
       intro: `They submitted the ${source} form on ceyagmark.com.`,
       rows: [
         { label: "Name", value: leadName },
-        { label: "Email", value: leadEmail },
+        { label: leadEmail ? "Email" : "WhatsApp", value: contact },
         { label: "Source", value: source },
       ],
-      primaryCta: { label: `Reply to ${leadName}`, href: `mailto:${leadEmail}` },
+      primaryCta: { label: `Reply to ${leadName}`, href: replyHref },
       secondaryCta: { label: "Open admin leads", href: `${SITE_URL}/admin/leads` },
     }),
   };
