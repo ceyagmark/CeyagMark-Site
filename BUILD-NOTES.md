@@ -869,3 +869,17 @@ Branch `villa-check`, not committed, not pushed, not deployed.
 Evidence: tsc clean, vitest 25/25 (was 14), check-migrations 4/4 contiguous, `next build` clean with `CEYAG_DEV_DB=0` (`/villa-check` static). Browser: full flow on local PGlite at desktop and 375px (lead 200, local-format number rejected 400, fixes match answers, hot message, fbq Lead fired once, no horizontal scroll).
 
 Not verified: production database write (needs migration 0004 + one approved live test); real Meta Events Manager receipt of the Lead event; visual check on a real phone.
+
+---
+
+## Neon Postgres data source · 2026-11-04
+
+Branch `villa-check`, not pushed, not deployed. The Supabase free project is paused and cannot be resumed, so production moves to Neon.
+
+- New `src/lib/data/sql-source.ts`: one SQL-backed `DataSource` built on a small `SqlExecutor` (`query(text, params) => rows`). `local-source.ts` (PGlite) and the new `neon-source.ts` (`@neondatabase/serverless` HTTP driver, reads `DATABASE_URL`) are thin executors over it, so the SQL and row mapping cannot drift. `supabase-source.ts` is untouched and still works as the fallback.
+- Selector in `index.ts`: `CEYAG_DEV_DB=1` then PGlite; else `DATABASE_URL` then Neon; else Supabase. The `env.ts` guard against `CEYAG_DEV_DB=1` in a production build is unchanged. PGlite and its migration auto-apply stay dev only.
+- Driver type differences handled in one place: `date`/`time` are cast to text in the availability query (the pg `date` parser builds a local-time Date, which would shift days on this machine's Asia/Colombo clock), timestamps go through `new Date(...)`, numerics through `Number()`, jsonb is parsed defensively. `lead.email: string | null` is kept.
+- `npm run db:migrate [-- --seed]` (`scripts/migrate.mjs`, logic in `scripts/migrate-lib.mjs`): applies `supabase/migrations/*.sql` to `DATABASE_URL`, one transaction per file, tracked in `schema_migrations`, reruns skip. The seed runs only when `session_types` and `site_settings` are both empty. It uses the Pool (websocket) driver because the HTTP driver rejects multi-statement SQL; `ws` is a devDependency for that.
+- Tests: `tests/sql-source.test.ts` drives the shared source on PGlite through the executor seam; `tests/migrate.test.ts` covers apply, skip-on-rerun and seed-only-when-empty.
+
+Not verified: any call against a real Neon database (no credentials yet), including the Pool/websocket path in `migrate.mjs` and the HTTP driver's return shape for `sql.query`. First real run should be `npm run db:migrate -- --seed` followed by one booking and one lead on a preview deploy.

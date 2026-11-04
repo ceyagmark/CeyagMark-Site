@@ -8,19 +8,22 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "db:migrate": "node scripts/migrate.mjs",
     "db:check": "node scripts/db-check.mjs",
     "check-migrations": "node scripts/check-migrations.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
+    "motion": "^12",
     "next": "16.3.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "motion": "^12",
-    "zod": "^3",
-    "resend": "^4"
+    "resend": "^4",
+    "zod": "^3"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.2",
+    "@supabase/supabase-js": "^2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,9 +31,9 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
     "tailwindcss": "^4",
+    "tsx": "^4",
     "typescript": "^5",
     "vitest": "^3",
-    "tsx": "^4",
-    "@supabase/supabase-js": "^2"
+    "ws": "^8.22.1"
   }
 }
