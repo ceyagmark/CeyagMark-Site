@@ -102,3 +102,13 @@ export function trackBookingCompleted(input: {
 export function trackContactSubmitted(input: { hasCompany: boolean }) {
   push({ event: "contact_submitted", has_company: input.hasCompany });
 }
+
+// No PII in this payload: the villa check pushes only what the ad platforms
+// need to optimise, the lead itself is in /api/leads.
+export function trackVillaCheckLead(input: { hot: boolean; rooms: number }) {
+  push({ event: "villa_check_lead", lead_source: "villa-check", hot: input.hot, rooms: input.rooms });
+  // Fired directly, not through GTM: the Meta campaign optimises on this Lead
+  // event and no GTM trigger exists for the new dataLayer name.
+  const w = window as Window & { fbq?: (...args: unknown[]) => void };
+  w.fbq?.("track", "Lead", { content_name: "villa_check" });
+}

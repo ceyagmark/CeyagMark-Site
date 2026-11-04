@@ -1167,3 +1167,32 @@ textarea.bk-input { min-height: 96px; resize: vertical; }
 @media (max-width: 640px) {
   .note { font-size: 1rem !important; line-height: 1.6; }
 }
+
+/* ============================================================
+   /villa-check page (Direct Booking Check calculator)
+   ============================================================ */
+.vc-result { display:grid; gap:8px; padding:20px; margin-bottom:26px; border-radius:16px; background:linear-gradient(135deg,rgba(46,134,255,.14),var(--surface)); border:1px solid var(--border-strong); }
+.vc-result .k { font-size:.92rem; color:var(--text-soft); }
+.vc-result .k b { color:var(--text); }
+.vc-big { font-family:var(--font-space-grotesk),sans-serif; font-weight:700; font-size:clamp(2rem,6vw,2.8rem); line-height:1.05; letter-spacing:-.02em; color:var(--text); }
+.vc-val { float:right; font-weight:600; color:var(--brand-glow); }
+.vc-range { width:100%; accent-color:var(--brand); height:28px; }
+.vc-rate { display:flex; gap:10px; align-items:center; }
+.vc-rate .ftext { flex:1; min-width:0; }
+.vc-chips { display:flex; flex-wrap:wrap; gap:10px; }
+.vc-chip { padding:11px 15px; }
+fieldset.ffield { border:0; padding:0; margin-inline:0; min-width:0; }
+.vc-assume { font-size:.82rem; margin-top:4px; }
+.vc-cta { width:100%; justify-content:center; margin-top:14px; }
+.vc-error { color:var(--bad); font-size:.92rem; margin:4px 0 8px; }
+.vc-back { appearance:none; background:none; border:0; color:var(--text-mute); font:500 .88rem/1 var(--font-inter),sans-serif; margin-top:14px; cursor:pointer; text-decoration:underline; }
+.vc-fixes { display:grid; gap:16px; margin:18px 0 22px; padding-left:20px; }
+.vc-fixes li b { color:var(--text); }
+.vc-fixes li p { color:var(--text-soft); font-size:.95rem; margin-top:4px; }
+.vc-next { padding:14px 16px; border-radius:13px; background:rgba(70,211,154,.08); border:1px solid rgba(70,211,154,.28); color:var(--text-soft); font-size:.95rem; }
+.vc-steps { display:grid; gap:18px; }
+@media (min-width:820px){ .vc-steps { grid-template-columns:repeat(3,1fr); } }
+.vc-step { padding:26px; }
+.vc-step h3 { margin:12px 0 6px; }
+.vc-step p { color:var(--text-soft); font-size:.95rem; }
+.vc-stepno { display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--brand); color:var(--on-brand); font-weight:700; }

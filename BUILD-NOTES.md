@@ -852,3 +852,20 @@ output values, and the View Transitions scope-cut reasoning).
   pages (only `.bg-aura .orb` does), so the `[data-parallax]` code path is
   live but has nothing to apply to yet. Not a defect; nothing was ever
   wired to use it on the live site's own equivalent pages either.
+
+---
+
+## Villa check (/villa-check) · 2026-11-03
+
+Branch `villa-check`, not committed, not pushed, not deployed.
+
+- New lead magnet for villa owners: commission calculator (`src/lib/villa-check.ts`, pure, pinned by `tests/villa-check.test.ts`) plus an unlock form that posts `source: "villa_check"` to `/api/leads`.
+- **Migration 0004 (`0004_villa_check_leads.sql`) must be run on the production Supabase BEFORE this deploys.** It adds `villa_check` to the leads source check and makes `email` nullable. Without it every villa lead fails with a 500.
+- `createLeadSchema`: email optional only for `villa_check`, which requires a `+E164` WhatsApp number instead; every other source still requires email (tests added).
+- `Lead.email` is now `string | null`; admin list shows phone when email is missing; owner alert email links to wa.me when there is no email.
+- Meta `Lead` fired directly with `fbq` on success (no GTM trigger exists for `villa_check_lead`); dataLayer payload carries no PII.
+- Dev launcher (`D:\Claude Cowork\.claude\ceyagmark-next-dev.js`) repointed from the old C: path to this D: copy. Stale `.next/dev` cache (broken prettier junction from the laptop move) moved to the session scratchpad, not deleted.
+
+Evidence: tsc clean, vitest 25/25 (was 14), check-migrations 4/4 contiguous, `next build` clean with `CEYAG_DEV_DB=0` (`/villa-check` static). Browser: full flow on local PGlite at desktop and 375px (lead 200, local-format number rejected 400, fixes match answers, hot message, fbq Lead fired once, no horizontal scroll).
+
+Not verified: production database write (needs migration 0004 + one approved live test); real Meta Events Manager receipt of the Lead event; visual check on a real phone.
