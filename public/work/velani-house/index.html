@@ -581,7 +581,7 @@ gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_pe
   const attach = (el, url) => new Promise((ok, bad) => { el.onloadeddata = ok; el.onerror = bad; el.src = url; el.load(); });
 
   // Step 1: a light film (8 MB desktop, 4.7 MB phone) so scrubbing starts quickly.
-  // Step 2 (desktop, fast connection, big screen): swap in the 1920px HD film without a flash.
+  // Step 2 (not on Save-Data/2G/3G): swap in the HD film without a flash (1920px desktop, 1080x1440 phone).
   let loadedSrc = '';
   async function loadFilm() {
     const src = mobile ? '/work/velani-house/assets/film-m.mp4' : '/work/velani-house/assets/film.mp4';
@@ -599,7 +599,7 @@ gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_pe
       ready = true;
       video.classList.add('ready');
       label.style.opacity = 0;
-      if (!mobile && wantsHD()) upgradeHD(src);
+      if (wantsHD()) upgradeHD(src);
     } catch (err) {
       label.textContent = '';
       console.warn('Film unavailable, showing still', err);
@@ -608,11 +608,12 @@ gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_pe
   function wantsHD() {
     const c = navigator.connection;
     if (c && (c.saveData || /(^|-)(2g|3g)$/.test(c.effectiveType || ''))) return false;
-    return innerWidth * (devicePixelRatio || 1) >= 1500;
+    // phones: 1080x1440 film once the screen has more pixels than the light 540px film
+    return innerWidth * (devicePixelRatio || 1) >= (mobile ? 700 : 1500);
   }
   async function upgradeHD(token) {
     try {
-      const url = await fetchBlob('/work/velani-house/assets/film-hd.mp4');
+      const url = await fetchBlob(mobile ? '/work/velani-house/assets/film-m-hd.mp4' : '/work/velani-house/assets/film-hd.mp4');
       if (token !== loadedSrc) { URL.revokeObjectURL(url); return; }
       const hd = video.cloneNode();
       hd.removeAttribute('id');
