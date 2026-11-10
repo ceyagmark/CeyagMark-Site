@@ -67,7 +67,7 @@ export default function PortfolioPage() {
         <div className="wrap">
           <div className="grid cols-4">
             <div className="stat reveal">
-              <div className="num tnum">{CASES.length}</div>
+              <div className="num tnum">{CASES.filter((c) => !c.concept).length}</div>
               <div className="lbl">Projects across web and marketing</div>
             </div>
             <div className="stat reveal">

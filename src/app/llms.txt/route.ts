@@ -45,6 +45,7 @@ All scoped and priced on Services (https://ceyagmark.com/services), each linked 
 - Motorbike parts store (https://ceyagmark.com/case-motorbike-parts): Baseline 38/100, audited 2026-06-04.
 - Sportswear brand (https://ceyagmark.com/case-sportswear): ROAS 2 to 9 in 2.5 months, AOV up 177%. Conversion audit baseline 54/100.
 - HNC Associates (accounting, Sri Lanka): $400 in ad spend turned into LKR 9M in revenue, FY 2024-25.
+- Velani House villa website (https://ceyagmark.com/work/velani-house): concept build for a fictional Tangalle villa. Scroll-driven AI drone film, book-direct perks panel, WhatsApp enquiry. Not a client result.
 
 Full list at https://ceyagmark.com/portfolio.
 

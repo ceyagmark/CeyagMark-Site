@@ -29,6 +29,7 @@ export type CaseCardData = {
   detailHref?: string;
   funnel?: FunnelStep[];
   funnelNote?: string;
+  concept?: boolean; // our own demo build, not client work: excluded from the project count
 };
 
 export const CASES: CaseCardData[] = [
@@ -111,6 +112,26 @@ export const CASES: CaseCardData[] = [
     tags: ["Web Build", "SEO"],
     cardTags: ["Restaurant site", "QR menu", "Google Sheets as CMS", "Restaurant schema", "Performance"],
     liveUrl: "https://lotusedge.lk",
+  },
+  {
+    slug: "case-velani-house",
+    kind: "build",
+    concept: true,
+    client: "Velani House (concept)",
+    industry: "Villa website design · fictional villa, Tangalle, Sri Lanka",
+    headline: "A villa website where the scroll bar flies you from sunrise over the sea to dinner by the pool",
+    metrics: [
+      { k: "First view on a phone, Lighthouse mobile largest paint", v: "2.3s", neutral: true },
+      { k: "Drone film driven by the visitor's scroll", v: "15s", neutral: true },
+    ],
+    basisLabel: "What we built.",
+    basis:
+      "A concept build, not a client result. Velani House is fictional: the film and photos were generated with AI from two keyframes we art-directed, then upscaled to 2K. Phones get a lighter film, desktops swap in an HD one after the page is already usable.",
+    connect:
+      "Most Sri Lankan villa sites are a photo slider and a Booking.com button, which sends the guest straight back to the commission. This one makes the visit itself the pitch. The film holds attention, a side-by-side panel shows what booking direct adds at the same price (Booking.com contracts often rule out a cheaper direct rate), and the enquiry opens in WhatsApp with the dates already filled in.",
+    tags: ["Web Build", "CRO"],
+    cardTags: ["Villa website", "Scroll-driven film", "AI video", "Book-direct perks", "WhatsApp enquiry"],
+    liveUrl: "https://ceyagmark.com/work/velani-house",
   },
   {
     slug: "case-agrilhotech",

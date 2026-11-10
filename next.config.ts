@@ -18,6 +18,8 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self' data:",
+  // /work/velani-house scrubs its film from a same-origin Blob URL (instant seeking).
+  "media-src 'self' blob:",
   "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com https://www.clarity.ms https://*.clarity.ms",
   "frame-src https://www.googletagmanager.com",
   "object-src 'none'",
@@ -38,7 +40,24 @@ const SECURITY_HEADERS = [
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
+    return [
+      { source: "/(.*)", headers: SECURITY_HEADERS },
+      // Velani House demo media never changes in place (new film = new file name).
+      {
+        source: "/work/velani-house/assets/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000, immutable" }],
+      },
+      {
+        source: "/work/velani-house/fonts/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
+  // The Velani House villa website demo is a self-contained static page in
+  // public/work/velani-house/ (its scroll-film engine is plain JS). Serve it at
+  // the clean URL; the static file itself is the rewrite target.
+  async rewrites() {
+    return [{ source: "/work/velani-house", destination: "/work/velani-house/index.html" }];
   },
   // Ported verbatim from the live .htaccess (SLICE-0-CONTRACTS.md "Redirects to
   // port"). Retired-page redirects are listed before any generic rule would
