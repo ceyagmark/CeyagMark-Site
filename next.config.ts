@@ -51,13 +51,30 @@ const nextConfig: NextConfig = {
         source: "/work/velani-house/fonts/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
+      // Mistfold Estate Bungalow concept: media and fonts never change in place.
+      {
+        source: "/work/mistfold-estate-bungalow/assets/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000, immutable" }],
+      },
+      {
+        source: "/work/mistfold-estate-bungalow/fonts/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      // Hidden concept page: keep it out of search until Shashika says otherwise.
+      {
+        source: "/work/mistfold-estate-bungalow",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   // The Velani House villa website demo is a self-contained static page in
   // public/work/velani-house/ (its scroll-film engine is plain JS). Serve it at
   // the clean URL; the static file itself is the rewrite target.
   async rewrites() {
-    return [{ source: "/work/velani-house", destination: "/work/velani-house/index.html" }];
+    return [
+      { source: "/work/velani-house", destination: "/work/velani-house/index.html" },
+      { source: "/work/mistfold-estate-bungalow", destination: "/work/mistfold-estate-bungalow/index.html" },
+    ];
   },
   // Ported verbatim from the live .htaccess (SLICE-0-CONTRACTS.md "Redirects to
   // port"). Retired-page redirects are listed before any generic rule would
