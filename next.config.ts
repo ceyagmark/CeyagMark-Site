@@ -60,11 +60,6 @@ const nextConfig: NextConfig = {
         source: "/work/mistfold-estate-bungalow/fonts/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
-      // Hidden concept page: keep it out of search until Shashika says otherwise.
-      {
-        source: "/work/mistfold-estate-bungalow",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
     ];
   },
   // The Velani House villa website demo is a self-contained static page in

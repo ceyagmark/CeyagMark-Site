@@ -16,6 +16,7 @@ const PATHS = [
   "/case-sportswear",
   "/case-motorbike-parts",
   "/work/velani-house",
+  "/work/mistfold-estate-bungalow",
   "/free-audit",
   "/villa-check",
   "/growth-audit",

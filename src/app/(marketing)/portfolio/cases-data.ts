@@ -134,6 +134,26 @@ export const CASES: CaseCardData[] = [
     liveUrl: "https://ceyagmark.com/work/velani-house",
   },
   {
+    slug: "case-mistfold-estate",
+    kind: "build",
+    concept: true,
+    client: "Mistfold Estate Bungalow (concept)",
+    industry: "Hotel website design · fictional tea-estate hotel, Sri Lanka hill country",
+    headline: "A hotel website that is one scrolled day, from the first mist at 5:40 am to the last log at 9 pm",
+    metrics: [
+      { k: "First view on a phone, Lighthouse mobile largest paint (median of three live runs)", v: "1.2s", neutral: true },
+      { k: "Moments of one day on the scroll, with what each hour includes", v: "8", neutral: true },
+    ],
+    basisLabel: "What we built.",
+    basis:
+      "A concept build, not a client result. Mistfold is fictional: the films and photos were generated with AI, and the rates, reviews and map are samples. Load time is the largest-paint figure from three Lighthouse mobile runs against the live page.",
+    connect:
+      "Most small hotel sites are a room table and a Booking.com button. This one shows the stay itself: an hour-by-hour day that says what is included and what costs extra, in the visitor's currency, nine rooms chosen by their window, and a hand-written reservation card that opens WhatsApp with the dates filled in, two taps from anywhere on the page. Direct perks are shown at the same price as the booking sites, because their contracts often rule out a lower public rate.",
+    tags: ["Web Build", "CRO"],
+    cardTags: ["Hotel website", "Scroll-driven film", "AI video", "Book-direct perks", "WhatsApp enquiry"],
+    liveUrl: "https://ceyagmark.com/work/mistfold-estate-bungalow",
+  },
+  {
     slug: "case-agrilhotech",
     kind: "outcome",
     client: "AgrilHoTech",
